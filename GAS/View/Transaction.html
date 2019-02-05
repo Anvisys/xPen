@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid zero_margin">
+
+        <div class="row" ng-show="AccountList.length==0" >
+            No Account or Project Added. First create a account and project
+        </div>
+        <div class="row zero_margin">
+            <div class="col-sm-6">
+                <div class="input-group" style="width:300px;">
+
+                    <!--<div class="input-group-addon" style="padding:0px;">
+                <select tabindex="2" ng-model="filterStatus" ng-options="x for x in AccountList" style="margin:0px;"></select>
+            </div>-->
+
+
+                    <select class="input-group-addon" ng-model="filterAccount" style="width:200px; height:40px;">
+                        <option ng-selected="true" value="{{undefined}}">All</option>
+                        <option ng-repeat="x in AccountList" value="{{x.AccountName}}">{{x.AccountName}}</option>
+                    </select>
+                    <div class="input-group-addon">
+                        <span ng-click="Previous()" title="Previous Month" class="glyphicon glyphicon-arrow-left"></span>
+                        <label style="padding-left:10px;padding-right:10px; color:blue;"> {{CurrentMonth| date:"MMM,yy"}}</label>
+                        <span ng-click="Next()" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
+                    </div>
+                    <div class="input-group-addon">
+                        <span ng-click="ShowData()" class="fa fa-search"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="row" style=" float:right;">
+                    <button type="button" class="btn btn-primary" ng-click="newSalary=true">Salary</button>
+                    <button type="button" class="btn btn-warning" ng-click="newTransfer=true">Add Transfer</button>
+                    <button type="button" class="btn btn-success" ng-click="newExpense=true;">Pay</button>
+                    <button type="button" class="btn btn-primary" ng-click="ShowExternal=true;">External Transaction</button>
+                </div>
+            </div>
+        </div>
+       
+
+
+
+        <div class="row">
+
+            <div class="panel panel-default" style="margin:10px; position:relative; z-index:-1;">
+                <div class="panel-heading bg_greyBlue" style="height:40px;">
+                    Transaction Details
+                    <span ng-hide="true" ng-click="exportToExcel('#TransactionData')" title="Export to Excel" style="margin-left:20px;cursor:pointer;">Export <img width="10" height="10" src="../../Images/Icon/excel.jpg" /></span>
+
+                    <img on-toggle="" src="../../Images/Icon/excel.jpg" title="Export to Excel" ng-click="exportToExcel('#TransactionData')" style="width:30px;height:30px;border-radius:50%;
+                             position: absolute;top:5px; right: 50px;" />
+                </div>
+                <div style="max-height:{{ScreenHeight}};overflow:scroll;">
+
+                    <table id="TransactionData" style="width:100%;">
+                        <tr class="padding-10">
+                            <th>#</th>
+                            <th>Date Time</th>
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Withdraw</th>
+                            <th>Deposit</th>
+                            <th>Balance</th>
+                            <th>Account Balance</th>
+                            <th>Name</th>
+                            <th>Remark</th>
+
+                        </tr>
+                        <tr ng-repeat="expense in expenses|orderBy:sortDate| filter:{AccountName: filterAccount}:false" class="repeated-item">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ expense.EntryDate| date:"ddMMM,yy @ h:mma" }}</td>
+                            <td>{{ expense.AccountName}}</td>
+                            <td>{{ expense.TransType}}</td>
+                            <td>{{ expense.Withdraw }}</td>
+                            <td>{{ expense.Deposit}}</td>
+                            <td>{{ expense.Balance}}</td>
+                            <td>{{ expense.AccountBalance}}</td>
+                            <td>{{ expense.TransName}}</td>
+                            <td>{{ expense.TransactionRemarks}}</td>
+
+                        </tr>
+
+                    </table>
+                </div>
+                </div>
+                </div>
+              
+
+
+                <div id="newTransferDialog" ng-show="newTransfer" class="layout_modal_Window">
+                    <div class="layout_modal_Content" style="width:350px;position:relative;">
+                        <div class="layout_modal_header"> Transfer:  <span ng-click="newTransfer=false" class="fa fa-close"></span> </div>
+                        <div class="layout_modal_body">
+                            <form name="Transfer" style="width:320px;margin:10px auto; text-align:left;">
+                                <label style="width:130px;">Name: </label> <input name="transferName" tabindex="0" type="text" ng-model="transfer_name" style="width:150px;" required text-length> <br />
+                                <label style="width:130px;"> Transaction Type: </label> <label>Transfer</label><br />
+                                <label style="width:130px;"> From Account: </label> <select tabindex="1" style="width:150px;height:22px;" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                                <label style="width:130px;"> To Account: </label> <select tabindex="2" style="width:150px;height:22px;" ng-model="selToAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                                <label style="width:130px;"> Amount :</label> <input name="Amount" tabindex="3" type="text" ng-model="transfer_amount" style="width:150px;" required min-amount /><br />
+                                <label style="width:130px;"> Remark :</label>  <input name="Remark" tabindex="4" type="text" ng-model="transfer_remark" style="width:150px;" required text-length /><br />
+                            </form>
+                        </div>
+                        <div class="layout_modal_footer">
+                            <button type="button" class="btn btn-success" ng-click="TransferUpdate()" ng-disabled="Transfer.AccHolder.$invalid || Transfer.Amount.$invalid || Transfer.Remark.$invalid">Add</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-warning" ng-click="newTransfer=false">Close</button>
+                        </div>
+                        <div ng-show="transfer_progress" class="loader_div">
+                            <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="newExpenseDialog" ng-show="newExpense" class="layout_modal_Window">
+                    <div class="layout_modal_Content" style="width:350px;position:relative">
+                        <div class="layout_modal_header"> Expense:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
+                        <div class="layout_modal_body">
+                            <form name="Expense" style="width:320px;margin:10px auto; text-align:left;">
+                                <label style="width:150px;">Name: </label> <input name="transferName" tabindex="0" type="text" ng-model="advance_name" style="width:150px;" required text-length> <br />
+                                <label style="width:150px;"> Transaction Type: </label> <label>Transfer</label><br />
+                                <label style="width:150px;"> From Account: </label> <select tabindex="2" style="width:150px;height:22px;" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                                <label style="width:150px;"> To Activity: </label> {{ActivityName}} <button class="btn btn-link" ng-click="SelectActivity()">Select Activity</button><br />
+                                <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="4" type="text" ng-model="advance_amount" style="width:150px;" required min-amount /><br />
+                                <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="5" type="text" ng-model="advance_Remarks" style="width:150px;" required text-length /><br />
+                            </form>
+                        </div>
+                        <div class="layout_modal_footer">
+                            <button type="button" class="btn btn-success" ng-click="PayAdvance()" ng-disabled="Expense.AccHolder.$invalid || Expense.Amount.$invalid || Expense.Remark.$invalid">Add</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-warning" ng-click="newExpense=false">Close</button>
+                        </div>
+                        <div ng-show="advance_progress" class="loader_div">
+                            <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                        </div>
+                    </div>
+                </div>
+
+        <div id="newSalaryDialog" ng-show="newSalary" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:350px;position:relative">
+                <div class="layout_modal_header"> Salary:  <span ng-click="newSalary=false" class="fa fa-close"></span> </div>
+                <div class="layout_modal_body">
+                    <form name="salary" style="width:320px;margin:10px auto; text-align:left;">
+                        <label style="width:150px;">Employee: </label> <input name="employeeName" tabindex="0" type="text" ng-model="employee_name" style="width:150px;" required text-length> <br />
+                        <label style="width:150px;"> Transaction Type: </label> <label>Salary</label><br />
+                        <label style="width:150px;"> From Account: </label> <select tabindex="2" ng-model="selFromAcc" style="width:150px;height: 22px;" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                        <label style="width:150px;"> Load On Project ? </label> {{ProjectName}} <button class="btn btn-link" ng-click="SelectProject()">Select Project</button><br />
+                        <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="4" type="text" ng-model="salary_amount" style="width:150px;" required min-amount /><br />
+                        <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="5" type="text" ng-model="salary_Remarks" style="width:150px;" required text-length /><br />
+                    </form>
+                </div>
+                <div class="layout_modal_footer">
+                    <button type="button" class="btn btn-success" ng-click="PaySalary()" ng-disabled="salary.AccHolder.$invalid || salary.Amount.$invalid || salary.Remark.$invalid">Add</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" ng-click="newSalary=false">Close</button>
+                </div>
+                <div ng-show="salary_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+                <div id="ActivitiesDialog" ng-show="ListActivity" class="layout_modal_Window">
+                    <div class="layout_modal_Content" style="width:500px;">
+                        <div class="layout_modal_header"> Activity List:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
+                        <div class="layout_modal_body">
+                            <div class="row">
+                                Filter <input />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <table style="margin:auto;max-height:300px;overflow-y:auto;">
+                                    <tr>
+                                        <th>ActivityName</th>
+                                        <th>ActivityID</th>
+                                        <th>User</th>
+                                        <th>Manager</th>
+                                        <th colspan="2">Status</th>
+                                    </tr>
+                                    <tr ng-repeat="act in ActivityList" style="overflow-y:auto;">
+                                        <td> {{act.ActivityName}}</td>
+                                        <td>{{act.ActivityID}}</td>
+                                        <td>{{act.CreatedBy}}</td>
+                                        <td>{{act.ApproverName}}</td>
+                                        <td>{{act.ActivityStatus}}</td>
+                                        <td><span class="fa fa-check" ng-click="Select(act)"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="layout_modal_footer">
+
+                            <button type="button" class="btn btn-warning" ng-click="ListActivity=false">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+        <div id="newExternalDialog" ng-show="ShowExternal" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:350px;">
+                <div class="layout_modal_header"> External Tranfer:  <span ng-click="ShowExternal=false" class="fa fa-close"></span> </div>
+                <div class="layout_modal_body">
+                    <form name="newExternal" style="width:320px;margin:10px auto; text-align:left;">
+                        <label style="width:150px;">Name: </label> <input name="transferName" tabindex="0" type="text" ng-model="external_name" style="width:150px;" required text-length> <br />
+                        <label style="width:150px;">Transaction Type: </label>
+                        <input type="radio" ng-model="type" value="Paid">Paid
+                        <input type="radio" ng-model="type" value="Received">Received
+                       
+                        <label style="width:150px;">Account: </label> <select tabindex="2" style="width:150px;height:24px;" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                        <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="4" type="text" ng-model="external_amount" style="width:150px;" required min-amount /><br />
+                        <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="5" type="text" ng-model="external_Remarks" style="width:150px;" required text-length /><br />
+                    </form>
+                </div>
+                <div class="layout_modal_footer">
+                    <button type="button" class="btn btn-success" ng-click="PayExternal()" ng-disabled="newExternal.AccHolder.$invalid || newExternal.Amount.$invalid || newExternal.Remark.$invalid">Add</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" ng-click="ShowExternal=false">Close</button>
+                </div>
+                <div ng-show="external_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+        <div id="ProjectDialog" ng-show="listProject" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:500px;">
+                <div class="layout_modal_header"> Project List:  <span ng-click="listProject=false" class="fa fa-close"></span> </div>
+                <div class="layout_modal_body">
+                    <div class="row">
+                        Filter <input />
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <table style="margin:auto;max-height:300px;overflow-y:auto;">
+                            <tr>
+                                <th>ProjectName</th>
+                                <th>ProjectNumber</th>
+                                <th>ClientName</th>
+                                <th>Manager Name</th>
+                                 <th colspan="2">Status</th>
+                            </tr>
+                            <tr ng-repeat="prj in ProjectList" style="overflow-y:auto;">
+                                <td> {{prj.ProjectName}}</td>
+                                <td>{{prj.ProjectNumber}}</td>
+                                <td>{{prj.ClientName}}</td>
+                                <td>{{prj.CreatedByName}}</td>
+                                <td>{{prj.Status}}</td>
+                                <td><span class="fa fa-check" ng-click="SelectProj(prj)"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+
+                    <button type="button" class="btn btn-warning" ng-click="listProject=false">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="User_Form" ng-show="SelectUserForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:400px;width:400px;">
+                <div class="layout_modal_header">
+                    <h4>Select User</h4>
+                </div>
+                <div class="layout_modal_body container-fluid" style="height:300px;">
+                   
+                        <div class="row">
+                            Filter <input />
+                        </div>
+                        <div class="row">
+                            <table style="height:270px;width:100%; overflow:scroll;">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                </tr>
+                                <tr ng-repeat="user in UserList" ng-click="SelectUser(user)">
+                                    <td> {{user.UserName}}</td>
+                                    <td>{{user.UserId}}</td>
+                                    <td>{{user.UserMobile}}</td>
+                                    <td>{{user.UserEmail}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                </div>
+                <div class="layout_modal_footer">
+                     <button type="button" class="btn btn-warning" ng-click="SelectUserForm= false">Close</button>
+                </div>
+            </div>
+        </div>
+            </div>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="project_summary" class="row">
+            
+            <div class="col-sm-6"><span class="btn btn-warning"> Back To <a href="#!activity" style="color:#fff;">My Activity </a> </span> </div>
+         
+            <div class="col-sm-6">
+                <button type="button" style="float:right;" class="btn btn-primary" ng-click="exportToExcel('#ActivityData')">Export Excel</button>
+            </div>
+            </div>
+        <div class="row" style="margin-top:10px;">
+                <div class="col-sm-4"><label class="heading_label">Project Name:</label> <label class="text_label" style="width:200px;font-size:16px;">{{ProjectName}}</label></div>
+
+                <div class="col-sm-4"><label class="heading_label">Activity: </label><label class="text_label" style="width:200px;font-size:16px;">{{ActivityName}}</label> </div>
+                <div class="col-sm-4"><label class="heading_label">Status: </label> <label class="text_label" style="width:200px;font-size:16px;">{{ActivityStatus}} </label></div>
+           
+
+
+            </div>
+        <div class="row">
+           
+      
+        </div>
+       
+        <div id="ExistingItemList" class="row">
+            <div class="layout-box" style="margin:10px; max-height:400px;">
+                <div class="data_header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span style="text-align:left;">  Expenses List</span>
+                            <span ng-click="exportToExcel('#ActivityData')" title="Export to Excel" style="margin-left:20px;cursor:pointer;">Export <img width="10" height="10" src="../../Images/Icon/excel.jpg" /></span>
+
+                            <span class="fa fa-plus" ng-show="(ActivityStatus=='Initiated'||ActivityStatus=='Added'||ActivityStatus=='Rejected')&&(tempexpenses.length==0&&!NewItemForm)" title="New Expenses" ng-click="ShowNewItemForm()" style="margin-left:20px; "></span>
+
+                            <!--<button type="button" ng-show="(ActivityStatus=='Initiated'||ActivityStatus=='Added'||ActivityStatus=='Rejected')&&(tempexpenses.length==0&&!NewItemForm)" ng-click="ShowNewItemForm()">NewItem</button>-->
+                        </div>
+                        <div class="col-sm-6" ng-show="ActivityStatus=='Initiated'||ActivityStatus=='Added'||ActivityStatus=='Rejected'">
+                            <button type="button" title="Submit for Approval" class="btn btn-success btn-sm" ng-click="Submit()">Submit</button>
+                            <button type="button" title="Add New Expenses" class="btn btn-primary btn-sm" ng-click="ShowNewItemForm()">New Item</button>
+                        </div>
+
+                    </div>
+   
+                </div>
+                <div ng-show="expenseItems.length>0" style="max-height:370px;overflow:inherit;">
+                    <table style="width:100%;">
+                        <tr>
+                            <th>#</th>
+                            <th>ItemName</th>
+                            <th>ExpenseAmount</th>
+                            <th>ReceiveAmount</th>
+                            <th>Remarks</th>
+                            <th>Status</th>
+                            <th>ExpenseDate</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="item in expenseItems track by $index" class="repeated-item">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ item.ItemName}}</td>
+                            <td>{{ item.ExpenseAmount | currency : "&#8377" : 2 }}</td>
+                            <td>{{ item.ReceiveAmount | currency : "&#8377" : 2 }}</td>
+                              <td>{{item.ExpenseDescription}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{ item.ExpenseDate| date:"mediumDate" }}</td>
+                            <td><span class="fa fa-archive" ng-click="Delete(item)" ng-show="Status== 'Rejected'||Status== 'Added'"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="5"></td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="newItemList" ng-show="tempexpenses.length>0||NewItemForm" class="row" style="margin-top:10px;">
+            <div class="layout-box" style="margin:10px; max-height:400px;">
+                <div class="data_header" style="height:30px;">
+                    New Item at Local (Please click Save to save on server)
+
+
+                    <span class="fa fa-floppy-o" title="Save Data" ng-click="SaveAtServer()" style="margin-left:20px; "></span>
+                    <span class="fa fa-trash" title="Cancel All" ng-click="ClearTempData()" style="margin-left:20px; "></span>
+                </div>
+                <div style="max-height:370px;overflow:scroll;">
+
+                    <table style="width:100%;">
+                        <tr>
+                            <th>#</th>
+                            <th>ItemName</th>
+                            <th>ExpenseAmount</th>
+                            <th>ReceiveAmount</th>
+                            <th>Remarks</th>
+                            <th>ExpenseDate</th>
+                        </tr>
+
+                        <tr ng-repeat="item in tempexpenses track by $index" class="repeated-item">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ item.ItemName}}</td>
+                            <td>{{ item.ExpenseAmount}}</td>
+                            <td>{{ item.ReceiveAmount}}</td>
+                            <td>{{item.ExpenseDescription}}</td>
+                            <td>{{ item.ExpenseDate| date:"mediumDate" }}</td>
+                            <td><span class="fa fa-edit" ng-click="Edit(expense)" ng-show="expense.Status== 'Rejected'"></span><span class="fa fa-archive" ng-click="Delete(expense)" ng-show="expense.Status== 'Rejected'"></span></td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td><input type="text" name="itemName" ng-model="item_name" placeholder="name" required /></td>
+                            <td><input type="text" name="Amount" ng-model="item_amount" placeholder="Amount" required /></td>
+                            <td></td>
+                            <td><input type="text" name="description" ng-model="item_description" placeholder="Description" required /></td>
+                            <td><input type="date" name="itemDate" ng-model="item_date" required /></td>
+                            <td><span ng-click="AddExpenseItem()" class="fa fa-check"></span></td>
+                        </tr>
+
+                    </table>
+                    <!--<button type="button" ng-click="SaveAtServer()">Save</button>
+            <button type="button" ng-click="ClearTempData()">ClearAll</button>-->
+                </div>
+            </div>
+            <div style="float:right;padding-right:10px;">
+                <button type="button" title="Cancel" class="btn btn-primary" ng-click="NewItemForm=false">Cancel</button>
+                <button type="button" title="Save" class="btn btn-success" ng-click="SaveAtServer()">Save</button>
+                <button type="button" title="Clear All" class="btn btn-primary" ng-click="ClearTempData()">Clear All</button>
+             </div>
+        </div>
+
+
+
+
+
+        <div id="AdvanceItemList" class="row" >
+            <div class="layout-box" style="margin:10px; max-height:400px;">
+                <div class="data_header">
+                    List of Advance taken
+                
+                    <span class="fa fa-plus" ng-show="ActivityStatus=='Initiated'||ActivityStatus=='Added'||ActivityStatus=='Rejected'" title="New Advance" ng-click="AdvanceForm()" style="margin-left:20px; "></span>
+
+                    <!--<button type="button" ng-show="ActivityStatus=='Initiated'||ActivityStatus=='Added'||ActivityStatus=='Rejected'" ng-click="AdvanceForm()">Request Advance</button>-->
+                </div>
+                <div ng-show="advanceItems.length>0" style="max-height:370px;overflow:scroll;">
+
+                    <table style="width:100%;">
+                        <tr>
+                            <th>#</th>
+                            <th>ItemName</th>
+                            <th>AdvanceAmount</th>
+                            <th>ReceiveAmount</th>
+
+                            <th>Remarks</th>
+                            <th>Status</th>
+                            <th>UpdatedBy</th>
+                            <th>ExpenseDate</th>
+                        </tr>
+                        <tr ng-repeat="item in advanceItems track by $index" class="repeated-item">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ item.AdvanceName}}</td>
+                            <td>{{ item.RequestAmount}}</td>
+                            <td>{{ item.ReceiveAmount}}</td>
+                            <td>{{item.AdvanceRemarks}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>{{item.Employee}}</td>
+                            <td>{{ item.CreationDate| date:"mediumDate" }}</td>
+                            <td><span class="fa fa-archive" ng-click="Delete(item)" ng-show="item.Status== 'Rejected'||item.Status== 'Added'"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+                </div>
+
+
+
+
+                <!--<div id="NewItem" ng-show="NewItemForm" class="row">
+                <form name="NewItem" style="margin:5px 5px; text-align:left;">
+                    <input type="date" name="itemDate" ng-model="item_date"  required />
+                    <input type="text" name="itemName" ng-model="item_name" placeholder="name" required />
+                    <input type="text" name="Amount" ng-model="item_amount" placeholder="Amount" required />
+                    <input type="text" name="description" ng-model="item_description" placeholder="Description" required />
+                    <span ng-click="AddExpenseItem()" class="fa fa-check" ng-hide="NewItem.itemName.$invalid||NewItem.Amount.$invalid||NewItem.description.$invalid"></span>
+                </form>
+                <button type="button" ng-click="cancel()">Cancel</button>
+            </div>-->
+                <!--<div id="newProjectModal" ng-show="NewItemForm" class="layout_modal_Window">
+                <div class="layout_modal_Content" style="height:250px;width:350px;">
+                    <div class="layout_modal_header">
+                        New Project <span ng-click="cancel()" class="fa fa-close"></span>
+                    </div>
+                    <div class="layout_modal_body">
+                        <form name="NewItem" style="margin:5px 5px; text-align:left;">
+                            <input type="date" name="itemDate" ng-model="item_date" required />
+                            <input type="text" name="itemName" ng-model="item_name" placeholder="name" required />
+                            <input type="text" name="Amount" ng-model="item_amount" placeholder="Amount" required />
+                            <input type="text" name="description" ng-model="item_description" placeholder="Description" required />
+
+                        </form>
+                    </div>
+                    <div class="layout_modal_footer">
+                        <span ng-click="AddExpenseItem()" class="fa fa-check" ng-hide="NewItem.itemName.$invalid||NewItem.Amount.$invalid||NewItem.description.$invalid"></span>
+                        <button class="btn" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>-->
+
+
+ 
+
+                <div id="newAdvanceForm" ng-show="advanceDiv" class="layout_modal_Window">
+                    <div class="layout_modal_Content" style="height:210px;width:310px;">
+                        <div class="layout_modal_header">
+                            <h4>Request Advance</h4>
+                        </div>
+                        <div class="layout_modal_body container-fluid">
+                            <form name="newAdvance" style="margin:5px 5px; text-align:left;">
+                                <div class="row">
+                                    <label style="width:60px;"> Amount :</label>  <input name="advAmount" tabindex="1" type="text" ng-model="advAmount" style="width:200px;" required text-length />
+                                </div>
+                                <div class="row">
+                                    <label style="width:60px;"> Remark :</label>  <input name="advRemark" tabindex="2" type="text" ng-model="advRemarks" style="width:200px;" required text-length />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="layout_modal_footer" style="padding-right:25px;">
+                            <button type="button" class="btn btn-primary" ng-click="RequestAdvance()">Send</button>
+                            &nbsp;&nbsp; <button type="button" class="btn btn-danger" ng-click="cancel()">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+</body>
+</html>

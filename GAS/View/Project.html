@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+   
+</head>
+<body>
+
+    <div class="container-fluid zero_margin">
+        <div class="row" ng-hide="true" style="text-align:end;">
+
+            <button class="btn btn-primary btn-sm" ng-click="ShowClose()">{{ProjectFilterName}}</button>
+
+            <button class="btn btn-primary btn-sm" ng-click="open()">New Project</button>
+        </div>
+        
+
+        <div class="row zero_margin">
+            <div class="col-md-9 padding-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue">
+                        My Projects
+                        
+                                <img on-toggle="" src="Images/Icon/logo_Filter.png" title="Add New Project" ng-click="ToggleFilter()"  style="width:30px;height:30px;border-radius:50%;
+                             position: absolute;top:12px; right: 70px;" />
+ 
+                        <img src="Images/Icon/logo_add.png" title="Add New Project" ng-click="open()" style="width:30px;height:30px;border-radius:50%;
+                            position: absolute;top:12px; right: 20px;" />
+
+                    </div>
+                    <div ng-show="ShowFilter" style="display:inline-block;background-color:grey; z-index:500; position: absolute;top:30px; right: 90px; padding:10px;">
+                        <ul style=" list-style-type: none;margin: 0;padding: 0;color:white;">
+                            <li ng-click="ShowAll()" style="cursor:pointer;">
+                               Show All
+                            </li>
+                            <li ng-click="ShowOpen()" style="cursor:pointer;">
+                                Show Open
+                            </li>
+                            <li ng-click="ShowClose()" style="cursor:pointer;">
+                                Show Close
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="container-fluid zero_margin" style="max-height:{{row1Height}};overflow-x:hidden;overflow-y:scroll; width:100%;">
+                        <div style="max-height:{{row1Height}};width:100%;">
+                            <div class="row" style="border-bottom:solid 1px #404040;;" ng-repeat="p in ProjectList" ng-click="ShowExpense(p.ProjectID)" ng-class-odd="'bg_lightGrey'">
+                                <div class="col-xs-12" style=" border-bottom:solid 1px #cccccc;">
+                                    <b>{{ p.ProjectName }}(#{{ p.ProjectNumber }})</b>, client: {{ p.ClientName }}
+                                  
+                                </div>
+                                <div class="col-xs-6 col-sm-3" style="padding:10px;text-align:center; border-right:solid 1px #cccccc;">
+                                    Owner:<br/>
+                                    <img src="{{ProfileImage}}" style="width:30px; height:30px; border-radius:50%; border:1px double grey;" />
+                                    <br />{{ p.CreatedByName }}
+
+
+                                </div>
+
+                               
+                                <div class="col-xs-6 col-sm-5" >
+
+                                    Project Value : {{ p.ProjectValue }} <br />
+                                    Spent : {{p.Spent | currency : "&#8377" : 2}} <br />
+                                    Received : {{p.Received | currency : "&#8377" : 2}}<br>
+                                    Net : {{p.Spent - p.Received | currency : "&#8377" : 2}}
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4" style="padding:5px;">
+                                    <uib-progressbar animate="false" value="dynamic" type="success"><b>{{p.WorkCompletion}}%</b></uib-progressbar>
+                                    <button class="btn btn-default btn-sm" ng-click="editStatus(p)" value="ddButton">{{p.Status}}</button>
+                                    
+                                    <a class="btn btn-primary btn-sm" href="#!PrjDetail/{{p.ProjectID}}">Show Details</a>
+                                </div>
+
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <!--<div class="col-xs-12" style="margin:0px;padding:0px;">
+                <div class="data_header">  My Projects 
+                    <span class="fa fa-plus" title="Create Project" ng-click="open()" style="margin-left:20px;"></span>
+                </div>-->
+
+                <div class="col-md-3 padding-10" >
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;">
+                            Project Daily Expenses
+                        </div>
+
+                        <div style="max-height:{{row1Height}};overflow-x:hidden;overflow-y:scroll;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Expense</th>
+                                    <th>Receive</th>
+                                </tr>
+
+                                <tr ng-repeat="exp in expenseList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ exp.ExpenseDate| date:"ddMMM,yy"}}</td>
+                                    <td>{{ exp.Status }}</td>
+                                    <td>{{ exp.ExpenseAmount}}</td>
+                                    <td>{{ exp.ReceiveAmount}}</td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                 
+                </div>
+        </div>
+
+     
+
+        <div class="row"  ng-hide="ActivityList.length==0">
+            <div class="col-sm-12 zero_margin" >
+                <div class="panel panel-default" style="margin:5px;">
+                    <!--  <linechart api="api" style="margin:50px; height:200px;" data="expensedata" options="expenseOptions"></linechart>-->
+                    <div class="panel-heading bg_greyBlue">Daily Expense / Received</div>
+
+                    <canvas id="bar" class="chart chart-bar" chart-data="projectdata" chart-labels="labels" chart-colors="colors"
+                            chart-series="series" style="max-height:300px;width:100%;"></canvas>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row layout-box">
+           
+        </div>
+
+
+        <div id="newProjectModal" ng-show="newProjectDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:350px;">
+                <div class="layout_modal_header">
+                    New Project <span ng-click="cancel()" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <label style="width:100px;">Project Number</label> <input type="text" ng-model="project_number" /><br />
+                    <label style="width:100px;">Client</label> <input type="text" ng-model="clientName" /><br />
+                    <label style="width:100px;">Project Name</label> <input type="text" ng-model="project_name" /><br />
+                    <label style="width:100px;">Value</label> <input type="text" ng-model="project_value" /><br />
+                    <label style="width:100px;">Description</label> <input type="text" ng-model="project_description" /><br />
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="AddProject()">Add</button> &nbsp;&nbsp; 
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+                <div ng-show="project_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="newPaymentModal" ng-show="newPaymentDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:350px;">
+                <div class="layout_modal_header"> 
+                Payment Dialog <span ng-click="cancel()" title="Close"  class="fa fa-close" style="float:right;"></span> 
+                </div>
+                <form name="newPayment" style="width:320px;margin:50px auto; text-align:left;">
+                    <label style="width:150px">Project : </label><span ng-bind="ProjectName"></span> <br />
+                    <label style="width:150px;">Name: </label> <input name="AccHolder" tabindex="0" type="text" ng-model="TName" style="width:150px;" required text-length> <br />
+                    <label style="width:150px;"> Transaction Type: </label> <select tabindex="1" ng-model="selectedType" ng-options="x for x in types"></select><br />
+                    <div>
+                        <label style="width:150px;"> Account: </label> <select tabindex="2" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
+                    </div>
+                    <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="3" type="text" ng-model="Amount" style="width:150px;" required min-amount /><br />
+                    <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="4" type="text" ng-model="Remarks" style="width:150px;" required text-length /><br />
+                </form>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" type="button" ng-click="PaymentUpdate()" ng-disabled="newPayment.Amount.$invalid || newPayment.Remark.$invalid">Add</button>
+                    &nbsp;&nbsp; 
+                    <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+                <div ng-show="payment_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+        <div id="newStatusModal" ng-show="newStatusDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:350px;">
+                <div class="layout_modal_header"> 
+               Status Update <span ng-click="cancel()" title="Close" class="fa fa-close"></span>
+                 </div>
+                <form name="newData" style="width:320px;margin:20px auto; text-align:left;">
+                    <label style="width:150px">Project : </label><span ng-bind="ProjectName"></span> <br />
+                    <label style="width:150px;">Work Completed %: </label> <input name="AccHolder" tabindex="0" type="number" ng-model="ProjectCompletion" style="width:150px;" text-length> <br />
+                    <label style="width:150px;">Remark :</label>  <input name="Remark" tabindex="1" type="text" ng-model="StatusRemark" style="width:150px;" required text-length /><br />
+
+                    <div style="margin:10px 0px 5px 0px"><label>Project Status</label></div>
+                    <div style="float:left" ng-repeat="option in ['Ongoing','Completed','Onhold'] track by $index">
+                        <input type="radio" name="status" ng-value="option" ng-model="ProjectStatus" ng-click="Status_Clicked(this)">
+                        <label style="margin:0px 10px 0px 5px">{{option}}</label>
+                    </div>
+                </form>
+
+                <div class="layout_modal_footer" style="margin-top:40px;">
+                    <button type="button" class="btn btn-success" ng-click="StatusUpdate()" ng-disabled="newData.AccHolder.$invalid || newData.Amount.$invalid || newData.Remark.$invalid">Update</button>
+                    &nbsp;&nbsp; <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+                <div ng-show="status_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" class="fa fa-loader"/>
+                </div>
+
+               
+                </div>
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>

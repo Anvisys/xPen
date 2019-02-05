@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
+    <script data-require="angular-ui-bootstrap@0.11.0" data-semver="0.11.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <div class="container-fluid zero_margin">
+
+    
+       
+        <div class="row padding-10 zero_margin">
+            
+            <div class="col-xs-12 col-sm-8 padding-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue">
+                        Accounts
+                        <span class="fa fa-plus" title="Add New Account" ng-click="OpenNewAccount()" 
+                              style="margin-left:20px; color:white; height:30px; width:30px; position: absolute;top: 15px; right: 10px;"></span>
+                    </div>
+
+                    <table style="max-height:{{row1Height}}; width:100%;">
+                        <tr>
+                            <th class="hidden-xs">#</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Number</th>
+                            <th>Current Balance</th>
+                            <th class="hidden-xs">Description</th>
+                            <th ng-hide="true"><span class="fa fa-bar-chart" title="Trend All Accounts" ng-click="ShowTrend('All')"></span></th>
+                        </tr>
+                        <tr ng-repeat="a in Accounts" ng-click="ShowTrend(a)">
+                            <td class="hidden-xs">{{ $index + 1 }}</td>
+                            <td><a title="Detail Transaction" href="#!Transaction/{{a.AccountName}}">{{ a.AccountName }}</a></td>
+                            <td>{{ a.AccountType }}</td>
+                            <td>{{ a.AccountNumber }}</td>
+                            <td>{{ a.AccountBalance }}</td>
+                            <td class="hidden-xs">{{ a.AccountDescription }}</td>
+                            <td ng-hide="true"><span class="fa fa-bar-chart" title="Daily Transaction" ng-click="ShowTrend(a)"></span></td>
+                            <td ng-hide="true" ng-class='{open: open}'>
+                                <div class="btn-group" uib-dropdown>
+                                    <button id="split-button" type="button" class="btn btn-danger">Action</button>
+                                    <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+
+                                        <li role="menuitem"><a ng-click="DDClick()">Another action</a></li>
+                                        <li role="menuitem"><a ng-click="DDClick()">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li role="menuitem"><a ng-click="DDClick()">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="hidden-xs" style="margin-top:10px;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading bg_greyBlue" style="background-color:#dbd7e3;">
+                            Daily Transaction from {{accName}}
+                         </div>
+                       
+                    
+                        <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                chart-data="data" chart-labels="labels" chart-options="accOptions"
+                                chart-series="series" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 padding-10">
+                <button ng-hide="true" class="btn btn-danger" ng-click="OpenNewAccount()">New Account</button>
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue">
+                        Transaction from {{accName}} Accounts
+                    </div>
+
+                    <table style="width: 100%; max-height:{{ScreenHeight}};">
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Deposit</th>
+                            <th>Withdraw</th>
+                        </tr>
+
+                        <tr ng-repeat="exp in transactionList">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ exp.ExpenseDate | date:"ddMMM,yy" }}</td>
+                            <td>{{ exp.ReceiveAmount }}</td>
+                            <td>{{ exp.ExpenseAmount }}</td>
+
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+   
+
+
+        <div id="newAccModal" ng-show="newAccountDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:318px;position:relative;">
+                <div class="layout_modal_header">
+                    New Account <span ng-click="cancel()" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <label style="width:100px;">Name</label> <input type="text" ng-model="accName" /><br />
+                    <label style="width:100px;">Type</label> <input type="text" ng-model="accType" /><br />
+                    <label style="width:100px;">Number</label> <input type="text" ng-model="accNumber" /><br />
+                    <label style="width:100px;">Description</label> <input type="text" ng-model="accDesc" /><br />
+                </div>
+                <div class="layout_modal_footer" style="padding-right:10px;">
+                    <button class="btn btn-success" ng-click="AddAccount()">Okay</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+                <div ng-show="newAccount_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+</html>

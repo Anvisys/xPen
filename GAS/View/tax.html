@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+    <div class="container-fluid">
+      
+
+        <div class="row">
+         
+                <span ng-click="Previous()" title="Previous Month" class="glyphicon glyphicon-arrow-left"></span>
+                <label style="padding-left:10px;padding-right:10px; color:blue;"> {{CurrentMonth| date:"MMM,yy"}}</label>
+                <span ng-click="Next()" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
+          
+        </div>
+
+
+        <div class="row" style="margin-top:10px;">
+          
+            <div class="col-xs-6">
+                <button class="btn btn-success" ng-hide="IsTDSBaseline || (PurchaseList.length==0 && SellList.length==0)" ng-click="showTDSBaseline = true">Baseline TDS</button>
+                <div class="row panel panel-default" style="text-align:left;" ng-show="IsTDSBaseline">
+
+                    <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;color:white;">
+                        TDS Baseline
+                    </div>
+
+                    <div class="col-xs-6">
+                        <label class="heading_label">Calculated TDS:</label> <label class="text_label" style="width:100px;"> {{items.payable}} </label>
+                    </div><div class="col-xs-6">
+                        <label class="heading_label"> Previous TDS:</label><label class="text_label" style="width:100px;"> {{prevTDS}}</label>  <br />
+                    </div><div class="col-xs-6">
+                        <label class="heading_label">Baseline TDS:</label> <label class="text_label" style="width:100px;"> {{TDS_Payable}} </label>
+                    </div>
+                    <div class="col-xs-6">
+                        <label class="heading_label"> PaidTDS :</label> <label class="text_label" style="width:100px;">{{paidTDS}}</label>  <br />
+                    </div>
+                    <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            <button class="btn btn-success" style="margin:auto;" ng-click="ShowTDSForm=true" ng-show="TDS_Payable>paidTDS">Pay</button>
+                        </div>
+                        <div ng-show="paidTDS>0">
+                            <label class="heading_label"> Paid Date: </label><label class="text_label" style="width:100px;"> {{TransDate| date:"mediumDate"}}</label>  <label class="heading_label">Remarks:</label><label class="text_label" style="width:100px;"> {{TransRemarks}} </label><br />
+                        </div>
+                    </div>
+            </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-success" ng-hide="IsGSTBaseline || (PurchaseList.length==0 && SellList.length==0)" ng-click="showGSTBaseline = true">Baseline GST</button>
+                    <div class="row panel panel-default" style="text-align:left;" ng-show="IsGSTBaseline">
+                        <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;color:white;">
+                           GST Baseline
+                        </div>
+                       <div class="col-xs-6">
+                                <label class="heading_label">GST Received:</label> <label class="text_label"> {{tax.IGST}} </label>
+                        </div>
+                        <div class="col-xs-6">
+                                <label class="heading_label"> GST Input:</label><label class="text_label" style="width:100px;"> {{tx.IGSTI}}</label>  <br />
+                            </div>
+                        <div class="col-xs-6">
+                                 <label class="heading_label">Previous:</label> <label class="text_label"> {{GST_Previous}} </label>
+                        </div><div class="col-xs-6">                            
+                                <label class="heading_label"> GST Payable :</label> <label class="text_label" style="width:100px;">{{GST_Payable}}</label>  <br />
+                            </div>
+                        <div class="col-xs-6">
+                            <label class="heading_label">Paid Amount:</label> <label class="text_label" style="width:100px;"> {{GST_Paid}} </label>
+                            </div>
+                        <div class="col-xs-6">
+                            <button class="btn btn-success" style="margin:auto;" ng-click="ShowGSTForm=true" ng-show="GST_Payable>GST_Paid">Pay</button>
+                        </div>
+                            <div ng-show="GST_Paid>0">
+                              <label class="heading_label"> Paid Date: </label><label class="text_label"> {{gstTransDate| date:"mediumDate"}}</label>  <label class="heading_label">Remarks:</label><label class="text_label" style="width:100px;"> {{gstTransRemarks}} </label><br />
+                             </div>
+                        </div>
+                </div>
+        </div>
+     
+
+
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-6" >
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;color:white;">
+                        TDS Data :
+                    </div>
+                    <div style="max-height:{{ScreenHeight}};overflow:scroll;">
+                        <h5 ng-hide="PurchaseList.length>0|| SellList.length>0"> No Sale, Purchase including GST was found</h5>
+                        <table ng-hide="PurchaseList.length==0 && SellList.length==0" ng-init="items ={}" style="width:100%;">
+                            <tr>
+                                <th>#</th>
+                                <th>Project</th>
+                                <th>InvoiceNumber</th>
+                                <th>TDS Deducted</th>
+                                <th>TDS Payable</th>
+                                <th>PaymentDate</th>
+                            </tr>
+                            <tr ng-repeat="tds in PurchaseList">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ tds.ProjectName }}</td>
+                                <td>{{ tds.InvoiceNumber }}</td>
+                                <td>0</td>
+                                <td ng-init="items.payable = items.payable+tds.TDS">{{ tds.TDS }}</td>
+                                <td>{{ tds.PaidDate | date:"mediumDate"}}</td>
+                                <td ng-show="false"><span class="fa fa-edit" title="Edit TDS" ng-click="EditTDS(tds)"></span></td>
+                            </tr>
+                            <tr ng-repeat="stds in SellList">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ stds.ProjectName }}</td>
+                                <td>{{ stds.InvoiceNumber }}</td>
+                                <td ng-init="items.deducted = items.deducted+stds.TDS">{{ stds.TDS }}</td>
+                                <td>0</td>
+                                <td>{{ stds.PaidDate | date:"mediumDate"}}</td>
+                                <td ng-show="false"><span class="fa fa-edit" title="Edit TDS" ng-click="EditTDS(stds)"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td>{{items.deducted| number:2}}</td>
+                                <td>{{items.payable| number:2}}</td>
+                                <td><span class="fa fa-rupee" title="Pay TDS" ng-click="PayTDS(items.Total)"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+
+            <div class="col-xs-6 " >
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;color:white; ">
+                        GST Data :
+                    </div>
+                    <div style="max-height:{{ScreenHeight}};overflow:scroll;">
+
+                        <h5 ng-hide="PurchaseList.length>0|| SellList.length>0"> No Sale, Purchase including GST was found</h5>
+                        <table ng-hide="PurchaseList.length==0 && SellList.length==0" ng-init="tax ={}" style="width:100%;">
+                            <tr>
+                                <th>#</th>
+                                <th>Project</th>
+                                <th>Invoice</th>
+                                <th>CGST</th>
+                                <th>SGST</th>
+                                <th>IGST</th>
+                                <th>InvoiceDate</th>
+                            </tr>
+                            <tr ng-repeat="gst1 in PurchaseList">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ gst1.ProjectName }}</td>
+                                <td>{{ gst1.InvoiceNumber }}</td>
+                                <td ng-init="tax.CGST = tax.CGSTI + gst1.CGST">-{{ gst1.CGST }}</td>
+                                <td ng-init="tax.SGST = tax.SGSTI + gst1.SGST">-{{ gst1.SGST }}</td>
+                                <td ng-init="tax.IGSTI = tax.IGSTI + gst1.IGST">-{{ gst1.IGST }}</td>
+
+                                <td>{{ gst1.InvoiceDate | date:"mediumDate"}}</td>
+
+                            </tr>
+                            <tr ng-repeat="gst2 in SellList">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ gst2.ProjectName }}</td>
+                                <td>{{ gst2.InvoiceNumber }}</td>
+                                <td ng-init="tax.CGST = tax.CGST + gst2.CGST">{{ gst2.CGST }}</td>
+                                <td ng-init="tax.SGST = tax.SGST + gst2.SGST">{{ gst2.SGST }}</td>
+                                <td ng-init="tax.IGST = tax.IGST + gst2.IGST">{{ gst2.IGST }}</td>
+
+                                <td>{{ gst2.InvoiceDate | date:"mediumDate"}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td>{{tax.CGST}}</td>
+                                <td>{{tax.SGST}}</td>
+                                <td>{{tax.IGST-tax.IGSTI| number:2}}</td>
+                                <td><span class="fa fa-rupee" title="Pay GST" ng-click="PayGST(items.total)"></span></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="newTDSPaymentModal" ng-show="ShowTDSForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:600px;">
+                <div class="layout_modal_header">
+                    Purchase Invoice <span ng-click="ShowTDSForm=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Project Name:</label> 
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Project Number</label> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> Payable: </label> {{TDS_Payable}}
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Penalty</label> <input type="text" style="width:100px;" ng-model="tds_penalty" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> From Account: </label> <select tabindex="2" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Amount</label> <input type="text" style="width:100px;" ng-model="tds_amount" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="trans_remarks" />
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="date" name="itemDate" ng-model="transaction_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="SubmitTDS()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="ShowTDSForm= false">Cancel</button>
+                </div>
+                <div ng-show="project_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+        <div id="newGSTPaymentModal" ng-show="ShowGSTForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:700px;">
+                <div class="layout_modal_header">
+                    GST Payment<span ng-click="ShowGSTForm=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                   <label style="width:150px;">Project Name: </label>  <button class="btn btn-link" ng-click="SelectProject()">{{ProjectName}}</button><br />
+                            </div>
+                       </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> GST : </label> <input type="text" style="width:100px;" ng-model="GST_Payable" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Penalty</label> <input type="text" style="width:100px;" ng-model="GST_penalty" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> From Account: </label> <select tabindex="2" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Amount</label> <input type="text" style="width:100px;" ng-model="gst_amount" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="trans_remarks" />
+                            </div>
+                            <div class="col-xs-6">
+                               Month <input type="date" name="itemDate" ng-model="payment_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="SubmitGST()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="ShowGSTForm= false">Cancel</button>
+                </div>
+                <div ng-show="GST_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:350px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="ProjectDialog" ng-show="listProject" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:500px;">
+                <div class="layout_modal_header"> Project List:  <span ng-click="listProject=false" class="fa fa-close"></span> </div>
+                <div class="layout_modal_body">
+                    <div class="row">
+                        Filter <input />
+                    </div>
+                    <div class="row" style="margin-top:10px;">
+                        <table style="margin:auto;max-height:300px;overflow-y:auto;">
+                            <tr>
+                                <th>ProjectName</th>
+                                <th>ProjectNumber</th>
+                                <th>ClientName</th>
+                                <th>Manager Name</th>
+                                <th colspan="2">Status</th>
+                            </tr>
+                            <tr ng-repeat="prj in ProjectList" style="overflow-y:auto;">
+                                <td> {{prj.ProjectName}}</td>
+                                <td>{{prj.ProjectNumber}}</td>
+                                <td>{{prj.ClientName}}</td>
+                                <td>{{prj.CreatedByName}}</td>
+                                <td>{{prj.Status}}</td>
+                                <td><span class="fa fa-check" ng-click="SelectProj(prj)"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+
+                    <button type="button" class="btn btn-warning" ng-click="listProject=false">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="newTDSBaselineModal" ng-show="showTDSBaseline" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:700px;">
+                <div class="layout_modal_header">
+                   TDS Baseline<span ng-click="showTDSBaseline=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label style="width:150px;">Month: </label>  {{SelectedMonth}}<br />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> Previous Due: </label> 0
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">TDS Deducted</label> {{items.deducted}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;">TDS Payable: </label> {{items.payable}}
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Amount</label> <input type="text" style="width:100px;" ng-model="tds_amount" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="trans_remarks" />
+                            </div>
+                            <div class="col-xs-6">
+                                Month <input type="date" name="itemDate" ng-model="payment_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="BaselineTDS()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="showTDSBaseline= false">Cancel</button>
+                </div>
+                <div ng-show="GST_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:350px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+        <div id="newGSTBaselineModal" ng-show="showGSTBaseline" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:700px;">
+                <div class="layout_modal_header">
+                    GST Baseline<span ng-click="showGSTBaseline=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label style="width:150px;">Month: </label>  {{SelectedMonth}}<br />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;"> GST Received: </label> {{tax.IGST}}
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">GST Input</label> {{tax.IGSTI}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:150px;">GST Payable: </label> {{tax.IGST-tax.IGSTI}}
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">GST Amount</label> <input type="text" style="width:100px;" ng-model="gst_amount" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="gst_remarks" />
+                            </div>
+                            <div class="col-xs-6">
+                                Month <input type="date" name="itemDate" ng-model="gstbaseline_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="BaselineGST()">Baeline</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="showGSTBaseline= false">Cancel</button>
+                </div>
+                <div ng-show="GST_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:350px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

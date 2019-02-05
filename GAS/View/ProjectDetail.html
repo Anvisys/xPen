@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Angular_Script/ui-bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row project_text bg_e7">
+            <div class="col-xs-6"><label class="text_discuss">Project Name  :</label> {{Project.ProjectName}} </div><div class="col-xs-6"><label class="text_discuss"> Project Number:</label> {{Project.ProjectNumber}}</div>
+            <div class="col-xs-6"><label class="text_discuss"> Client Name :</label> {{Project.ClientName}} </div><div class="col-xs-6"><label class="text_discuss"> Project Value:</label> {{Project.ProjectValue | currency : "&#8377" : 2 }}</div>
+            <div class="col-xs-6"><label class="text_discuss">  Project Status :</label> {{Project.ProjectStatus}} </div><div class="col-xs-6"><label class="text_discuss"> Project Description:</label> {{Project.ProjectDescription}}</div>
+            <div class="col-xs-6"><label class="text_discuss"> Creation Date :</label> {{Project.ProjectCreationDate| date:"mediumDate"}} </div><div class="col-xs-6"><label class="text_discuss"> Last Updated:</label> {{Project.StatusOn| date:"mediumDate"}}</div>
+        </div>
+
+
+
+        <div class="row">
+            <uib-tabset  active="0">
+                <uib-tab  index="0" heading="Transaction">
+                    <div class="row">
+                      
+                        <div class="col-xs-12" style="margin-top:0px;">
+                            <div class="data_header" ng-show="false"> Project Transaction <span class="fa fa-plus" title="Enter Invoice" ng-click="model.newOtherPaymentDiv= true" style="margin-left:20px;"></span></div>
+                           
+                            <div style="max-height:300px;overflow-y:scroll; overflow-x:hidden;">
+                                <table ng-init="TransItems={}" style="max-height:250px; overflow:scroll; width:100%;">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Type</th>
+                                        <th>Name</th>
+                                        <th>Withdraw</th>
+                                        <th>Deposit</th>
+                                        <th>DateTime</th>
+                                       
+                                    </tr>
+                                    <tr ng-repeat="t in model.transactionList">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ t.TransType}}</td>
+                                        <td>{{ t.TransName}}</td>
+                                        <td ng-init="TransItems.Withdraw = TransItems.Withdraw + t.Withdraw">{{ t.Withdraw | currency : "&#8377" : 2}}</td>
+                                        <td ng-init="TransItems.Deposit = TransItems.Deposit + t.Deposit">{{ t.Deposit | currency : "&#8377" : 2 }}</td>
+                                        <td>{{t.TransactionDate| date:"mediumDate"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Total</td>
+                                        <td>{{TransItems.Withdraw | currency : "&#8377" : 2}}</td>
+                                        <td>{{TransItems.Deposit | currency : "&#8377" : 2}}</td>
+                                        <td></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                       
+                   
+                    </div>
+                </uib-tab>
+
+                <uib-tab index="1" heading="Invoices" >
+                    <div class="row">
+                   
+                        <div class="col-xs-12 " style="margin:10px;">
+                            <div class="data_header" style="text-align:center;">  Sell <span class="fa fa-plus" title="Create Invoice" ng-click="model.newInvoiceDiv= true" style="margin-left:20px;"></span></div>
+                            <div class="customLayout" style="max-height:300px;overflow:scroll;">
+                                <table  ng-init="sellItems = {}" style="max-height:250px; overflow:scroll; width:100%;">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>InvoiceNumber</th>
+                                        <th>Date</th>
+                                        <th>Client</th>
+                                        <th>Cost</th>
+                                        <th>CGST</th>
+                                        <th>SGST</th>
+                                        <th>IGST</th>
+                                        <th>TDS</th>
+                                        <th>Total</th>
+                                        <th>Received</th>
+                                        <th>Received On</th>
+                                        <th></th>
+                                    </tr>
+
+                                    <tr ng-repeat="p in model.InvoiceList">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ p.InvoiceNumber}}</td>
+                                        <td>{{p.InvoiceDate| date:"mediumDate"}}</td>
+                                        <td>{{p.ClientName}}</td>
+                                        <td>{{ p.ServiceCost |currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.CGST | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.SGST | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.IGST | currency : "&#8377" : 2}}</td>
+                                        <td>{{ p.TDS | currency : "&#8377" : 2}}</td>
+                                        <td ng-init="sellItems.total = sellItems.total + p.ServiceCost+p.CGST+p.SGST+ p.IGST - p.TDS">
+                                            {{p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS | currency : "&#8377" : 2}}
+                                            <span class="fa fa-edi" style="color:#4caf50;font-size:1.5em;" title="Payment Received" ng-click="model.receivePayment(p)"></span>
+                                        </td>
+                                        <td ng-init="sellItems.received = sellItems.received + p.ReceivedAmount">{{p.ReceivedAmount | currency : "&#8377" : 2}}</td>
+                                        <td>{{p.ReceivedDate | date:"mediumDate"}}</td>
+                                      
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9"> Total Billing </td>
+                                        <td> {{sellItems.total | currency : "&#8377" : 2}}</td>
+                                        <td> {{sellItems.received | currency : "&#8377" : 2}}</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                 
+                     
+                    </div>
+                </uib-tab>
+                <uib-tab index="2" heading="Purchase" >
+                    <div class="row" >
+                        
+                        <div class="col-xs-12" style="margin-top:10px;">
+                            <div class="data_header" style="text-align:center;">  Purchase <span class="fa fa-plus" title="Enter Invoice" ng-click="model.newPurchaseInvoiceDiv= true" style="margin-left:20px;"></span></div>
+                            <div class="customLayout" style="max-height:300px;overflow:scroll;">
+                                <table ng-init="purchaseItems={}" style="max-height:250px; overflow:scroll; width:100%;">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>InvoiceNumber</th>
+                                        <th>Date</th>
+                                        <th>Vendor</th>
+                                        <th>Cost</th>
+                                        <th>CGST</th>
+                                        <th>SGST</th>
+                                        <th>IGST</th>
+                                        <th>TDS</th>
+                                        <th>Total</th>
+                                        <th>Paid</th>
+                                        <th>Paid Date</th>
+                                        <th></th>
+                                    </tr>
+
+                                    <tr ng-repeat="p in model.PurchaseInvoiceList">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ p.InvoiceNumber}}</td>
+                                        <td>{{p.InvoiceDate| date:"mediumDate"}}</td>
+                                        <td>{{ p.VendorName}}</td>
+                                        <td>{{ p.ServiceCost | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.CGST | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.SGST | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.IGST | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.TDS | currency : "&#8377" : 2 }}</td>
+                                        <td ng-init="purchaseItems.payable = purchaseItems.payable + p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS">{{p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS | currency : "&#8377" : 2 }}  <span class="fa fa-edit" style="color:#4caf50;font-size:1.5em;" title="Add Payment" ng-click="makePayment(p)"></span></td>
+                                        <td ng-init="purchaseItems.Paid = purchaseItems.Paid+ p.PaidAmount">{{ p.PaidAmount | currency : "&#8377" : 2 }}</td>
+                                        <td>{{ p.PaidDate | date:"mediumDate"}}</td>
+                                        <td>
+                                           
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9"></td>
+                                        <td>{{purchaseItems.payable | currency : "&#8377" : 2 }}</td>
+                                        <td>{{purchaseItems.Paid | currency : "&#8377" : 2 }}</td>
+                                        <td></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                      
+
+                    </div>
+                </uib-tab>
+           
+                <uib-tab index="3" heading="Activity/Expense" select="LoadActivity()">
+
+                    <div class="layout-box" style="margin:10px;">
+                        <div class="data_header">  Project Activities</div>
+                        <span class="fa fa-plus" title="New Activity" ng-click="model.NewActivityForm=true" style="margin-left:20px; "></span>
+                        <span class="fa fa-plus-square-o" title="Quick Expense" ng-click="model.QuickExpenseForm=true" style="margin-left:20px; "></span>
+                        <div style="max-height:300px;overflow:scroll;">
+
+                            <table style="width:100%;max-height:260px;">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ActivityName</th>
+                                    <th>Employee</th>
+                                    <th>ActivityStatus</th>
+                                    <th>Expense</th>
+                                    <th>Received</th>
+                                    <th>Advance</th>
+                                </tr>
+
+                                <tr ng-repeat="act in model.ActivityList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ act.ActivityName}}</td>
+                                    <td>{{ act.Employee}}</td>
+                                    <td>{{ act.ActivityStatus }}</td>
+                                    <td>{{ act.Expenses | currency : "&#8377" : 2  }}</td>
+                                    <td>{{ act.Settlement |currency : "&#8377" : 2  }}</td>
+                                    <td>{{ act.Advance | currency : "&#8377" : 2  }}</td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                  
+                </uib-tab>
+
+
+            </uib-tabset>
+            </div>
+        
+
+
+        <div id="Activity_Form" ng-show="model.NewActivityForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:650px;">
+                <div class="layout_modal_header">
+                    New Activity <span ng-click="model.NewActivityForm=false" class="fa fa-close" style="float:right;"></span>
+                </div>
+                <div class="layout_modal_body container-fluid" style="border-bottom:solid 1px grey;">
+                    <form name="newActivity" style="margin:5px 5px; text-align:left;">
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Created By: </label> <label class="text_label">{{UserId}} ({{UserName}})</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Transaction Type: </label> <label class="text_label">Expenses</label> <br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Project </label><label class="text_label">{{Project.ProjectName}} </label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="heading_label">Activity Name: </label> <input ng-disabled="EditProject" name="ActivityName" tabindex="1" type="text" ng-model="model.activity_name" required text-length>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label">Employee</label> <label type="text" class="text_label">{{EmployeeName}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-link" ng-click="OpenEmployeeDialog()">ChangeUser</button>
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top:10px;">
+                           
+                            <div class="col-xs-6">
+                               <input name="ItemRemark" placeholder="Remark" tabindex="2" type="text" ng-model="model.activity_remarks" style="width:150px;    margin-left: 15px;" required />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="layout_modal_footer">
+                    <button type="button" class="btn btn-success" ng-click="AddActivity()">Add Activity</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" ng-click="model.NewActivityForm=false">Cancel</button>
+                </div>
+            </div>
+            <div ng-show="newActivity_progress" class="loader_div">
+                <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:310px;" src="Images/Icon/ajax-loader.gif" />
+            </div>
+        </div>
+
+
+
+        <div id="QuickExpense_Form" ng-show="model.QuickExpenseForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:500px;position:relative;">
+                <div class="layout_modal_header">
+                    Quick Expense<span ng-click="model.QuickExpenseForm=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="Quick_Activity">
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Employee: </label> <label class="text_label">{{UserId}} ({{UserName}})</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Transaction Type: </label> <label class="text_label">Expenses</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Project/Head: </label>  <select class="heading_label" ng-model="activity_Project" style="width:100px;margin-left: 6px; height: 22px;" ng-options="x.ProjectName for x in ProjectList"></select>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Activity:</label><label class="text_label">  General</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> ExpenseName:</label>  <input name="ExpenseName" tabindex="1" type="text" placeholder="Expense Name" style="width:100px;" ng-model="expense_name" required>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Amount:</label>  <input name="Amount" tabindex="2" type="text" style="width:100px;" placeholder="Amount" ng-model="expense_amount"  required min-amount />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="heading_label"> Remark:</label>   <input name="Remark" tabindex="3" type="text" style="width:100px;    margin-left: 42px;" ng-model="expense_remarks" required text-length />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layout_modal_footer" >
+                    <button type="button" class="btn btn-success" ng-click="AddQuickExpense()" ng-disabled="Quick_Activity.AccHolder.$invalid || Quick_Activity.Amount.$invalid || Quick_Activity.Remark.$invalid">Add</button>
+                    &nbsp;&nbsp; <button type="button" class="btn btn-warning" ng-click="model.QuickExpenseForm=false">Close</button>
+                </div>
+                <div ng-show="QuickExpense_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:310px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+      
+        <div id="User_Form" ng-show="model.SelectUserForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="max-height:500px;width:640px;">
+                <div class="layout_modal_header">
+                    Select User<span ng-click="model.SelectUserForm=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="newUser" style="margin:5px 5px; text-align:left;">
+
+                        <div class="row form-group">
+                            <div style="text-align:center;">Filter <input ng-model="searchText"></div>
+                        </div>
+                        <div class="row" style="max-height:300px; overflow:scroll;">
+                            <table style="width:100%">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Select</th>
+                                </tr>
+                                <tr ng-repeat="user in UserList | filter:searchText" ng-click="Select(user)">
+                                    <td> {{user.UserName}}</td>
+                                    <td>{{user.UserId}}</td>
+                                    <td>{{user.UserMobile}}</td>
+                                    <td>{{user.UserEmail}}</td>
+                                    <td><span class="fa fa-check" ng-click="Select(user)"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="layout_modal_footer">
+                    <button type="button" class="btn btn-success" ng-show="false" ng-click="GetUser()">GetUser</button>
+                    &nbsp;&nbsp; <button type="button" class="btn btn-warning" ng-click="model.SelectUserForm= false">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="newInvoiceModal" ng-show="model.newInvoiceDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:290px;width:520px;">
+                <div class="layout_modal_header">
+                    New Invoice <span ng-click="model.newInvoiceDiv=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Project Name:</label> <label>{{Project.ProjectName}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:105px;">Project Number:</label> <label>{{Project.ProjectNumber}}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Client:</label> <label>{{Project.ClientName}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Invoice No:</label> <input type="text" style="width:100px;" ng-model="invoice_number" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Cost</label> <input type="number" style="width:100px;" ng-model="work_cost" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">CGST</label> <input type="number" style="width:100px;" ng-model="CGST" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">SGST</label> <input type="number" style="width:100px;" ng-model="SGST" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">IGST</label> <input type="number" style="width:100px;" ng-model="IGST" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">TDS</label> <input type="number" style="width:100px;" ng-model="TDS" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Grand Total:</label> {{work_cost+CGST+SGST+IGST-TDS | currency : "&#8377" : 2}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Description</label> <input type="text" style="width:100px;" ng-model="project_description" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Invoice Date</label>  <input type="date" style="width:100px;" name="itemDate" ng-model="invoice_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer " >
+                    <button class="btn btn-success" ng-click="AddSellInvoice()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="model.newInvoiceDiv= false">Cancel</button>
+                </div>
+                <div ng-show="project_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+            <div id="newReceivePaymentModal" ng-show="newReceivePaymentDiv" class="layout_modal_Window">
+                <div class="layout_modal_Content" style="width:600px;">
+                    <div class="layout_modal_header">
+                        Receive Payment <span ng-click="newReceivePaymentDiv=false" title="Close" class="fa fa-close"></span>
+                    </div>
+                    <div class="layout_modal_body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label style="width:105px;">Invoice Number:</label> <label>{{selInvoice.InvoiceNumber}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label style="width:115px;">Total Payable:</label> <label>{{selInvoice.ServiceCost+selInvoice.CGST+selInvoice.SGST+ selInvoice.IGST - selInvoice.TDS | currency : "&#8377" : 2}}</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label style="width:135px;">Amount Received</label> <label>{{selInvoice.ReceivedAmount | currency : "&#8377" : 2}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Received Cost</label> <input type="number" style="width:100px;" ng-model="received_cost" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Received GST</label> <input type="number" style="width:144px;" ng-model="received_GST" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Received TDS</label> <input type="number" style="width:100px;" ng-model="received_TDS" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Account</label> <select style="width:144px;    height: 22px;" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts"></select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="trans_remarks" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label style="width:100px;">Payment Date</label> <input type="date" name="itemDate" ng-model="receive_date" required />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="layout_modal_footer">
+                        <button class="btn btn-success" ng-click="AddPayment()">Add</button> &nbsp;&nbsp;
+                        <button class="btn btn-warning" ng-click="newReceivePaymentDiv= false">Cancel</button>
+                    </div>
+                    <div ng-show="project_progress" class="loader_div">
+                        <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                    </div>
+                </div>
+            </div>
+        
+        
+
+        <div id="newPurchaseInvoiceModal" ng-show="model.newPurchaseInvoiceDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:270px;width:600px;">
+                <div class="layout_modal_header">
+                    Purchase Invoice <span ng-click="model.newPurchaseInvoiceDiv=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Project Name:</label> <label>{{Project.ProjectName}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Project Number</label> <label>{{Project.ProjectNumber}}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:104px;">Vendor Name:</label><input type="text" style="width:100px;" ng-model="vendor_name" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Invoice No:</label> <input type="text" style="width:100px;" ng-model="pinvoice_number" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Cost</label> <input type="number" style="width:100px;" ng-model="pwork_cost" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">CGST</label> <input type="number" style="width:100px;" ng-model="pCGST" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">SGST</label> <input type="number" style="width:100px;" ng-model="pSGST" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">IGST</label> <input type="number" style="width:100px;" ng-model="pIGST" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">TDS</label> <input type="number" style="width:100px;" ng-model="pTDS" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:150px;">Grand Total:</label> {{pwork_cost+pCGST+pSGST+pIGST | currency : "&#8377" : 2}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Description</label> <input type="text" style="width:100px;" ng-model="project_description" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Invoice date</label>  <input type="date" name="itemDate" ng-model="pinvoice_date" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="AddPurchaseInvoice()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="model.newPurchaseInvoiceDiv= false">Cancel</button>
+                </div>
+                <div ng-show="project_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+        <div id="newMakePaymentModal" ng-show="newMakePaymentDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:200px;width:600px;">
+                <div class="layout_modal_header">
+                    Purchase Invoice <span ng-click="newMakePaymentDiv=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:105px;">Invoice Number:</label> <label>{{selInvoice.InvoiceNumber}}</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Cost Invoiced:</label> <label>{{selInvoice.ServiceCost | currency : "&#8377" : 2}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Cost Paid</label> <input type="text" style="width:100px;" ng-model="paid_cost" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:104px;">Account name</label><select style="width:130px;height:22px;" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text"  style="width:100px;" ng-model="payment_Remarks" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Invoice date</label> <input style="width:130px;" type="date" name="itemDate" ng-model="receive_date" required />
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <div class="layout_modal_footer" >
+                    <button class="btn btn-success" ng-click="Pay()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="newMakePaymentDiv= false">Cancel</button>
+                </div>
+                <div ng-show="project_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+
+        <div id="newOtherPaymentModal" ng-show="model.newOtherPaymentDiv" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:600px;">
+                <div class="layout_modal_header">
+                    Other Payment <span ng-click="model.newOtherPaymentDiv=false" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="layout_modal_body">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Name</label> <input type="text" style="width:100px;" ng-model="model.trans_name" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Cost Paid</label> <input type="text" style="width:100px;" ng-model="model.trans_amount" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Account</label>  <select ng-model="model.selAccount" ng-options="acc.AccountName for acc in Accounts"></select>
+                            </div>
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Date:</label>  <input type="date" name="itemDate" ng-model="model.trans_date" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label style="width:100px;">Remarks</label> <input type="text" style="width:100px;" ng-model="model.trans_Remarks" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="PayOther()">Add</button> &nbsp;&nbsp;
+                    <button class="btn btn-warning" ng-click="model.newOtherPaymentDiv= false">Cancel</button>
+                </div>
+                <div ng-show="other_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:300px;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+   <br/>
+
+</body>
+</html>

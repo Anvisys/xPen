@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+   
+</head>
+<body>
+    <div class="container-fluid zero_margin">
+        <div class="row" ng-show="ProjectList.length==0">
+            No Project found, Please create Project First
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4 style="font-size:22px;">Dashboard</h4>
+            </div>
+            <div class="col-sn-6">
+                <h5 style="text-align:right;">
+                    <button class="btn btn-primary btn-sm SeeMore2 fa fa-exchange"  ng-click="SeeMore()">&nbsp;My Expense</button>
+
+                </h5>
+            </div>
+        </div>
+       
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="card mb-5">
+
+                    <div class="container1">
+
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
+                                <p>Number of Activity:{{IPCount}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>Amount:<h4><b>{{IPValue| currency : "&#8377" : 2}}</b></h4></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-sm-4">
+                <div class="card mb-5">
+
+                    <div class="container1">
+
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
+                                <p>Number of Activity:{{SubmittedCount}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>Amount:<h4><b>{{SubmittedValue|currency : "&#8377" : 2}}</b></h4></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card mb-5">
+
+                    <div class="container1">
+
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h4 style="color: #4caf50;"><b>Approved Expense</b></h4>
+                                <p>Number of Activity:{{ApprovedCount}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <p>Amount:<h4><b>{{ApprovedValue|currency : "&#8377" : 2}}</b></h4></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{ TodayExpense|currency : "&#8377" : 2 }}</h4></div>
+                <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> {{ApprovedValue|currency : "&#8377" : 2}}</h4> </div>
+
+
+            </div>
+            <div class="col-sm-8">
+                <div class="shadow" style="height:200px;">
+                    <div class="panel-heading" style="background-color:#FFC107;">
+                        Daily Expense
+                    </div>
+                    <div class="panel-body zero_all">
+                         <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                                chart-data="chartdata" chart-labels="labels" chart-options="accOptions"
+                                                chart-series="series" style="max-height:180px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card mb-5">
+
+                    <div class="container1">
+                        <h4><b>Last 2 Expense</b></h4>
+                        <p>Railway ticket <b>Rs750</b>  28/01/2019</p>
+                        <p>Hotel Booking <b>Rs1750 </b> 28/01/2019</p>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-8">
+                <div class="card mb-5">
+                    <div class="container1">
+                        <h4><b>Active project</b></h4>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <p>Project Name</p>
+                                <h4>CCTV</h4>
+                            </div>
+                            <div class="col-xs-3">
+                                <p>Client Name</p>
+                                <h4> BHEL</h4>
+                            </div>
+                            <div class="col-xs-3">
+                                <p>Project Number</p>
+                                <h4> CCTV/03</h4>
+                            </div>
+                            <div class="col-xs-3">
+                                <p>Strat Date</p>
+                                <h4> May 10, 2018</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+  
+</body>
+
+</html>

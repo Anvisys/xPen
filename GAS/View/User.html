@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid zero_margin" >
+    
+        <div class="row zero_margin" >
+            
+            
+            <div class="col-md-8 padding-10" style="height:{{ScreenHeight}};">
+      
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue" style="position: relative;height:50px;">
+                        User/Employee List
+                        <span ng-hide="false" class="fa fa-plus-square fa-2x" title="New User" ng-click="NewUser()" style="float:right;padding-right: 6px;color:#fff"></span>
+                        <span ng-hide="false" class="fa fa-user-plus fa-2x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;" ></span>
+                        <!--<img src="Images/Icon/icon_AddUser_white.png" title="Add New User" ng-click="NewUser()" style="width:20px;height:20px;border-radius:50%;margin-left:10px;
+                             position: absolute;top: 10px; right: 50px;" />
+                        <img src="Images/Icon/icon_ExistUser_white.png" title="Add Existing User" ng-click="existingUserDiv=true" style="width:30px;height:30px;border-radius:50%;
+                            position: absolute;top: 5px; right: 10px;" />-->
+                    </div>
+
+                    <div style="max-height:{{ScreenHeight}};overflow-x:hidden;overflow-y:scroll;">
+                        <div style="max-height:{{ScreenHeight}}; width:100%;">
+                  
+                            <div class="row" ng-init="imgsrc = 'UserImage_'+ user.UserId" ng-repeat="user in userList" ng-class-odd="'bg_lightGrey'" ng-click="Show(user)">
+                              
+                                <div class="col-sm-3 col-xs-3" style="padding-top: 10px; padding-left: 22px;" >
+                                    <img ng-src="{{UserImages['UserImage_'+ user.UserId]}}" ng-m ng-model="UImage" style="border-radius:50%; height:40px; width:40px;" />
+                                    
+                                </div>
+                                <div class="col-sm-3 col-xs-3 padding-10" style="height:50px;">
+                                    {{ user.UserName }}({{ user.UserId}})
+                                    <br />{{ user.UserRole }}
+                                </div>
+                              
+                        
+                                <div class="col-sm-3 col-xs-3 padding-10">{{ user.UserEmail }} <br /> {{ user.UserMobile }}</div>
+                               
+                                <div class="col-sm-3 col-xs-3 padding-10">
+                                    <div class="btn-group" uib-dropdown>
+                                        <button id="split-button" type="button" class="btn btn-primary btn-sm">Action</button>
+                                        <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+
+                                            <li role="menuitem"><a href="#!UserTrans/{{user.UserId}}">Detail</a></li>
+                                            <li role="menuitem"><a ng-click="Remove(user)">Remove User</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4 padding-10" style="height:{{ScreenHeight}};">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue">
+                        {{selectedUser}}'s Dues
+                    </div>
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-6" style="text-align:center;">
+                                    <div class="OuterRing" style=" background-color:#42A5F5;margin:auto;">
+                                        <div class="InnerRing">
+                                            <h4 class="ring_title"> Payable </h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value">{{UserPayable | currency:'&#8377;' : 2}}</h4>
+                                </div>
+
+                                <div class="col-xs-6" style="text-align:center;">
+                                    <div class="OuterRing" style=" background-color:#8bc34a;margin:auto;">
+                                        <div class="InnerRing" style=" background-color:#ffffff; text-align:center;">
+                                            <h4 class="ring_title"> Receivable </h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value">{{InProcess | currency:'&#8377;' : 2}}</h4>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12" style="text-align:center;">
+                                    <div class="OuterRing" style=" background-color:#ffa726;margin:auto;">
+                                        <div class="InnerRing" style=" background-color:#ffffff; text-align:center;">
+                                            <h4 class="ring_title"> InProcess </h4>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value">{{InProcess | currency:'&#8377;' : 2}}</h4>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                   
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading bg_greyBlue">
+                            Daily Expenses
+                        </div>
+                        <div class="panel-body">
+                        <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                chart-data="userdata" chart-labels="labels" chart-options="accOptions"
+                                chart-series="series" style="max-height:180px;"></canvas>
+                    </div>
+                
+            </div>
+
+
+
+            </div>
+        </div>
+       
+
+
+        <div ng-show="newUserDiv" class="layout_modal_Window" >
+           
+            <div class="panel panel-primary layout_modal_container" style="width:500px;">
+                
+                <div class="panel-heading">
+                    Add User <span ng-click="Close()" title="Close" style="float:right;color:white;" class="fa fa-close"></span>
+                </div>
+                <div class="panel-body" style="background-color: #fff;">
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newData" style="margin:5px 5px; text-align:left;">
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group" style="padding:5px;">
+                                        <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-envelope" style="border:none;"></i></span>
+                                        <input name="email" class="form-control" placeholder="Email" tabindex="2" type="email" ng-model="user_email" style="width:150px; font-size:small;" required min-amount /><br />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group" style="padding:5px;">
+                                        <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-phone" style="border:none;"></i></span>
+                                        <input name="mobile" class="form-control" placeholder="Mobile" tabindex="4" type="text" ng-model="user_mobile" style="width:150px;" required min-amount /><br />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group" style="padding:5px;">
+                                        <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-user" style="border:none;"></i></span>
+                                        <input name="userName" class="form-control" placeholder="User Name" tabindex="1" type="text" ng-model="user_name" style="width:150px;" required text-length>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group" style="padding:5px;">
+                                        <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-lock" style="border:none;"></i></span>
+                                        <input type="password" style="width:150px;" tabindex="5" placeholder="Password" class="form-control" ng-model="user_password" required text-length /><br />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="input-group" style="padding:5px;">
+                                        <span class="input-group-addon" style="color:black;"><i class="fa fa-users" style="border:none;"></i></span>
+                                        <select class="form-control" ng-model="user_role" ng-options="x for x in roles" style="width:150px;"></select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <label style="font-size:smaller; color:red;">{{response}}</label>
+                </div>
+                <div class="panel-footer" style="text-align:right;" >
+                   
+                        <button type="button" class="btn btn-success" ng-click="UserAdd()" ng-disabled="newData.AccHolder.$invalid || newData.Amount.$invalid || newData.Remark.$invalid">Add</button>
+                        &nbsp;&nbsp; <button type="button" class="btn btn-warning"  ng-click="Close()">Close</button>
+                   
+                </div>
+              
+                <div ng-show="newUser_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:310px;" src="../../Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+               
+        </div>
+
+        <div ng-show="existingUserDiv" class="layout_modal_Window">
+            <div class="panel panel-primary layout_modal_container">
+                <div class="panel-heading">
+                    Add Exising User<span ng-click="existingUserDiv=false" style="float:right;" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="panel-body" style="background-color: #fff;">
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newData" style="margin:5px 5px; text-align:left;">
+                            <div class="row">
+                                Search By Mobile : <input name="MobileNumber" tabindex="0" type="text" ng-model="SearchMobile" style="width:147px;" required text-length>
+                                <span ng-click="GetUser()" class="fa fa-search"></span>
+                            </div>
+                            <div class="row">
+                                <label>{{UserText}}</label>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                <div class="panel-footer" style="text-align:right;">
+                    <button type="button" class="btn btn-success" ng-disabled="SelectedUser== null" ng-click="AddExistingUser()">Add</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" ng-click="existingUserDiv=false">Close</button>
+                </div>
+                </div>
+            </div>
+
+        <div ng-show="ConfirmRemoval" class="layout_modal_Window">
+            <div class="panel panel-primary layout_modal_container">
+                <div class="panel-heading">
+                    Confirm <span ng-click="ConfirmRemoval=false" style="float:right;" title="Close" class="fa fa-close"></span>
+                </div>
+                <div class="panel-body" style="background-color: #fff;">
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newData" style="margin:5px 5px; text-align:left;">
+                            <div class="row">
+                                <h5 style="color:blue;"> Do you Really want to remove User!</h5>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                <div class="panel-footer" style="text-align:right;">
+                    <button type="button" class="btn btn-success" ng-click="UserRemove()">Remove</button>
+                    &nbsp;&nbsp; <button type="button" class="btn btn-warning" ng-click="ConfirmRemoval=false">Close</button>
+                </div>
+                </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div id="filter" class="row">
+            <div class="col-xs-6 ">
+             {{UserName}}   <label ng-click="ShowUsers()" style="cursor:pointer;color:cornflowerblue;">Change User</label>
+                </div>
+              <div class="col-xs-6" style="text-align:right;">
+                Show for Month <span ng-click="Previous()" title="Previous Month" class="glyphicon glyphicon-arrow-left"></span>
+                <label style="padding-left:10px;padding-right:10px; color:blue;"> {{CurrentMonth| date:"MMM,yy"}}</label><span ng-click="Next()" ng-show="ShowNext" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
+            </div>
+          
+
+        </div>
+
+
+        <div class="row" style="margin-top:10px;">
+
+            <div class="layout-box" style="margin:10px; max-height:400px;">
+                <div class=" data_header">
+                    Transaction Details
+                    <span ng-click="exportToExcel('#TransactionData')" title="Export to Excel" style="cursor:pointer;float:right;padding-right:10px;">Export <i class="fa fa-file-excel-o" aria-hidden="true"></i></span>
+
+                </div>
+                <div style="max-height:380px;overflow:scroll;">
+                    <label ng-show="expenses.length<=0"> No data for selected filter</label>
+                    <table ng-show="expenses.length>0" id="TransactionData" style="width:100%;">
+                        <tr>
+                            <th>#</th>
+                            <th>Date Time</th>
+
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Withdraw</th>
+                            <th>Deposit</th>
+                            <th>Balance</th>
+                            <th>Account Balance</th>
+                            <th>Name</th>
+                            <th>Remark</th>
+
+                        </tr>
+                        <tr ng-repeat="expense in expenses|orderBy:sortDate| filter:{AccountName: filterAccount}:false" class="repeated-item">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ expense.EntryDate| date:"ddMMM,yy @ h:mma" }}</td>
+                            <td>{{ expense.AccountName}}</td>
+                            <td>{{ expense.TransType}}</td>
+                            <td>{{ expense.Withdraw }}</td>
+                            <td>{{ expense.Deposit}}</td>
+                            <td>{{ expense.Balance}}</td>
+                            <td>{{ expense.AccountBalance}}</td>
+                            <td>{{ expense.TransName}}</td>
+                            <td>{{ expense.TransactionRemarks}}</td>
+
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="User_Form" ng-show="ShowUserForm" class="layout_modal_Window">
+            <div class="panel panel-primary layout_modal_container">
+                <div class="panel-heading bg_greyBlue">
+                    <h4>Select User</h4>
+                </div>
+                <div class="panel-body" style="background-color: #fff;">
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newUser" style="margin:5px 5px; text-align:left;">
+                            <div class="row">
+                                Filter <input ng-change="GetUserList()" ng-model="UserHint" />
+                            </div>
+                            <div class="row" style="max-height:200px; overflow-y:scroll;">
+                                <table >
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>ID</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                    </tr>
+                                    <tr ng-repeat="user in UserList" ng-click="GetUser(user)">
+                                        <td> {{user.UserName}}</td>
+                                        <td>{{user.UserId}}</td>
+                                        <td>{{user.UserMobile}}</td>
+                                        <td>{{user.UserEmail}}</td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="panel-footer" style="text-align:right;">
+                <button type="button" class="btn btn-warning" ng-click="ShowUserForm=false">Close</button>
+            </div>
+                </div>
+            </div>
+
+
+
+    </div>
+
+
+
+</body>
+</html>

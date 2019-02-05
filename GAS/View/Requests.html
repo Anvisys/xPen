@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html ng-controller="requestCtrl">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="margin-top:20px;">
+            <div class="layout-box" style="margin:auto;">
+                <table style="width:100%;">
+                    <tr>
+                        <th>Status</th>
+                        <th>OrganizationName</th>
+                        <th>No Of Employee</th>
+                        <th>Contact</th>
+                        <th>Mobile</th>
+                        <th>AdminName</th>
+                        <th>AdminMobile</th>
+                        <th>AdminEmail</th>
+                    </tr>
+                    <tr ng-repeat="org in OrgnizationList">
+                        <td>{{org.Status}}</td>
+                        <td>{{org.OrganizationName}}</td>
+                        <td>{{org.Employee}}</td>
+                        <td>{{org.ContactPerson}}</td>
+                        <td>{{org.ContactNumber}}</td>
+                        <td>{{org.AdminName}}</td>
+                        <td>{{org.UserEmail}}</td>
+                        <td>{{org.UserMobile}}</td>
+                        <td><span class="fa fa-check" ng-click="ShowApprove(org)"></span></td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+
+
+        <div ng-show="approvalForm" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="height:250px;width:340px; position: relative;">
+                <div class="layout_modal_header">
+                    <h4>Approval </h4>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="newData" style="margin:5px 5px; text-align:left;">
+
+                        <div class="row">
+                            <label style="width:120px;"> Number :</label>  <input name="orgNumber" tabindex="4" type="text" ng-model="orgNumber" style="width:250px;" />
+                            <label style="width:120px;"> Remark :</label>  <input name="orgRemark" tabindex="4" type="text" ng-model="orgRemark" style="width:250px;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="layout_modal_footer" style="padding:5px;">
+                    <button type="button" ng-click="ApproveSubmit()">Approve</button>
+                    &nbsp;&nbsp; <button type="button" ng-click="Cancel()">Close</button>
+                </div>
+                <label style="font-size:smaller; color:red;">!{{response}}</label>
+                <div ng-show="request_approval" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; margin:auto;" src="Images/Icon/ajax-loader.gif" />
+                </div>
+            </div>
+
+        </div>
+
+        <button type="button" ng-click="NewOrganizationForm =true">Add Organization</button>
+
+        <div class="row">
+
+            <div id="Organization_Form" ng-show="NewOrganizationForm" class="layout_modal_Window">
+                <div class="layout_modal_Content" style="width:640px; position: relative;">
+                    <div class="layout_modal_header">
+                        <h4>Add Detail Expense</h4>
+                    </div>
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newActivity" style="margin:5px 5px; text-align:left;">
+                         <div class="row" style="border-bottom:solid 1px grey;">
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Organization Name" ng-model="OrgName" />
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Number of Employee" ng-model="EmployeeCount" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Address" ng-model="OrgAddress" />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Contact Name" ng-model="ContactPerson" />
+                                    </div>
+                             </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Contact Number" ng-model="ContactMobile" />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Contact Email" ng-model="ContactEmail" />
+                                    </div>
+                                </div>
+                            </div>
+                      </form>
+                    </div>
+                    <div class="layout_modal_footer">
+                        <button type="button" ng-click="AddOrganization()">Add Organization</button>
+                        &nbsp;&nbsp; <button type="button" ng-click="NewOrganizationForm = false">Cancel</button>
+                    </div>
+                    <label style="font-size:smaller; color:red;">!{{response}}</label>
+                    <div ng-show="newOrg_progress" class="loader_div" style="vertical-align:middle">
+                        <img style="height:20px;width:20px;z-index:15;position:absolute;top:50%;" src="../../Images/Icon/ajax-loader.gif" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="Admin_Form" ng-show="NewAdminForm" class="layout_modal_Window">
+                <div class="layout_modal_Content" style="width:640px;position:relative;">
+                    <div class="layout_modal_header">
+                        <h4>Create Admin</h4>
+                    </div>
+                    <div class="layout_modal_body container-fluid">
+                        <form name="newActivity" style="margin:5px 5px; text-align:left;">
+                            <div class="row" style="border-bottom:solid 1px grey;">
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Admin Name" ng-model="adminName" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Admin Email" ng-model="adminEmail" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Admin Mobile" ng-model="adminMobile" />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" placeholder="Admin" ng-model="adminRole" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layout_modal_footer">
+                        <button type="button" ng-click="AddAdmin()">Create Admin</button>
+                        &nbsp;&nbsp; <button type="button" ng-click="NewAdminForm = false">Cancel</button>
+                    </div>
+                    <label style="font-size:smaller; color:red;">!{{response}}</label>
+                    <div ng-show="newAdmin_progress" class="loader_div">
+                        <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:310px;" src="../../Images/Icon/ajax-loader.gif" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

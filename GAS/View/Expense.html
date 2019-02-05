@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--<div id="filterRow" ng-show="false" class="row">
+            <select ng-model="SelFilterType" ng-options="x for x in filterType"></select>
+
+            <select ng-model="SelFilterYear" ng-options="x for x in filterYear"></select>
+
+            <select ng-model="SelFilterMonth"  ng-show="SelFilterType=='Monthly'" ng-options="x for (x,y) in filterMonth"></select>
+            <span ng-click="RefreshData()" class="fa fa-search"></span>
+        </div>-->
+
+        <div id="dataRow" class="row" style="margin-top:20px;">
+
+            <div class="col-xs-4">
+                <div class="layout-box" style="margin:10px;">
+                    <div class="data_header">Monthly Expense</div>
+                            <table style="width:100%; max-height:500px;">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Year</th>
+                                    <th>Month</th>
+                                    <th>Month Expense</th>
+                                </tr>
+                                <tr ng-repeat="ex in monthList">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{ex.Year}}</td>
+                                    <td>{{ex.Month}}</td>
+                                    <td><a ng-click="ShowDetail(ex)">{{ex.Expense}}</a></td>
+                                </tr>
+                            </table>
+                    </div>
+                </div>
+            <div class="col-xs-8" style="height:100%; border-left:solid 1px grey;">
+                <div class="layout-box" style="margin:10px;">
+                    <div class="data_header">Daily Expense
+                        <span ng-click="exportToExcel('#expenseData')" title="Export to Excel" style="margin-left:20px;cursor:pointer;">Export <img width="10" height="10" src="../../Images/Icon/excel.jpg" /></span>
+
+                        <span class="fa fa-plus" title="New Expense" ng-click="NewExpensePage()" style="margin-left:20px; "></span>
+                    </div>
+                    <table id="expenseData" style="width:100%;max-height:500px;" ng-show="expenseList.length>0">
+                        <tr>
+                            <th>#</th>
+                            <th>Date Time</th>
+                            <th>Expense Type</th>
+                            <th>ExpenseAmount</th>
+                            <th>Remarks</th>
+
+                        </tr>
+
+                        <tr ng-repeat="expense in expenseList">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ expense.ExpenseDate| date:"ddMMM @ h:mma"}}</a></td>
+                            <td>{{ expense.ExpenseType}}</td>
+                            <td>
+                                {{ expense.ExpenseAmount }}
+                            </td>
+                            <td>{{ expense.ExpenseDescription}}</td>
+
+                        </tr>
+
+                    </table>
+                    <!--<button type="button" ng-click="exportToExcel('#expenseData')">Export to Excel</button>-->
+                    </div>
+
+                </div>
+            <div style="margin:0 10px 0 10px; text-align:center;">
+                <!--<button type="button" class="btn btn-success" ng-click="NewExpensePage()">New Expense</button>-->
+               
+
+            </div>
+        </div>
+
+ 
+
+
+
+
+        <div id="NewExpenseForm" ng-show="NewExpenseDialog" class="layout_modal_Window">
+            <div class="layout_modal_Content" style="width:330px;">
+                <div class="layout_modal_header">
+                    <h4>Add New Expense</h4>
+                </div>
+                <div class="layout_modal_body container-fluid">
+                    <form name="newExpense" class="form-inline" style="margin:5px 5px; text-align:left;">
+
+                        <label class="heading_label">Expense Type : </label><select tabindex="1" class="form-control" ng-model="SelExpenseType" ng-options="x for x in ExpenseType" style="width:150px;"></select>
+                        <br />
+                        <!--<label ng-show="SelExpenseType=='Others'" class="heading_label">Expense Type : </label><input class="form-control sm-6" ng-show="SelExpenseType=='Others'" type="text" placeholder="Expense Type :" ng-model="SelExpenseType" style="width:150px;    margin-left: 36px;" />--><br />
+                        <label class="heading_label">Amount : </label><input type="text"  placeholder="Amount" class="form-control" ng-model="ExpenseAmount" style="width:150px;    margin-left: 36px;" /><br /><br />
+
+                        <label class="heading_label">Rmarks : </label> <input type="text" class="form-control" placeholder="Remarks" ng-model="ExpenseRemark" style="width:150px;    margin-left: 36px;" />
+
+
+                    </form>
+                </div>
+                <div class="layout_modal_footer" style="margin-right: 23px;">
+                    <button type="button" class="btn btn-primary" ng-click="SubmitExpense()">Submit</button>
+                    &nbsp;&nbsp; <button type="button" class="btn btn-danger" ng-click="CancelExpense()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>
