@@ -1,0 +1,249 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E233ECBC-FE52-4535-8027-98FFF40A489D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xPen</RootNamespace>
+    <AssemblyName>xPen</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Angular_Script\angular-route.js" />
+    <Content Include="Angular_Script\angular.min.js" />
+    <Content Include="Angular_Script\ng-img-crop.css" />
+    <Content Include="Angular_Script\ng-img-crop.js" />
+    <Content Include="Angular_Script\ui-bootstrap.min.js" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="GAS\html\index.html" />
+    <Content Include="GAS\Images\Icon\excel.jpg" />
+    <Content Include="GAS\Images\Icon\icon_AddUser.png" />
+    <Content Include="GAS\Images\Icon\icon_AddUser_white.png" />
+    <Content Include="GAS\Images\Icon\icon_ExistUser_white.png" />
+    <Content Include="GAS\Images\Icon\logo_add.png" />
+    <Content Include="GAS\Images\Icon\logo_Filter.png" />
+    <Content Include="GAS\Images\Icon\logo_xpen.png" />
+    <Content Include="GAS\Images\Icon\logo_xpen_bg_white.png" />
+    <Content Include="GAS\Scripts\accountController.js" />
+    <Content Include="GAS\Scripts\activityController.js" />
+    <Content Include="GAS\Scripts\approvalController.js" />
+    <Content Include="GAS\Scripts\dashboardController.js" />
+    <Content Include="GAS\Scripts\expenseController.js" />
+    <Content Include="GAS\Scripts\ExpenseItemController.js" />
+    <Content Include="GAS\Scripts\gas.module.js" />
+    <Content Include="GAS\Scripts\indexController.js" />
+    <Content Include="GAS\Scripts\mainController.js" />
+    <Content Include="GAS\Scripts\profileController.js" />
+    <Content Include="GAS\Scripts\projectController.js" />
+    <Content Include="GAS\Scripts\projectDetailController.js" />
+    <Content Include="GAS\Scripts\requestController.js" />
+    <Content Include="GAS\Scripts\taxController.js" />
+    <Content Include="GAS\Scripts\transactionController.js" />
+    <Content Include="GAS\Scripts\userController.js" />
+    <Content Include="GAS\Scripts\userTransactionController.js" />
+    <Content Include="GAS\Services\accountService.js" />
+    <Content Include="GAS\Services\activityService.js" />
+    <Content Include="GAS\Services\advanceService.js" />
+    <Content Include="GAS\Services\dashboardService.js" />
+    <Content Include="GAS\Services\expenseItemService.js" />
+    <Content Include="GAS\Services\expenseService.js" />
+    <Content Include="GAS\Services\httpInterceptor.js" />
+    <Content Include="GAS\Services\invoiceService.js" />
+    <Content Include="GAS\Services\profileService.js" />
+    <Content Include="GAS\Services\projectService.js" />
+    <Content Include="GAS\Services\taxService.js" />
+    <Content Include="GAS\Services\transactionService.js" />
+    <Content Include="GAS\Services\userService.js" />
+    <Content Include="GAS\View\Account.html" />
+    <Content Include="GAS\View\Activity.html" />
+    <Content Include="GAS\View\Approval.html" />
+    <Content Include="GAS\View\employedashboard.html" />
+    <Content Include="GAS\View\Expense.html" />
+    <Content Include="GAS\View\ExpenseItem.html" />
+    <Content Include="GAS\View\Images\Icon\excel.jpg" />
+    <Content Include="GAS\View\Images\Icon\icon_AddUser.png" />
+    <Content Include="GAS\View\Images\Icon\icon_AddUser_white.png" />
+    <Content Include="GAS\View\Images\Icon\icon_ExistUser_white.png" />
+    <Content Include="GAS\View\Images\Icon\logo_add.png" />
+    <Content Include="GAS\View\Images\Icon\logo_Filter.png" />
+    <Content Include="GAS\View\main.html" />
+    <Content Include="GAS\View\managerdashboard.html" />
+    <Content Include="GAS\View\Profile.html" />
+    <Content Include="GAS\View\Project.html" />
+    <Content Include="GAS\View\ProjectDetail.html" />
+    <Content Include="GAS\View\Requests.html" />
+    <Content Include="GAS\View\tax.html" />
+    <Content Include="GAS\View\Transaction.html" />
+    <Content Include="GAS\View\User.html" />
+    <Content Include="GAS\View\UserTransaction.html" />
+    <Content Include="Images\Banner1.jpg" />
+    <Content Include="Images\Icon\accounting.jpg" />
+    <Content Include="Images\Icon\ajax-loader.gif" />
+    <Content Include="Images\Icon\down_arrow.png" />
+    <Content Include="Images\Icon\excel.jpg" />
+    <Content Include="Images\Icon\gap_icon.png" />
+    <Content Include="Images\Icon\Gap_logo.png" />
+    <Content Include="Images\Icon\icon_AddUser.png" />
+    <Content Include="Images\Icon\icon_AddUser_white.png" />
+    <Content Include="Images\Icon\icon_ExistUser_white.png" />
+    <Content Include="Images\Icon\logo_1.gif" />
+    <Content Include="Images\Icon\logo_add.png" />
+    <Content Include="Images\Icon\logo_Filter.png" />
+    <Content Include="Images\Icon\logo_xpen.png" />
+    <Content Include="Images\Icon\logo_xpen_blue_transp.png" />
+    <Content Include="Images\Icon\logo_xpen_white_transp.png" />
+    <Content Include="Images\Icon\mobile_data.png" />
+    <Content Include="Images\Icon\profile.jpg" />
+    <Content Include="Index.html" />
+    <Content Include="Login.html" />
+    <Content Include="Login\Images\Banner1.jpg" />
+    <Content Include="Login\Images\customer.png" />
+    <Content Include="Login\Images\dashboard_icon.png" />
+    <Content Include="Login\Images\data_entry.jpg" />
+    <Content Include="Login\Images\ic_expense_green.png" />
+    <Content Include="Login\Images\ic_invoice_orange.png" />
+    <Content Include="Login\Images\ic_transaction_green.png" />
+    <Content Include="Login\Images\logo_Expense.png" />
+    <Content Include="Login\Images\logo_Invoice.png" />
+    <Content Include="Login\Images\logo_transaction.png" />
+    <Content Include="Login\Images\manish.jpeg" />
+    <Content Include="Login\Images\mobile_data.png" />
+    <Content Include="Login\Images\playstore.png" />
+    <Content Include="Login\Images\profile.jpg" />
+    <Content Include="Login\Images\sanjay.jpg" />
+    <Content Include="Login\Images\yogendra.jpeg" />
+    <Content Include="Login\Script\CarouselCtrl.js" />
+    <Content Include="Login\Script\homeController.js" />
+    <Content Include="Login\Script\login.module.js" />
+    <Content Include="Login\Script\loginController.js" />
+    <Content Include="Login\Script\registerController.js" />
+    <Content Include="Login\Services\registerService.js" />
+    <Content Include="Login\Services\userService.js" />
+    <Content Include="Login\View\Home.html" />
+    <Content Include="Login\View\Recovery.html" />
+    <Content Include="Login\View\register.html" />
+    <Content Include="styles\gap.css" />
+    <Content Include="styles\layout.css" />
+    <Content Include="styles\xpen.css" />
+    <Content Include="TestPage.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\xPen.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\xPen.csprojAssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52823</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52823/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

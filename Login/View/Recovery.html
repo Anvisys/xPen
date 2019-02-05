@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid" style="background-color:#BED4FF;padding:0px;">
+        <div class="row" style="height:50px;"></div>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <img src="Login/Images/forgot.png" style="height:300px;text-align:right;margin-left: 141px;" />
+
+
+            </div>
+            <div class="col-sm-6">
+                <div style="height:200px; width:400px;background-color:#efefef;  border-radius:5px;">
+                    <div class="layout_modal_header">
+                        Retrieve Password
+                    </div>
+                    <div class="container-fluid ">
+
+                        <div class="row">
+                            <div class="col-xs-6"><input type="text" placeholder="Contact Mobile" ng-model="ContactMobile" style="height:30px;padding: 5px; width:150px;margin:10px;" /></div>
+                            <div class="col-xs-6">
+                                <input type="text" placeholder="Contact Email" ng-model="ContactEmail" style="height:30px;padding: 5px; width:150px;margin:10px;" />
+
+                            </div>
+                        </div>
+
+                        <button type="button" style="margin-left: 29px;" class="btn btn-primary" x:name="btnLogin" ng-click="Forgot()">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <label style="width:200px;font-size:medium;color:red">{{RecoveryResponse}}</label>
+
+        </div>
+        <div class="footer" style="padding:30px;width:100%;">
+            <div class="container-fluid">
+                <div class="row" style="color:#EEE9E9;">
+                    <div class="col-sm-4 footer-align">
+                        <h3 style="padding-left:10px;">Quick Links</h3>
+                        <ul style="color:#EEE9E9">
+                            <li><a href="#home"> Home</a></li>
+                            <li> <a href="#Features">Features</a></li>
+                            <li><a href="#Features"> Mobility</a></li>
+                            <li> <a href="#Features">Pricing</a></li>
+                            <li><a href="#customer">Customers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 footer-align">
+                        <h3 style="padding-left:30px;">Services</h3>
+                        <ul>
+                            <li> IT Consulting</li>
+                            <li> Web and Mobile Application Development</li>
+                            <li> GIS Consulting</li>
+                            <li> Security and Automation</li>
+                            <li> Pricing</li>
+                        </ul>
+                        <!--<ul>
+                        Product
+                        <li> LetsMeet(Mobile Tracking Android App)</li>
+                        <li> MyAptt(Society Management System)</li>
+                        <li> GAP(General Accounting Platform)</li>
+                    </ul>-->
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Write to Us</h4>
+                        <form method="post">
+                            <input type="text" name="name" id="your_name" ng-model="guest_name" placeholder="Your Name" style="width:75%;padding-bottom:3px;margin-top:10px;"><br />
+                            <input type="email" name="email_address" id="your_email_address" ng-model="guest_email" style="width:75%;margin-top:10px;" placeholder="Email Address"><br />
+                            <textarea name="query" rows="3" ng-model="guest_message" placeholder="Write Your Message" style="width:75%;height:90px;margin-top:10px;"></textarea><br />
+                            <button type="submit" name="Submitbtn" ng-click="SendQuery()" class="btn btn-warning" style="margin-top:10px;">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row zero_margin" style="color:white;text-align:center;background-color:#000;padding:20px;">
+            <div class="col-md-6">
+                Copyright &#169 2014   <a href="http://www.Anvisys.net" target="_blank" style="color:white;"> <strong> Anvisys Technologies Pvt. Ltd. </strong></a>
+            </div>
+            <div class="col-md-6">
+                Follwo Us: <span class="fa fa-facebook fa-2x" style="border:solid 1px;padding:5px;"></span>  <span class="fa fa-linkedin fa-2x" style="border:solid 1px;padding:5px;"></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

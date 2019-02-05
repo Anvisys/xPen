@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html ng-app="gas">
+<head>
+
+    <link rel="icon" type="image/png" href="Images/Icon/gap_icon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <script src="Angular_Script/angular.min.js"></script>
+    <script src="Angular_Script/angular-route.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <!--For Angular Charts-->
+    <script src="https://cdn.jsdelivr.net/angular.chartjs/1.1.1/angular-chart.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.28/LineChart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-chart/2.0.28/LineChart.min.css" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-cookies.js"></script>
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+
+    <script src="Angular_Script/ng-img-crop.js"></script>
+    <link type="text/css" rel="stylesheet" href="Angular_Script/ng-img-crop.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+
+
+    <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <script src="Angular_Script/ui-bootstrap.min.js"></script>
+
+        -->
+    <!--********************************************************************************************************-->
+    <script src="GAS/Scripts/gas.module.js"></script>
+    <script src="GAS/Services/httpInterceptor.js"></script>
+    <script src="GAS/Scripts/indexController.js?index=1"></script>
+    <script src="GAS/Scripts/mainController.js"></script>
+    <script src="GAS/Scripts/projectController.js"></script>
+    <script src="GAS/Services/projectService.js"></script>
+    <script src="GAS/Scripts/UserController.js"></script>
+    <script src="GAS/Services/userService.js"></script>
+
+    <script src="GAS/Scripts/activityController.js"></script>
+    <script src="GAS/Services/activityService.js"></script>
+
+    <script src="GAS/Scripts/transactionController.js"></script>
+    <script src="GAS/Services/transactionService.js"></script>
+
+
+    <script src="GAS/Scripts/accountController.js"></script>
+    <script src="GAS/Services/accountService.js"></script>
+
+    <script src="GAS/Scripts/approvalController.js"></script>
+
+    <script src="GAS/Scripts/ExpenseItemController.js"></script>
+    <script src="GAS/Services/expenseItemService.js"></script>
+
+    <script src="GAS/Services/advanceService.js"></script>
+
+    <script src="GAS/Scripts/expenseController.js"></script>
+    <script src="GAS/Services/expenseService.js"></script>
+
+    <script src="GAS/Scripts/profileController.js"></script>
+    <script src="GAS/Services/profileService.js"></script>
+
+    <script src="GAS/Scripts/requestController.js"></script>
+    <script src="GAS/Scripts/projectDetailController.js"></script>
+    <script src="GAS/Services/invoiceService.js"></script>
+    <script src="GAS/Scripts/taxController.js"></script>
+    <script src="GAS/Services/taxService.js"></script>
+    <script src="GAS/Scripts/userTransactionController.js"></script>
+    <script src="GAS/Scripts/dashboardController.js"></script>
+    <script src="GAS/Services/dashboardService.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="styles/gap.css" />
+    <link type="text/css" rel="stylesheet" href="styles/xpen.css" />
+
+
+    <!--********************************************************************************************************-->
+
+</head>
+<body ng-controller="indexCtrl">
+
+    <div class="container-fluid zero_margin" style="position:static;">
+
+        <header id="header" class="row hidden-sm hidden-md hidden-lg zero_margin" style="height:60px;position:static;">
+            <div class="row  bg_11 hidden-sm hidden-md hidden-lg zero_margin" style="height:60px;">
+                <div class="col-xs-4">
+                    <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px;  margin-left:20px;" />
+                </div>
+                <div class="col-xs-4" style="text-align:center;">
+                    <h3 class="center_heading">xPen</h3>
+                </div>
+                <div class="col-xs-4 zero_margin" style="text-align:right;position:relative;">
+
+                    <button ng-click="ShowDDMenu()" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+
+                    <!--<div ng-show="DDMenu" id="Usertype" style="color:#10023c; float:right; margin-right:40px; margin-top:30px;z-index:100;">
+                    <div class="layout-dropdown-content" id="UserType_Div">
+                        <a href="#!Profile" ng-click="showProfileDD1=false" id="User_profile" style="display:block;">Profile</a>
+                        <a id="btnlogout" text="Logout" ng-click="LogOff()">Log Off</a>
+                        <a href="#" ng-click="showProfileDD1=false" id="help">Help</a>
+                    </div>
+                </div>-->
+                    
+                </div>
+                <div ng-show="DDMenu" class=" col-xs-12 layout-dropdown-content" style="color:#10023c;float:right; margin-top:30px;margin-right:30px; z-index:999;">
+                    <div class="layout-dropdown-content">
+                        <a href="#!main" ng-click="DDMenu=false" ng-show="Role=='Admin'">Dashboard</a>
+                        <a href="#!employedashboard" ng-click="DDMenu=false" ng-show="Role=='Employee'">EDashboard</a>
+                        <a href="#!user" ng-click="DDMenu=false" ng-show="Role=='Admin'||Role=='SuperAdmin'">User</a>
+                        <a href="#!accounts" ng-click="DDMenu=false" ng-show="Role=='Admin'">Accounts</a>
+                        <a href="#!project" ng-click="DDMenu=false" ng-show="Role=='Admin'||Role=='Manager'">My Projects</a>
+                        <a href="#!activity" ng-click="DDMenu=false" ng-hide="Role=='Individual'||Role=='SuperAdmin'">My Activity</a>
+                        <a href="#!transaction" ng-click="DDMenu=false" ng-show="Role=='Admin'">Transaction</a>
+                        <a href="#!approval" ng-click="DDMenu=false" ng-show="Role=='Admin'||Role=='Manager'">Tasks</a>
+                        <a href="#!expense" ng-click="DDMenu=false" ng-show="Role=='Individual'">My Expenses</a>
+                        <a href="#!request" ng-click="DDMenu=false" ng-show="Role=='SuperAdmin'">Request</a>
+                        <a href="#!tax" ng-click="DDMenu=false" ng-show="Role=='Admin'">Tax</a>
+                        <a href="#!UserTrans" ng-click="DDMenu=false" ng-show="Role=='Admin'">UserTransaction</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        </div>
+    <div  class="row zero_margin" id="MyHeader" style="position:static;">
+        <header id="header" style="position:fixed;width:100%;z-index:999;">
+            <div class="row  bg_11 hidden-xs zero_margin theme_header">
+                <div class="col-md-5">
+                    <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px; margin-left:20px;" />
+                </div>
+                <div class="col-md-2" style="text-align:center;">
+
+                </div>
+                <div class="col-sm-5">
+                    <div id="profile_button" style="float:right; margin-right:10px; ">
+                        <img id="ImgProfileIcon" ng-src="{{ProfileImage}}" style="height:50px;width:50px; border-radius:50%;" />
+                        <b ng-mouseover="ShowProfile1()" class="caret"></b>
+                        <label id="lblAdmin" text="Amit Bansal">{{UserName}}   as</label>
+                        <label id="lblUType" text="Admin">{{Role}}</label>
+                    </div>
+
+                    <div ng-show="showProfileDD1" id="Usertype" style="color:#10023c; float:right; margin-right:40px; margin-top:30px;">
+                        <div class="layout-dropdown-content" id="UserType_Div">
+                            <a href="#!Profile" ng-click="showProfileDD1=false" id="User_profile" style="display:block;">Profile</a>
+                            <a id="btnlogout" text="Logout" ng-click="LogOff()">Log Off</a>
+                            <a href="#" ng-click="showProfileDD1=false" id="help">Help</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+    </div>
+
+
+
+        <div class="container-fluid" style="height:100%;margin-top: 50px; ">
+            <div class="row">
+                <!--<div class="row zero_margin" style="position:relative; ">
+        -->
+                <div class="col-md-2 hidden-xs  zero_margin" style="padding:0px;">
+                    <div style=" position: fixed; height: 100%; background-color: #e7e7e7; width: inherit; display: inline;">
+                        <div style="height:130px;background-image:url('Images/Icon/user-img-background.jpg');">
+                            <div id="profile_button" style="text-align:center; ">
+                                <img id="ImgProfileIcon" ng-src="{{ProfileImage}}" style="height:65px;width:65px; border-radius:50%;margin:7px;" />
+                                <br />
+                                <p>
+                                    <label id="lblAdmin" text="Amit Bansal">{{UserName}} as</label>
+                                    <label id="lblUType" text="Admin">{{Role}}</label><br />
+                                   
+                                </p>
+                                
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-pills nav-stacked">
+
+                            <li ng-class="getClass('main')"><a href="#!main" ng-show="Role=='Admin'"><i class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;Dashboard</i></a></li>
+                            <li ng-class="getClass(' employedashboard')"><a href="#!employedashboard"><i class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;EmpDashboard</i></a></li>
+                            <li ng-class="getClass('managerdashboard')"><a href="#!managerdashboard" ng-show="Role=='Manager'||Role=='Admin'"><i class="fa fa-tachometer fa-2x" style="color:#000;" aria-hidden="true">&nbsp;ManagerDashboard</i></a></li>
+                            <li ng-class="getClass('user')"><a href="#!user" ng-show="Role=='Admin'||Role=='SuperAdmin'"><i class="fa fa-user" style="color:#000;" aria-hidden="true">&nbsp;User</i></a></li>
+                            <li ng-class="getClass('accounts')"><a href="#!accounts" ng-show="Role=='Admin'"><i class="fa fa-th-large" style="color:#000;" aria-hidden="true">&nbsp;Accounts</i></a></li>
+                            <li ng-class="getClass('project')"><a href="#!project" ng-show="Role=='Admin'||Role=='Manager'||Role=='Employee'"><i class="fa fa-tasks fa-2x" style="color:#000;" aria-hidden="true">&nbsp;My Projects</i></a></li>
+                            <li ng-class="getClass('activity')"><a href="#!activity" ng-hide="Role=='Individual'||Role=='SuperAdmin'"><i class="fa fa-bookmark-o fa-2x" style="color:#000;" aria-hidden="true">&nbsp;My Activity</i></a></li>
+                            <li ng-class="getClass('transaction')"><a href="#!transaction" ng-show="Role=='Admin'"><i class="fa fa-exchange" style="color:#000;" aria-hidden="true">&nbsp;Transaction</i></a></li>
+                            <li ng-class="getClass('approval')"><a href="#!approval" ng-show="Role=='Admin'||Role=='Manager'"><i class="fa fa-sticky-note fa-2x" style="color:#000;" aria-hidden="true">&nbsp;Tasks</i></a></li>
+                            <li ng-class="getClass('expense')"><a href="#!expense"><i class="fa fa-inr fa-2x" style="color:#000;" aria-hidden="true">&nbsp;My Expenses</i></a></li>
+                            <li ng-class="getClass('request')"><a href="#!request" ng-show="Role=='SuperAdmin'">Request</a></li>
+                            <li ng-class="getClass('tax')"><a href="#!tax" ng-show="Role=='Admin'"><i class="fa fa-file-text" style="color:#000;" aria-hidden="true">&nbsp;Tax</i></a></li>
+                            <li ng-class="getClass('UserTrans')"><a href="#!UserTrans" ng-show="Role=='Admin'"><i class="fa fa-money" style="color:#000;" aria-hidden="true">&nbsp;UserTransaction</i></a></li>
+
+                        </ul>
+
+
+                    </div>
+                </div>
+
+                <div ng-view class="col-md-10 zero_margin" style="padding-top:10px; "></div>
+            </div>
+
+
+        </div>
+
+
+
+</body>
+</html>

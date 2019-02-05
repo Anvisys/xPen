@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        //$(document).ready(function () {
+
+        //    $("a.carousel-control").click(function (e) {
+        //        e.preventDefault();
+        //        $(this).parent().carousel($(this).data("slide"));
+        //    });
+        //});
+
+        $(document).ready(function () {
+
+            var bannerHeight = $("#banner").height();
+
+            $("#banner-text").height(bannerHeight);
+
+            $("#bText").css("margin-top", bannerHeight * 2 / 6);
+            $("#bText").css("margin-left", 300);
+        });
+
+            //$("#banner-image").ready(function () {
+            //    var bannerHeight = $("#banner").height();
+            //    alert(bannerHeight);
+            //    $("#banner-text").height(bannerHeight);
+            //});
+
+    </script>
+    <style>
+        .divbg {
+            background-image: url(../../Login/Images/function1.jpg);
+            background-repeat: no-repeat;
+        }
+
+        hr {
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: inset;
+            border-width: 1px;
+        }
+
+        .bg-text {
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 2px solid #f1f1f1;
+            position: absolute;
+            top: 20%;
+            left: 5%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .vertical-left {
+            border-left: 3px solid #D14545;
+            height: 400px;
+            position: absolute;
+            margin-left: -3px;
+            left: 50%;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid zero_all">
+
+        <div id="banner" class="row zero_all" style="position:relative;width:100%; height:450px;background-image: radial-gradient(#6495ed,#81d4fa);opacity: 0.95;">
+            <img id="banner-image" src="https://www.books-business.com/images/home-1.png" style="float:right;padding:15px;" />
+            <div id="banner-text" style="position:absolute;top:0px;left:0px; width:100%;   color:white; ">
+                <div id="bText" class="bg-text">
+
+                    <h2> Expense Management solution</h2>
+                    <ul>
+                        <li><h4>Individual Expenses</h4></li>
+                        <li><h4>Project Expenses and Income</h4></li>
+                        <li><h4>Organization Expenses and Income</h4></li>
+                        <li><h4>Taxes</h4></li>
+                    </ul>
+                    <button type="button" class="btn btn-success">Register</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div ng-hide="ShowCarousel" class="row">
+            <div ng-controller="CarouselCtrl" style="width:100%; ">
+
+                <carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                    <slide ng-repeat="slide in slides" index="slide.id" style="position:relative;">
+
+                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                        <!--<div class="row bg_2" style="position:absolute; top:0px; left:0px; bottom:0px; width:100%;opacity:0.5;"></div>-->
+
+                        <div class="carousel-caption" style="z-index:999;">
+                            <h3>{{slide.title}}</h3>
+                            <p style="font-size:large;elevation:above;">{{slide.text}}</p>
+                        </div>
+                    </slide>
+                </carousel>
+
+
+            </div>
+        </div>
+
+
+
+        <div id="description" class="row">
+
+            <div class="col-md-6" style="text-align:center;margin-top:120px!important;padding-top:10px;padding-bottom:10px;">
+                <img src="Login/Images/finance.png" style="width:70%;">
+            </div>
+            <div class="col-md-6" style=" margin-top:10px;padding-bottom:10px;margin-bottom:10px;">
+                <h2>xPen- Your money management solution</h2>
+                <div class="">
+                    <p class="description" style="text-justify:distribute;text-align:left; font-size:16px;">
+                        Pen your Expenses in <strong style="color:darkblue;">XPEN </strong> to collate financial
+                        information,track money flow, quick analysis and reporting by
+                        <ul class="points" style="text-align:left">
+                            <li>Distributing work</li>
+                            <li>Workflow / Approval</li>
+                            <li>Tax Calculations</li>
+                            <li>Reporting</li>
+
+                        </ul>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div ng-show="false" class="row zero_margin" style="height:600px;background-image:url(Login/Images/function1.jpg);background-repeat:no-repeat;">
+            <div style="height:600px; width:100%;background-color:black;opacity:0.8;"></div>
+        </div>
+
+        <div id="Features" class="container-fluid ">
+            <div class="row" style="text-align:center;margin-bottom:40px!important;"> <h2>Features</h2> </div>
+            <div class="row" style="margin-top:40px;margin-bottom:20px!important;">
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_expense_green.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Manage Expenses</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_transaction_green.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Transaction</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_invoice_orange.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Sale Purchase</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;margin-bottom:30px!important;">
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_expense_green.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Manage Expenses</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_transaction_green.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Transaction</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+                <div class="col-md-4" style="text-align:center;">
+                    <img class="img-circle" src="Login/Images/ic_transaction_green.png" alt="Generic placeholder image" width="100" height="100">
+                    <h3>Transaction test</h3>
+                    <p style="width:70%;text-justify:auto;margin:auto;" class="text">Ensure real time Expense entry using Mobile App or Web App from anywhere.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="vision" class="row">
+            <div class="row" style="text-align:center;"> <h2 style="font-style:italic;">Our Commitment</h2> </div>
+            <div class="row" style="margin-top:50px!important;padding-bottom:50px;">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+
+                    <h3 style="color:darkblue;"> Customer Engagement </h3>
+                    <p style="text-justify:auto;margin:auto;" class="text">
+                        We are stable , secure , scalable at the same time Evolving. So we welcome customer feedback and input. Based on customer input we are committed to keep improving
+                        the product and comes up with upgrade.
+                    </p>
+                    <img src="Login/Images/playstore.png" style="height:50px;" />
+
+                </div>
+                <div class="col-sm-4">
+                    <img src="Login/Images/dashboard_icon.png" style="width:400px;float:right;" />
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <div id="feedback" class="row">
+
+            <div class="col-xs-12" style="text-align:center;padding:30px;"><h2>Our customers</h2></div>
+
+            <div class="row" style="margin-top:50px;margin-bottom:50px!important;position:relative;">
+
+                <div class="col-md-4">
+                    <div class="customer">
+                        <h5 style="font-weight:bold;"> Easy and Efficient</h5>
+                        <p>Easiness makes everyone participate and accumulate at top level</p>
+                        <img class="Customer_image" src="Login/Images/sanjay.jpg">
+                        <h5>Sanjay Agrawal</h5>
+                        <h5 class="designation">Dir. SMC Systems</h5>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="customer">
+                        <h5 style="font-weight:bold;"> Easy and Efficient</h5>
+                        <p>Easiness makes everyone participate and accumulate at top level</p>
+                        <img class="Customer_image" src="Login/Images/manish.jpeg">
+                        <h5>Manish Jain</h5>
+                        <h5 class="designation">Dir. Falidae Systems</h5>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="customer">
+                        <h5 style="font-weight:bold;"> Easy and Efficient</h5>
+                        <p>Easiness makes everyone participate and accumulate at top level</p>
+                        <img class="Customer_image" src="Login/Images/yogendra.jpeg">
+                        <h5>Sanjay Agrawal</h5>
+                        <h5 class="designation">Dir. SNS Pocket</h5>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="footer" style="padding:30px;width:100%;">
+            <div class="container-fluid">
+                <div class="row" style="color:#EEE9E9;">
+                    <div class="col-sm-4 footer-align">
+                        <h3 style="padding-left:10px;">Quick Links</h3>
+                        <ul style="color:#EEE9E9">
+                            <li><a href="#home"> Home</a></li>
+                            <li> <a href="#Features">Features</a></li>
+                            <li><a href="#Features"> Mobility</a></li>
+                            <li> <a href="#Features">Pricing</a></li>
+                            <li><a href="#customer">Customers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 footer-align">
+                        <h3 style="padding-left:30px;">Services</h3>
+                        <ul>
+                            <li> IT Consulting</li>
+                            <li> Web and Mobile Application Development</li>
+                            <li> GIS Consulting</li>
+                            <li> Security and Automation</li>
+                            <li> Pricing</li>
+                        </ul>
+                        <!--<ul>
+                            Product
+                            <li> LetsMeet(Mobile Tracking Android App)</li>
+                            <li> MyAptt(Society Management System)</li>
+                            <li> GAP(General Accounting Platform)</li>
+                        </ul>-->
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Write to Us</h4>
+                        <form method="post">
+                            <input type="text" name="name" id="your_name" ng-model="guest_name" placeholder="Your Name" style="width:75%;padding-bottom:3px;margin-top:10px;"><br />
+                            <input type="email" name="email_address" id="your_email_address" ng-model="guest_email" style="width:75%;margin-top:10px;" placeholder="Email Address"><br />
+                            <textarea name="query" rows="3" ng-model="guest_message" placeholder="Write Your Message" style="width:75%;height:90px;margin-top:10px;"></textarea><br />
+                            <button type="submit" name="Submitbtn" ng-click="SendQuery()" class="btn btn-warning" style="margin-top:10px;">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row zero_margin" style="color:white;text-align:center;background-color:#000;padding:20px;">
+            <div class="col-md-6">
+                Copyright &#169 2019   <a href="http://www.Anvisys.net" target="_blank" style="color:white;"> <strong> Anvisys Technologies Pvt. Ltd. </strong></a>
+            </div>
+            <div class="col-md-6">
+                Follwo Us: <span class="fa fa-facebook fa-2x" style="border:solid 1px;padding:5px;"></span>  <span class="fa fa-linkedin fa-2x" style="border:solid 1px;padding:5px;"></span>
+            </div>
+        </div>
+    </div>
+    <style>
+     
+    </style>
+</body>
+
+</html>
