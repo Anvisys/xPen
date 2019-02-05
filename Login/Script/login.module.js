@@ -20,6 +20,10 @@
                 templateUrl: 'Login/View/Recovery.html',
                 controller: 'registerCtrl'
             })
+            .when('/Aboutus', {
+                templateUrl: 'Aboutus.html',
+                controller: 'registerCtrl'
+            })
           
         
            .otherwise({ redirectTo: '/home' });
