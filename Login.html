@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="login" ng-controller="loginCtrl">
 <head>
     <link rel="icon" type="image/png" href="Images/Icon/Gap_logo.png" />
@@ -10,7 +10,9 @@
     <script src="Angular_Script/angular.min.js"></script>
     <script src="Angular_Script/angular-route.js"></script>
     <script src="Angular_Script/ui-bootstrap.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular-cookies.js"></script>
+
     <script src="Login/Script/login.module.js"></script>
     <script src="Login/Script/loginController.js?index=1"></script>
     <!--<script src="Login/Script/IndexController.js"></script>-->
@@ -21,14 +23,19 @@
 
     <!--<script src="Login/Script/requestController.js"></script>-->
     <script src="Login/Services/userService.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" type="text/css" href="styles/gap.css" />
     <link rel="stylesheet" type="text/css" href="styles/xpen.css" />
 </head>
+
 <body>
     <div class="container-fluid zero_margin" style="position:relative;">
+
         <div id="topbar" class="row bg_1 hidden-sm hidden-md hidden-lg zero_margin" style="height:60px;position:fixed;">
+
             <div class="col-xs-4">
                 <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px;  margin-left:20px;" />
             </div>
@@ -39,12 +46,16 @@
                 <button type="button" class="btn btn-default dropdown-toggle" aria-label="Left Align" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
                 </button>
+
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="z-index:999;position:absolute;">
                     <li><a ng-click="ToggelLogin()">Login</a></li>
                     <li><a ng-click="GoToRegister()">Register</a></li>
                 </ul>
+
             </div>
         </div>
+
+
 
         <div id="topbar" class="row bg_1 hidden-xs zero_margin" style="height:60px;position:fixed; z-index:5;">
             <div style="margin-top:15px;">
@@ -62,8 +73,11 @@
                         <li><a ng-click="GoToRegister()">Register</a></li>
                     </ul>
                 </div>
+
             </div>
         </div>
+
+
 
 
         <div ng-show="showlogin" class="loginBox" style="z-index:999;">
@@ -83,52 +97,58 @@
                     <button type="button" class="btn btn-primary" x:name="btnLogin" ng-click="CheckLogin()" style="float:right; margin-top:10px;">Login</button>
                 </form>
             </div>
+
             <div class="row" style="width:200px;height:30px;text-align:center; margin-top:10px; ">
                 <img ng-show="progress" style="height:20px;width:20px;z-index:15;" src="Images/Icon/ajax-loader.gif" />
                 <a href="#!forgot" ng-hide="progress" ng-click="showlogin=false" style="left:40px;position:absolute;text-decoration:none;">Forgot Password</a>
             </div>
             <label class="response_label" style="width:180px;margin-left:10px;height:20px;">{{response}}</label>
             <div ng-show="progress" style="width:100%;height:100%; position:absolute; top:0px;left:0px; background-color: rgba(0,0,0,0.05);text-align:center;">
+
             </div>
         </div>
 
-
-        <div ng-view style="margin-top:50px;margin-left:0px; margin-right:0px;padding-right:0px;"></div>
     </div>
 
-            <style>
 
-                .loginBox {
-                    transition: all linear 0.5s;
-                    position: fixed;
-                    top: 35px;
-                    right: 150px;
-                    elevation: above;
-                    height: 220px;
-                    width: 300px;
-                    background-color: #efefef;
-                    border-radius: 5px;
-                }
+    <div ng-view style="margin-top:60px;margin-left:0px; margin-right:0px;padding-right:0px;"></div>
 
-                .layout_modal_header {
-                    color: white;
-                    font-size: medium;
-                    text-align: left;
-                    padding: 5px;
-                    margin: 0px;
-                    border-top-left-radius: 5px;
-                    border-top-right-radius: 5px;
-                    background-color: #4CAF50;
-                }
 
-                    .layout_modal_header span {
-                        float: right;
-                    }
 
-                .response_label {
-                    font-size: smaller;
-                    color: red;
-                }
-            </style>
+
+    <style>
+        .loginBox {
+            transition: all linear 0.5s;
+            position: fixed;
+            top: 35px;
+            right: 150px;
+            elevation: above;
+            height: 220px;
+            width: 300px;
+            background-color: #efefef;
+            border-radius: 5px;
+        }
+
+        .layout_modal_header {
+            color: white;
+            font-size: medium;
+            text-align: left;
+            padding: 5px;
+            margin: 0px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background-color: #4CAF50;
+        }
+
+            .layout_modal_header span {
+                float: right;
+            }
+
+        .response_label {
+            font-size: smaller;
+            color: red;
+        }
+    </style>
+
 </body>
 </html>
