@@ -185,7 +185,7 @@
 
     .layout_modal_body {
         color: black;
-        font-size: small;
+        /*font-size: small;*/
         text-align: left;
         padding: 15px;
         margin: 0px;

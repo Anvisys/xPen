@@ -359,7 +359,7 @@
 
 
         <div id="newInvoiceModal" ng-show="model.newInvoiceDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="height:290px;width:520px;">
+            <div class="layout_modal_Content" style="width:520px;">
                 <div class="layout_modal_header">
                     New Invoice <span ng-click="model.newInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
@@ -492,71 +492,137 @@
         
 
         <div id="newPurchaseInvoiceModal" ng-show="model.newPurchaseInvoiceDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="height:270px;width:600px;">
+            <div class="layout_modal_Content" style="width:550px;">
                 <div class="layout_modal_header">
                     Purchase Invoice <span ng-click="model.newPurchaseInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Project Name:</label> <label>{{Project.ProjectName}}</label>
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Project Number</label> <label>{{Project.ProjectNumber}}</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:104px;">Vendor Name:</label><input type="text" style="width:100px;" ng-model="vendor_name" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Invoice No:</label> <input type="text" style="width:100px;" ng-model="pinvoice_number" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label for="colFormLabel" class="col-sm-6 col-form-label">Project Name:</label>
+                                <div class="col-sm-6">
+                                    <label>{{Project.ProjectName}}</label>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Cost</label> <input type="number" style="width:100px;" ng-model="pwork_cost" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">CGST</label> <input type="number" style="width:100px;" ng-model="pCGST" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">SGST</label> <input type="number" style="width:100px;" ng-model="pSGST" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">IGST</label> <input type="number" style="width:100px;" ng-model="pIGST" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">TDS</label> <input type="number" style="width:100px;" ng-model="pTDS" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:150px;">Grand Total:</label> {{pwork_cost+pCGST+pSGST+pIGST | currency : "&#8377" : 2}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Description</label> <input type="text" style="width:100px;" ng-model="project_description" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Invoice date</label>  <input type="date" name="itemDate" ng-model="pinvoice_date" required />
+                        <div class="col-sm-6">
+                            <div class=" row">
+                                <label for="colFormLabel" class="col-sm-6 col-form-label">Project Number</label>
+                                <div class="col-sm-6">
+                                    <label >{{Project.ProjectNumber}}</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="layout_modal_footer">
-                    <button class="btn btn-success" ng-click="AddPurchaseInvoice()">Add</button> &nbsp;&nbsp;
-                    <button class="btn btn-warning" ng-click="model.newPurchaseInvoiceDiv= false">Cancel</button>
-                </div>
-                <div ng-show="project_progress" class="loader_div">
-                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" tabindex="3" ng-model="vendor_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Cost</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" tabindex="5" ng-model="pwork_cost">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice No:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" tabindex="4" ng-model="pinvoice_number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" name="itemDate" tabindex="5" ng-model="pinvoice_date" required />
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">SGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="pSGST">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class=" row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">IGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="pIGST">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" style="padding:10px;">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">TDS</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="pTDS">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="padding:10px;">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">CGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="pCGST">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Description</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="project_description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-8 col-form-label">Grand Total:</label>
+                                    <div class="col-sm-4">
+                                        <label>{{pwork_cost+pCGST+pSGST+pIGST | currency : "&#8377" : 2}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            </div>
+                            <div class="layout_modal_footer">
+                                <button class="btn btn-success" ng-click="AddPurchaseInvoice()">Add</button> &nbsp;&nbsp;
+                                <button class="btn btn-warning" ng-click="model.newPurchaseInvoiceDiv= false">Cancel</button>
+                            </div>
+                            <div ng-show="project_progress" class="loader_div">
+                                <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                            </div>
+                        </div>
         </div>
 
         <div id="newMakePaymentModal" ng-show="newMakePaymentDiv" class="layout_modal_Window">
