@@ -150,16 +150,50 @@
                 </div>
 
                 <div id="newExpenseDialog" ng-show="newExpense" class="layout_modal_Window">
-                    <div class="layout_modal_Content" style="width:350px;position:relative">
+                    <div class="layout_modal_Content" style="width:380px;position:relative">
                         <div class="layout_modal_header"> Expense:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
                         <div class="layout_modal_body">
-                            <form name="Expense" style="width:320px;margin:10px auto; text-align:left;">
-                                <label style="width:150px;">Name: </label> <input name="transferName" tabindex="0" type="text" ng-model="advance_name" style="width:150px;" required text-length> <br />
-                                <label style="width:150px;"> Transaction Type: </label> <label>Transfer</label><br />
-                                <label style="width:150px;"> From Account: </label> <select tabindex="2" style="width:150px;height:22px;" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
-                                <label style="width:150px;"> To Activity: </label> {{ActivityName}} <button class="btn btn-link" ng-click="SelectActivity()">Select Activity</button><br />
-                                <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="4" type="text" ng-model="advance_amount" style="width:150px;" required min-amount /><br />
-                                <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="5" type="text" ng-model="advance_Remarks" style="width:150px;" required text-length /><br />
+                            <form name="Expense" style="width:340px;margin:10px auto; text-align:left;">
+
+
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-6 col-form-label">Name:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="transferName" tabindex="0" type="text" ng-model="advance_name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-6 col-form-label">Transaction Type:</label>
+                                    <div class="col-sm-6">
+                                        <label>Transfer</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-6 col-form-label">From Account:</label>
+                                    <div class="col-sm-6">
+                                        <select tabindex="1" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-6 col-form-label">To Activity: :</label>
+                                    <div class="col-sm-6">
+                                        {{ActivityName}} <button class="btn btn-link" ng-click="SelectActivity()">Select Activity</button>
+
+                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-6 col-form-label">Amount:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="Amount" tabindex="0" ng-model="advance_amount" required min-amount>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-6 col-form-label">Remark:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="transferName" tabindex="5" ng-model="advance_Remarks" required text-length>
+                                        </div>
+                                    </div>
                             </form>
                         </div>
                         <div class="layout_modal_footer">
@@ -232,7 +266,7 @@
                     <div class="layout_modal_Content" style="width:500px;">
                         <div class="layout_modal_header"> Activity List:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
                         <div class="layout_modal_body">
-                            <div class="row">
+                            <div class="row" style="text-align:center;">
                                 Filter <input />
                             </div>
                             <div class="row" style="margin-top:10px;">
@@ -267,14 +301,38 @@
                 <div class="layout_modal_header"> External Tranfer:  <span ng-click="ShowExternal=false" class="fa fa-close"></span> </div>
                 <div class="layout_modal_body">
                     <form name="newExternal" style="width:320px;margin:10px auto; text-align:left;">
-                        <label style="width:150px;">Name: </label> <input name="transferName" tabindex="0" type="text" ng-model="external_name" style="width:150px;" required text-length> <br />
-                        <label style="width:150px;">Transaction Type: </label>
-                        <input type="radio" ng-model="type" value="Paid">Paid
-                        <input type="radio" ng-model="type" value="Received">Received
-                       
-                        <label style="width:150px;">Account: </label> <select tabindex="2" style="width:150px;height:24px;" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList"></select><br />
-                        <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="4" type="text" ng-model="external_amount" style="width:150px;" required min-amount /><br />
-                        <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="5" type="text" ng-model="external_Remarks" style="width:150px;" required text-length /><br />
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-5 col-form-label">Name:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="transferName" tabindex="0" type="text" ng-model="aexternal_name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-5 col-form-label">Transaction Type:</label>
+                            <div class="col-sm-7">
+                                <input type="radio" ng-model="type" value="Paid">Paid
+                                <input type="radio" ng-model="type" value="Received">Received
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-5 col-form-label">Account:</label>
+                            <div class="col-sm-7">
+                                <select tabindex="1" class="form-control" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList">></select>
+                            </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-5 col-form-label">Amount:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="Amount" tabindex="0" ng-model="external_amount" required min-amount>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-5 col-form-label">Remark:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="Remark" tabindex="5" ng-model="external_Remarks" required text-length>
+                                </div>
+                            </div>
                     </form>
                 </div>
                 <div class="layout_modal_footer">
