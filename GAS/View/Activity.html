@@ -252,22 +252,23 @@
 
 
             <div id="User_Form" ng-show="SelectUserForm" class="layout_modal_Window">
-                <div class="layout_modal_Content" style="height:400px;width:640px;">
+                <div class="layout_modal_Content" style="width:640px;">
                     <div class="layout_modal_header">
                         <h4>Select User</h4>
                     </div>
                     <div class="layout_modal_body container-fluid">
-                        <form name="newUser" style="margin:5px 5px; text-align:left;">
-                            <div class="row">
+                        <form name="newUser" style="margin:5px 5px; text-align:center;">
+                            <div class="row" style="padding:10px;">
                                 Filter <input />
                             </div>
                             <div class="row">
-                                <table>
+                                <table style="width:100%;">
                                     <tr>
                                         <th>Name</th>
                                         <th>ID</th>
                                         <th>Mobile</th>
                                         <th>Email</th>
+                                        <th></th>
                                     </tr>
                                     <tr ng-repeat="user in UserList">
                                         <td> {{user.UserName}}</td>

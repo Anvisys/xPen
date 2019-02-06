@@ -212,11 +212,11 @@
 
 
         <div id="Activity_Form" ng-show="model.NewActivityForm" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:650px;">
+            <div class="layout_modal_Content" style="width:550px;">
                 <div class="layout_modal_header">
                     New Activity <span ng-click="model.NewActivityForm=false" class="fa fa-close" style="float:right;"></span>
                 </div>
-                <div class="layout_modal_body container-fluid" style="border-bottom:solid 1px grey;">
+                <div class="layout_modal_body container-fluid">
                     <form name="newActivity" style="margin:5px 5px; text-align:left;">
 
                         <div class="row">
@@ -231,8 +231,8 @@
                             <div class="col-xs-6">
                                 <label class="heading_label"> Project </label><label class="text_label">{{Project.ProjectName}} </label>
                             </div>
-                            <div class="col-xs-6">
-                                <label class="heading_label">Activity Name: </label> <input ng-disabled="EditProject" name="ActivityName" tabindex="1" type="text" ng-model="model.activity_name" required text-length>
+                            <div class="col-xs-6 form-inline">
+                                <label class="heading_label">Activity Name: </label> <input ng-disabled="EditProject" class="form-control" name="ActivityName" tabindex="1" type="text" style="width:50%;" ng-model="model.activity_name" required text-length>
                             </div>
                         </div>
                         <div class="row">
@@ -248,7 +248,7 @@
                         <div class="row" style="margin-top:10px;">
                            
                             <div class="col-xs-6">
-                               <input name="ItemRemark" placeholder="Remark" tabindex="2" type="text" ng-model="model.activity_remarks" style="width:150px;    margin-left: 15px;" required />
+                               <input name="ItemRemark" class="form-control" placeholder="Remark" tabindex="2" type="text" ng-model="model.activity_remarks" style="width:150px;    margin-left: 15px;" required />
                             </div>
                         </div>
 
@@ -284,16 +284,16 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Project/Head: </label>  <select class="heading_label" ng-model="activity_Project" style="width:100px;margin-left: 6px; height: 22px;" ng-options="x.ProjectName for x in ProjectList"></select>
+                            <div class="col-xs-6 form-inline">
+                                <label class="heading_label"> Project/Head: </label>  <select class="heading_label form-control" ng-model="activity_Project" style="width:100px;margin-left: 6px; height: 22px;" ng-options="x.ProjectName for x in ProjectList"></select>
                             </div>
                             <div class="col-xs-6">
                                 <label class="heading_label"> Activity:</label><label class="text_label">  General</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-6">
-                                <label class="heading_label"> ExpenseName:</label>  <input name="ExpenseName" tabindex="1" type="text" placeholder="Expense Name" style="width:100px;" ng-model="expense_name" required>
+                            <div class="col-xs-6 form-inline">
+                                <label class="heading_label"> ExpenseName:</label>  <input name="ExpenseName" class="form-control" tabindex="1" type="text" placeholder="Expense Name" style="width:100px;" ng-model="expense_name" required>
                             </div>
                             <div class="col-xs-6">
                                 <label class="heading_label"> Amount:</label>  <input name="Amount" tabindex="2" type="text" style="width:100px;" placeholder="Amount" ng-model="expense_amount"  required min-amount />
@@ -492,7 +492,7 @@
         
 
         <div id="newPurchaseInvoiceModal" ng-show="model.newPurchaseInvoiceDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:550px;">
+            <div class="layout_modal_Content" style="width:600px;">
                 <div class="layout_modal_header">
                     Purchase Invoice <span ng-click="model.newPurchaseInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
