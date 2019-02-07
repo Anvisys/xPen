@@ -10,6 +10,7 @@
         var service = {};
 
         service.getExpenseByEmpStatus = getExpenseByEmpStatus;
+        service.getActiveProjects = getActiveProjects;
 
         return service;
 
@@ -18,7 +19,15 @@
                 .then(handleSuccess, handleError('Error getting Accounts'));
         }
 
-       
+        function getActiveProjects(EmpID) {
+            return $http.get($rootScope.APIUrl + '/api/Dashboard/Organization/' + $rootScope.OrgID + '/Employee/' + EmpID)
+                .then(handleSuccess, handleError('Error getting Accounts'));
+        }
+
+        function getTodayExpense(EmpID) {
+            return $http.get($rootScope.APIUrl + '/api/dashboard/TodayExpense/' + $rootScope.OrgID + '/Employee/' + EmpID)
+                .then(handleSuccess, handleError('Error getting Accounts'));
+        }
 
         function handleSuccess(res) {
 

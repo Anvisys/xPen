@@ -14,7 +14,7 @@
 
         $scope.Submit = function () {
             var date = new Date();
-            var expenseItem = [{ ActivityID: $scope.ActivityID, ItemName: "StatusUpdate", ExpenseAmount: 0, ReceiveAmount: 0, ExpenseDescription: "Submitted for Approval", ExpenseDate: date, SelectedRow: false, Status: "Submitted" }];
+            var expenseItem = [{ ActivityID: $scope.ActivityID, ItemName: "StatusUpdate", ExpenseAmount: 0, ReceiveAmount: 0, ExpenseDescription: "Submitted for Approval", ExpenseDate: date, SelectedRow: false, Action: "Submitted" }];
             expenseItemService.addItem(expenseItem)
             .then(function (res) {
                 if (res.data.Response == "OK") {
@@ -45,7 +45,7 @@
         {
             var expItem = {
                 ActivityID: $scope.ActivityID, ItemName: $scope.item_name, ExpenseAmount: $scope.item_amount,
-                ReceiveAmount: 0, ExpenseDescription: $scope.item_description, ExpenseDate: $scope.item_date, SelectedRow: false, Status: 'Added'
+                ReceiveAmount: 0, ExpenseDescription: $scope.item_description, ExpenseDate: $scope.item_date, SelectedRow: false, Action: 'Added'
             };
           
             

@@ -3,7 +3,7 @@
 
     app.controller('dashboardCtrl', function (dashboardService, $timeout, $scope, $rootScope, $cookies) {
 
-        $scope.IPValue = 1000;
+        $scope.IPValue = 0;
         $scope.SubmittedValue = 0;
         $scope.ApprovedValue = 0;
         $scope.IPCount = 0;
@@ -46,6 +46,9 @@
 
         }
 
+        function GetActiveProject() {
+
+        }
 
     })
 

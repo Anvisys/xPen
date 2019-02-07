@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div id="project_summary" class="row">
             
-            <div class="col-sm-6"><span class="btn btn-warning"> Back To <a href="#!activity" style="color:#fff;">My Activity </a> </span> </div>
+            <div class="col-sm-6"><span class="btn btn-warning"> <a href="#!activity" style="color:#fff;">Back To My Activity </a> </span> </div>
          
             <div class="col-sm-6">
                 <button type="button" style="float:right;" class="btn btn-primary" ng-click="exportToExcel('#ActivityData')">Export Excel</button>
@@ -214,17 +214,25 @@
  
 
                 <div id="newAdvanceForm" ng-show="advanceDiv" class="layout_modal_Window">
-                    <div class="layout_modal_Content" style="height:210px;width:310px;">
+                    <div class="layout_modal_Content" style="width:310px;">
                         <div class="layout_modal_header">
                             <h4>Request Advance</h4>
                         </div>
                         <div class="layout_modal_body container-fluid">
                             <form name="newAdvance" style="margin:5px 5px; text-align:left;">
-                                <div class="row">
-                                    <label style="width:60px;"> Amount :</label>  <input name="advAmount" tabindex="1" type="text" ng-model="advAmount" style="width:200px;" required text-length />
+                                <div class="row form-group">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Amount:</label>
+                                    <div class="col-sm-8">
+
+                                        <input type="text" name="advAmount" class="form-control" tabindex="1" ng-model="advAmount" required text-length />
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <label style="width:60px;"> Remark :</label>  <input name="advRemark" tabindex="2" type="text" ng-model="advRemarks" style="width:200px;" required text-length />
+                                <div class="row form-group">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Remark:</label>
+                                    <div class="col-sm-8">
+
+                                        <input type="text" name="advRemark" class="form-control" tabindex="2" ng-model="advRemarks" required text-length />
+                                    </div>
                                 </div>
                             </form>
                         </div>

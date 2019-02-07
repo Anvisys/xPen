@@ -208,44 +208,44 @@
                 </div>
 
         <div id="newSalaryDialog" ng-show="newSalary" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:480px;position:relative">
+            <div class="layout_modal_Content" style="width:400px;position:relative">
                 <div class="layout_modal_header"> Salary:  <span ng-click="newSalary=false" class="fa fa-close"></span> </div>
                 <div class="layout_modal_body">
                     <form name="salary" >
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">Employee</label>
-                            <div class="col-sm-8">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">Employee</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" name="employeeName" tabindex="0" type="text" ng-model="employee_name">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">Transaction Type:</label>
-                            <div class="col-sm-8">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">Transaction Type:</label>
+                            <div class="col-sm-6">
                                 <label class="form-control">Salary </label>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">From Account:</label>
-                            <div class="col-sm-8">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">From Account:</label>
+                            <div class="col-sm-6">
                                 <select class="form-control" tabindex="2" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">Load On Project ?</label>
-                            <div class="col-sm-8 form-inline">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">Load On Project ?</label>
+                            <div class="col-sm-6 form-inline">
                                 {{ProjectName}}<button class="btn btn-link" ng-click="SelectProject()">Select Project</button>
                            
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">Amount:</label>
-                            <div class="col-sm-8">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">Amount:</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" name="Amount" tabindex="4" ng-model="salary_amount">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabel" class="col-sm-4 col-form-label">Remark:</label>
-                            <div class="col-sm-8">
+                            <label for="colFormLabel" class="col-sm-6 col-form-label">Remark:</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" name="Remark" tabindex="5" ng-model="salary_Remarks">
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                         <div class="layout_modal_header"> Activity List:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
                         <div class="layout_modal_body">
                             <div class="row" style="text-align:center;">
-                                Filter <input />
+                                <div style="text-align:center;">Filter <input ng-model="searchText"></div>
                             </div>
                             <div class="row" style="margin-top:10px;">
                                 <table style="margin:auto;max-height:300px;overflow-y:auto;">
@@ -278,7 +278,7 @@
                                         <th>Manager</th>
                                         <th colspan="2">Status</th>
                                     </tr>
-                                    <tr ng-repeat="act in ActivityList" style="overflow-y:auto;">
+                                    <tr ng-repeat="act in ActivityList | filter:searchText" style="overflow-y:auto;">
                                         <td> {{act.ActivityName}}</td>
                                         <td>{{act.ActivityID}}</td>
                                         <td>{{act.CreatedBy}}</td>
@@ -352,7 +352,8 @@
                 <div class="layout_modal_header"> Project List:  <span ng-click="listProject=false" class="fa fa-close"></span> </div>
                 <div class="layout_modal_body">
                     <div class="row">
-                        Filter <input />
+                       
+                        <div style="text-align:center;">Filter <input ng-model="searchText"></div>
                     </div>
                     <div class="row" style="margin-top:10px;">
                         <table style="margin:auto;max-height:300px;overflow-y:auto;">
@@ -363,7 +364,7 @@
                                 <th>Manager Name</th>
                                  <th colspan="2">Status</th>
                             </tr>
-                            <tr ng-repeat="prj in ProjectList" style="overflow-y:auto;">
+                            <tr ng-repeat="prj in ProjectList | filter:searchText" style="overflow-y:auto;">
                                 <td> {{prj.ProjectName}}</td>
                                 <td>{{prj.ProjectNumber}}</td>
                                 <td>{{prj.ClientName}}</td>

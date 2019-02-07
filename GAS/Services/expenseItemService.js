@@ -115,6 +115,11 @@
         }
 
         function handleSuccess(res) {
+         
+            if ((typeof res.data == 'undefined') || res.data === null ){
+                return [];
+            }
+            
             return res.data.$values;
         }
 

@@ -274,36 +274,81 @@
                 </div>
                 <div class="layout_modal_body container-fluid">
                     <form name="Quick_Activity">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Employee:</label>
+                                    <div class="col-sm-7">
+                                        <label><b>{{UserId}} ({{UserName}})</b></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class=" row">
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Transaction Type:</label>
+                                    <div class="col-sm-7">
+                                        <label><b>Expenses</b></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Employee: </label> <label class="text_label">{{UserId}} ({{UserName}})</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Project/Head:</label>
+                                    <div class="col-sm-7">
+                                        <select  class="form-control" ng-model="activity_Project" ng-options="x.ProjectName for x in ProjectList"></select>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Transaction Type: </label> <label class="text_label">Expenses</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Activity:</label>
+                                    <div class="col-sm-7">
+                                        <label>  General</label>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-xs-6 form-inline">
-                                <label class="heading_label"> Project/Head: </label>  <select class="heading_label form-control" ng-model="activity_Project" style="width:100px;margin-left: 6px; height: 22px;" ng-options="x.ProjectName for x in ProjectList"></select>
+                            <div class="col-sm-6">
+                                <div class="row"    style="padding: 9px 0px;">
+                                    <label for="colFormLabel"  class="col-sm-5 col-form-label">ExpenseName:</label>
+                                    <div class="col-sm-7">
+
+                                        <input type="text"  name="ExpenseName" class="form-control" tabindex="4" placeholder="Expense Name" ng-model="expense_name" required>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Activity:</label><label class="text_label">  General</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Amount:</label>
+                                    <div class="col-sm-7">
+
+                                        <input type="date" class="form-control" name="itemDate" tabindex="5" placeholder="Amount" ng-model="expense_amount" required min-amount />
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-xs-6 form-inline">
-                                <label class="heading_label"> ExpenseName:</label>  <input name="ExpenseName" class="form-control" tabindex="1" type="text" placeholder="Expense Name" style="width:100px;" ng-model="expense_name" required>
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-5 col-form-label">Remark</label>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="form-control" name="Remark" tabindex="5" ng-model="expense_remarks" required text-length>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Amount:</label>  <input name="Amount" tabindex="2" type="text" style="width:100px;" placeholder="Amount" ng-model="expense_amount"  required min-amount />
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label class="heading_label"> Remark:</label>   <input name="Remark" tabindex="3" type="text" style="width:100px;    margin-left: 42px;" ng-model="expense_remarks" required text-length />
-                            </div>
-                        </div>
+
                     </form>
                 </div>
                 <div class="layout_modal_footer" >
@@ -359,64 +404,137 @@
 
 
         <div id="newInvoiceModal" ng-show="model.newInvoiceDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:520px;">
+            <div class="layout_modal_Content" style="width:590px;">
                 <div class="layout_modal_header">
                     New Invoice <span ng-click="model.newInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label>Project Name:</label> <label>{{Project.ProjectName}}</label>
-                            </div>
-                            <div class="col-xs-6">
-                                <label>Project Number:</label> <label>{{Project.ProjectNumber}}</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Client:</label> <label>{{Project.ClientName}}</label>
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Invoice No:</label> <input type="text"style="width:100px;" ng-model="invoice_number" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label for="colFormLabel" class="col-sm-6 col-form-label">Project Name:</label>
+                                <div class="col-sm-6">
+                                    <label><b>{{Project.ProjectName}}</b></label>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Cost</label> <input type="number" style="width:100px;" ng-model="work_cost" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">CGST</label> <input type="number" style="width:100px;" ng-model="CGST" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">SGST</label> <input type="number" style="width:100px;" ng-model="SGST" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">IGST</label> <input type="number" style="width:100px;" ng-model="IGST" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">TDS</label> <input type="number" style="width:100px;" ng-model="TDS" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Grand Total:</label> {{work_cost+CGST+SGST+IGST-TDS | currency : "&#8377" : 2}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Description</label> <input type="text" style="width:100px;" ng-model="project_description" />
-                            </div>
-                            <div class="col-xs-6">
-                                <label style="width:100px;">Invoice Date</label>  <input type="date" style="width:100px;" name="itemDate" ng-model="invoice_date" required />
+                        <div class="col-sm-6">
+                            <div class=" row">
+                                <label for="colFormLabel" class="col-sm-6 col-form-label">Project Number</label>
+                                <div class="col-sm-6">
+                                    <label><b>{{Project.ProjectNumber}}</b></label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="layout_modal_footer " >
+                    <div class="row">
+
+                        <label for="colFormLabel" class="col-sm-4 col-form-label">Client name:</label>
+                        <div class="col-sm-6">
+                            <label><b>{{Project.ClientName}}</b></label>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" tabindex="1" ng-model="vendor_name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Cost</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="2" ng-model="work_cost">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice No:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" tabindex="3" ng-model="invoice_number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control" name="itemDate" tabindex="4" ng-model="invoice_date" " required   />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">SGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="5" ng-model="SGST">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class=" row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">IGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="6" ng-model="IGST">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" style="padding: 8px 15px;">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">TDS</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="7" ng-model="TDS">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="padding: 8px 15px;">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">CGST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="8" ng-model="CGST">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Description</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" tabindex="9" ng-model="project_description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label for="colFormLabel" class="col-sm-8 col-form-label">Grand Total:</label>
+                                    <div class="col-sm-4">
+                                        <label>{{work_cost+CGST+SGST+IGST-TDS | currency : "&#8377" : 2}}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                <div class="layout_modal_footer ">
                     <button class="btn btn-success" ng-click="AddSellInvoice()">Add</button> &nbsp;&nbsp;
                     <button class="btn btn-warning" ng-click="model.newInvoiceDiv= false">Cancel</button>
                 </div>
@@ -502,7 +620,7 @@
                             <div class="row">
                                 <label for="colFormLabel" class="col-sm-6 col-form-label">Project Name:</label>
                                 <div class="col-sm-6">
-                                    <label>{{Project.ProjectName}}</label>
+                                    <label><b>{{Project.ProjectName}}</b></label>
                                 </div>
                             </div>
                         </div>
@@ -510,7 +628,7 @@
                             <div class=" row">
                                 <label for="colFormLabel" class="col-sm-6 col-form-label">Project Number</label>
                                 <div class="col-sm-6">
-                                    <label >{{Project.ProjectNumber}}</label>
+                                    <label ><b>{{Project.ProjectNumber}}</b></label>
                                 </div>
                             </div>
                         </div>
@@ -520,7 +638,7 @@
                             <div class="row">
                                 <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" tabindex="3" ng-model="vendor_name">
+                                    <input type="text" class="form-control" tabindex="1" ng-model="vendor_name">
                                 </div>
                             </div>
                         </div>
@@ -529,7 +647,7 @@
 
                                 <label for="colFormLabel" class="col-sm-4 col-form-label">Cost</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" tabindex="5" ng-model="pwork_cost">
+                                    <input type="number" class="form-control" tabindex="2" ng-model="pwork_cost">
                                 </div>
                             </div>
                         </div>
@@ -540,7 +658,7 @@
                             <div class="row">
                                 <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice No:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" tabindex="4" ng-model="pinvoice_number">
+                                    <input type="text" class="form-control" tabindex="3" ng-model="pinvoice_number">
                                 </div>
                             </div>
                         </div>
@@ -549,7 +667,7 @@
 
                                 <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
                                 <div class="col-sm-8">
-                                    <input type="date" class="form-control" name="itemDate" tabindex="5" ng-model="pinvoice_date" required />
+                                    <input type="date" class="form-control" name="itemDate" tabindex="4" ng-model="pinvoice_date" required />
                                 </div>
                             </div>
                         </div>
@@ -569,26 +687,26 @@
                                 <div class=" row">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">IGST</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" tabindex="5" ng-model="pIGST">
+                                        <input type="number" class="form-control" tabindex="6" ng-model="pIGST">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6" style="padding:10px;">
+                            <div class="col-sm-6" style="padding: 8px 15px;">
                                 <div class="row">
 
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">TDS</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" tabindex="5" ng-model="pTDS">
+                                        <input type="number" class="form-control" tabindex="7" ng-model="pTDS">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6" style="padding:10px;">
+                            <div class="col-sm-6" style="padding: 8px 15px;">
                                 <div class="row">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">CGST</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" tabindex="5" ng-model="pCGST">
+                                        <input type="number" class="form-control" tabindex="8" ng-model="pCGST">
                                     </div>
                                 </div>
                             </div>
@@ -600,7 +718,7 @@
 
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Description</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" tabindex="5" ng-model="project_description">
+                                        <input type="number" class="form-control" tabindex="9" ng-model="project_description">
                                     </div>
                                 </div>
                             </div>

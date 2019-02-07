@@ -14,8 +14,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading bg_greyBlue" style="position: relative;height:50px;">
                         User/Employee List
-                        <span ng-hide="false" class="fa fa-plus-square fa-2x" title="New User" ng-click="NewUser()" style="float:right;padding-right: 6px;color:#fff"></span>
-                        <span ng-hide="false" class="fa fa-user-plus fa-2x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;" ></span>
+                        <span ng-hide="false" class="fa fa-plus-square fa-3x" title="New User" ng-click="NewUser()" style="float:right;padding-right: 6px;color:#fff"></span>
+                        <span ng-hide="false" class="fa fa-user-plus fa-3x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;" ></span>
                         <!--<img src="Images/Icon/icon_AddUser_white.png" title="Add New User" ng-click="NewUser()" style="width:20px;height:20px;border-radius:50%;margin-left:10px;
                              position: absolute;top: 10px; right: 50px;" />
                         <img src="Images/Icon/icon_ExistUser_white.png" title="Add Existing User" ng-click="existingUserDiv=true" style="width:30px;height:30px;border-radius:50%;
@@ -141,7 +141,7 @@
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group" style="padding:5px;">
                                         <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-envelope" style="border:none;"></i></span>
-                                        <input name="email" class="form-control" placeholder="Email" tabindex="2" type="email" ng-model="user_email" style="width:150px; font-size:small;" required min-amount /><br />
+                                        <input name="email" class="form-control" placeholder="Email" tabindex="1" type="email" ng-model="user_email" style="width:150px; font-size:small;" required min-amount /><br />
                                     </div>
 
                                 </div>
@@ -149,7 +149,7 @@
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group" style="padding:5px;">
                                         <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-phone" style="border:none;"></i></span>
-                                        <input name="mobile" class="form-control" placeholder="Mobile" tabindex="4" type="text" ng-model="user_mobile" style="width:150px;" required min-amount /><br />
+                                        <input name="mobile" class="form-control" placeholder="Mobile" tabindex="2" type="text" ng-model="user_mobile" style="width:150px;" required min-amount /><br />
                                     </div>
                                 </div>
 
@@ -159,14 +159,14 @@
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group" style="padding:5px;">
                                         <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-user" style="border:none;"></i></span>
-                                        <input name="userName" class="form-control" placeholder="User Name" tabindex="1" type="text" ng-model="user_name" style="width:150px;" required text-length>
+                                        <input name="userName" class="form-control" placeholder="User Name" tabindex="3" type="text" ng-model="user_name" style="width:150px;" required text-length>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 col-xs-12">
                                     <div class="input-group" style="padding:5px;">
                                         <span class="input-group-addon" style="color:black;"><i class="glyphicon glyphicon-lock" style="border:none;"></i></span>
-                                        <input type="password" style="width:150px;" tabindex="5" placeholder="Password" class="form-control" ng-model="user_password" required text-length /><br />
+                                        <input type="password" style="width:150px;" tabindex="4" placeholder="Password" class="form-control" ng-model="user_password" required text-length /><br />
                                     </div>
                                 </div>
 

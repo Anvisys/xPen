@@ -635,3 +635,6 @@ element.style {
 .form-group {
     margin-bottom: 8px!important;
 }
+.fa-3x {
+    font-size: 2em;
+}
