@@ -63,9 +63,9 @@
             var TranData = {
                 TransName: $scope.transfer_name, AccID: $scope.selFromAcc.AccID, TransactionID: $scope.selToAcc.AccID, Deposit: $scope.transfer_amount, Withdraw: $scope.transfer_amount,
                 TransactionRemarks: $scope.transfer_remark, ProjectID: 0, ActivityID: 0, InvoiceID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
-                TransType: 'Transfer'
+                TransactionDate: date,TransType: 'Transfer'
             };
-
+      
             transactionService.Transfer(TranData)
              .then(function (response) {
                  $scope.transfer_progress = false;
@@ -133,22 +133,23 @@
                 deposit = $scope.external_amount;
                 withdraw = 0;
             }
+            var date = new Date();
             var TranData = {
                 TransName: $scope.external_name, AccID: $scope.selAcc.AccID, Deposit: deposit, Withdraw: withdraw,
                 TransactionRemarks: $scope.external_Remarks, ProjectID: 0, ActivityID: 0, InvoiceID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
-                TransType:'External'
+                TransactionDate: date,TransType:'External'
             };
-            //alert(JSON.stringify(TranData));
-
+          
            AddTransaction(TranData);
         }
 
         $scope.PaySalary = function () {
             $scope.salary_progress = true;
-           
+            var date = new Date();
             var TranData = {
                 TransName: $scope.employee_name + "_Salary", AccID: $scope.selFromAcc.AccID, Deposit: 0, Withdraw: $scope.salary_amount,
-                TransactionRemarks: $scope.salary_Remarks, ProjectID: $scope.ProjectID, ActivityID: 0, InvoiceID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
+                TransactionRemarks: $scope.salary_Remarks, ProjectID: $scope.ProjectID, ActivityID: 0, InvoiceID: 0, ExpenseID: 0,
+                TransactionDate: date,OrgID: $rootScope.OrgID,
                 TransType:"Salary"
             };
             //alert(JSON.stringify(TranData));
@@ -159,18 +160,47 @@
         $scope.PayAdvance = function () {
             $scope.advance_progress = true;
             var date = new Date();
-            var advanceItem = { ActivityID: $scope.ActivityID, AdvanceName: "Paid", RequestAmount: 0, ReceiveAmount: $scope.advance_amount, AdvanceRemarks: $scope.advance_Remarks, CreationDate: date, SelectedRow: false, Status: "Paid" };
+
+
+            var advanceItem = {
+                ActivityID: $scope.ActivityID, AdvanceName: "Paid", RequestAmount: 0, ReceiveAmount: $scope.advance_amount,
+                AdvanceRemarks: $scope.advance_Remarks, CreationDate: date, SelectedRow: false, Status: "Paid",
+                AccID: $scope.selFromAcc.AccID, ProjectID: 0, OrgID: $rootScope.OrgID
+            };
+
+
+
             var TranData = {
                 TransName: $scope.advance_name, AccID: $scope.selFromAcc.AccID, Deposit: 0, Withdraw: $scope.advance_amount,
                 TransactionRemarks: $scope.advance_Remarks, ProjectID: 0, ActivityID: $scope.ActivityID, ExpenseID: 0, OrgID: $rootScope.OrgID,
                 TransType:"Advance"
             };
 
+            console.log(JSON.stringify(advanceItem));
             advanceService.addItem(advanceItem)
             .then(function (resp) {
                 if (resp.data.Response == "OK") {
 
-                    AddTransaction(TranData);
+                    //AddTransaction(TranData);
+                   
+                    $scope.advance_progress = false;
+                    
+                    $scope.newExpense = false;
+                    $scope.ShowExternal = false;
+                    $scope.newSalary = false;
+                    $scope.advance_name = "";
+                    $scope.advance_amount = "";
+                    $scope.advance_Remarks = "";
+                    $scope.ActivityName = "";
+                    $scope.external_name = "";
+                    $scope.external_amount = "";
+                    $scope.external_Remarks = "";
+                    $scope.employee_name = "";
+                    $scope.salary_amount = "";
+                    $scope.salary_Remarks = "";
+                    GetTransaction();
+
+
                 }
                 else {
                     alert("Error");
@@ -181,7 +211,7 @@
 
 
         function AddTransaction(TranData) {
-
+           
             transactionService.AddPayment(TranData)
                .then(function (data) {
                    $scope.external_progress = false;

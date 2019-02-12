@@ -68,8 +68,7 @@
                 ActivityStatus: "Initiated", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
             };
            console.log(JSON.stringify(Activity));
-            alert(JSON.stringify(Activity));
-            return;
+           
             activityService.CreateActivity(Activity)
             .then(function (resp) {
                 $scope.newActivity_progress = false;
@@ -108,7 +107,7 @@
                 ActivityName: $scope.expense_name, EmployeeID: $scope.selectedUserID,
                 ProjectID: $scope.activity_Project.ProjectID, CreatedBy: $rootScope.UserId,
                 ActivityDescription: $scope.expense_remarks, CreationDate: date, ExpenseAmount: $scope.expense_amount,
-                ActivityStatus: "Quick", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
+                ActivityStatus: "Submit", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
             };
 
             activityService.CreateActivity(Activity)

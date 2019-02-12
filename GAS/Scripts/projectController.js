@@ -236,6 +236,19 @@
                     });
 
             }
+
+            else if ($rootScope.Role === 'Employee') {
+
+                projectService.getProjectForManager($rootScope.UserId, status)
+                    .then(function (data) {
+
+                        $scope.ProjectList = data;
+                        //alert(JSON.stringify(data[0]));
+                        GetProjectExpense(data[0].ProjectID);
+                        GetActivitiesForProject(data[0].ProjectID)
+                    });
+
+            }
         }
 
         $scope.ShowExpense = function(id)

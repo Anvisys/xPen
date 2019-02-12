@@ -165,6 +165,7 @@
         }
 
         $timeout(function () {
+            $scope.CurrentMonth = new Date();
             $scope.year = $scope.SelectedMonth.getFullYear();
             $scope.month = $scope.SelectedMonth.getMonth() + 1;
             //alert($scope.year + "/" + $scope.month);

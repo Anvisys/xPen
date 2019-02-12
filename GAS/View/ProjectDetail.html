@@ -57,7 +57,7 @@
                     </div>
                 </uib-tab>
 
-                <uib-tab index="1" heading="Invoices" >
+                <uib-tab index="1" heading="Sale" >
                     <div class="row">
                    
                         <div class="col-xs-12 " style="margin:10px;">
@@ -81,7 +81,7 @@
                                     </tr>
 
                                     <tr ng-repeat="p in model.InvoiceList">
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $index + 1 }}aaa</td>
                                         <td>{{ p.InvoiceNumber}}</td>
                                         <td>{{p.InvoiceDate| date:"mediumDate"}}</td>
                                         <td>{{p.ClientName}}</td>
@@ -92,10 +92,14 @@
                                         <td>{{ p.TDS | currency : "&#8377" : 2}}</td>
                                         <td ng-init="sellItems.total = sellItems.total + p.ServiceCost+p.CGST+p.SGST+ p.IGST - p.TDS">
                                             {{p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS | currency : "&#8377" : 2}}
-                                            <span class="fa fa-edi" style="color:#4caf50;font-size:1.5em;" title="Payment Received" ng-click="model.receivePayment(p)"></span>
+                                            <span class="fa fa-edit" style="color:#4caf50;font-size:1.5em;" title="Payment Received" ng-click="model.receivePayment(p)"></span>
                                         </td>
                                         <td ng-init="sellItems.received = sellItems.received + p.ReceivedAmount">{{p.ReceivedAmount | currency : "&#8377" : 2}}</td>
-                                        <td>{{p.ReceivedDate | date:"mediumDate"}}</td>
+                                        <td>
+                                            {{p.ReceivedDate | date:"mediumDate"}}
+                                            aaa
+                                            <span class="fa fa-edit" style="color:#4caf50;font-size:1.5em;" title="Payment Received" ng-click="receivePayment(p)"></span>
+                                        </td>
                                       
 
                                     </tr>
@@ -146,7 +150,8 @@
                                         <td>{{ p.SGST | currency : "&#8377" : 2 }}</td>
                                         <td>{{ p.IGST | currency : "&#8377" : 2 }}</td>
                                         <td>{{ p.TDS | currency : "&#8377" : 2 }}</td>
-                                        <td ng-init="purchaseItems.payable = purchaseItems.payable + p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS">{{p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS | currency : "&#8377" : 2 }}  <span class="fa fa-edit" style="color:#4caf50;font-size:1.5em;" title="Add Payment" ng-click="makePayment(p)"></span></td>
+                                        <td ng-init="purchaseItems.payable = purchaseItems.payable + p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS">{{p.ServiceCost+p.CGST+p.SGST+ p.IGST-p.TDS | currency : "&#8377" : 2 }} 
+                                        <span class="fa fa-edit" style="color:#4caf50;font-size:1.5em;" title="Add Payment" ng-click="makePayment(p)"></span></td>
                                         <td ng-init="purchaseItems.Paid = purchaseItems.Paid+ p.PaidAmount">{{ p.PaidAmount | currency : "&#8377" : 2 }}</td>
                                         <td>{{ p.PaidDate | date:"mediumDate"}}</td>
                                         <td>
@@ -188,7 +193,7 @@
                                     <th>Advance</th>
                                 </tr>
 
-                                <tr ng-repeat="act in model.ActivityList">
+                                <tr ng-repeat="act in ActivityList">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ act.ActivityName}}</td>
                                     <td>{{ act.Employee}}</td>

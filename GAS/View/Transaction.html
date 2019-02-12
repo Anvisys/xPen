@@ -37,7 +37,7 @@
                 <div class="row" style=" float:right;">
                     <button type="button" class="btn btn-primary" ng-click="newSalary=true">Salary</button>
                     <button type="button" class="btn btn-warning" ng-click="newTransfer=true">Add Transfer</button>
-                    <button type="button" class="btn btn-success" ng-click="newExpense=true;">Pay</button>
+                    <button type="button" class="btn btn-success" ng-click="newExpense=true;">Advance</button>
                     <button type="button" class="btn btn-primary" ng-click="ShowExternal=true;">External Transaction</button>
                 </div>
             </div>
@@ -304,7 +304,7 @@
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-5 col-form-label">Name:</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" name="transferName" tabindex="0" type="text" ng-model="aexternal_name">
+                                <input type="text" class="form-control" name="transferName" tabindex="0"  ng-model="external_name">
                             </div>
                         </div>
                         <div class="form-group row">

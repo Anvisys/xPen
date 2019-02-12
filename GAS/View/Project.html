@@ -12,7 +12,7 @@
 
             <button class="btn btn-primary btn-sm" ng-click="ShowClose()">{{ProjectFilterName}}</button>
 
-            <button class="btn btn-primary btn-sm" ng-click="open()">New Project</button>
+            <button class="btn btn-primary btn-sm" ng-hide="Role=='Employee'" ng-click="open()">New Project</button>
         </div>
         
 
@@ -25,7 +25,7 @@
                                 <img on-toggle="" src="Images/Icon/logo_Filter.png" title="Add New Project" ng-click="ToggleFilter()"  style="width:30px;height:30px;border-radius:50%;
                              position: absolute;top:12px; right: 70px;" />
  
-                        <span title="Add New Project" class="fa fa-plus-square-o fa-3x" ng-click="open()" style="width:30px;height:30px;border-radius:50%;
+                        <span title="Add New Project" class="fa fa-plus-square-o fa-3x" ng-hide="Role=='Employee'" ng-click="open()" style="width:30px;height:30px;border-radius:50%;
                             position: absolute;top:12px; right: 20px;" > </span>
 
                     </div>

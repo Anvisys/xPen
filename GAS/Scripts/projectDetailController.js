@@ -92,7 +92,7 @@
 
         $scope.model.receivePayment = function (invoice)
         {
-            
+            alert(invoice);
             $scope.selInvoice = invoice;
             $scope.newReceivePaymentDiv = true;
         }
@@ -118,7 +118,7 @@
             };
 
           var item =[CostTransaction, GSTTransaction, TDSTransaction];
-
+            console.log(JSON.stringify(item));
             transactionService.AddTransactions(item)
                    .then(function (data) {
                        $scope.other_progress = false;
@@ -303,7 +303,7 @@
             $scope.sellItems = {};
             invoiceService.getSellForProject($scope.PrjId)
             .then(function (data) {
-               
+                alert(JSON.stringify(data));
                 $scope.model.InvoiceList = data;
 
             });

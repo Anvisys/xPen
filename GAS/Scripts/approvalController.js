@@ -72,9 +72,9 @@
             var date = new Date();
             var expenseItem = [{
                 ActivityID: $scope.selActivity.ActivityID, ItemName: "StatusUpdate", ExpenseAmount: 0,
-                ReceiveAmount: 0, ExpenseDescription: $scope.appRemarks, ExpenseDate: date, SelectedRow: false, Status: "Approved"
+                ReceiveAmount: 0, ExpenseDescription: $scope.appRemarks, ExpenseDate: date, SelectedRow: false, Action: "Approved"
             }];
-
+            console.log(JSON.stringify(expenseItem));
             expenseItemService.addItem(expenseItem)
             .then(function (resp) {
                 if (resp.data.Response == "OK") {
@@ -104,7 +104,7 @@
   
             var PaymentData = {
                 ProjectID: $scope.ProjectID, ActivityID: $scope.selActivity.ActivityID, ExpenseID: 0, OrgID: $rootScope.OrgID,
-                ExpenseAmount:  $scope.paid_Amount,AccID:$scope.selAcc.AccID,ItemName: $scope.payment_name,Status:"Paid",
+                ExpenseAmount:  $scope.paid_Amount,AccID:$scope.selAcc.AccID,ItemName: $scope.payment_name,Action:"Paid",
                 ExpenseDescription: $scope.paid_Remarks,ExpenseDate: date, 
             };
             //console.log( JSON.stringify(PaymentData));
@@ -199,15 +199,27 @@
             var advanceItem = {
                 ActivityID: $scope.ActivityID, AdvanceName: "Paid", RequestAmount: 0,
                 ReceiveAmount: $scope.advance_Amount, AdvanceRemarks: $scope.advance_Remarks, CreationDate: date,
-                SelectedRow: false, Status: "Paid"
+                SelectedRow: false, Status: "Paid",
+                AccID: $scope.selAcc.AccID, ProjectID: 0, OrgID: $rootScope.OrgID
             };
             var TranData = { TransName: $scope.advance_name, AccountNumber: $scope.selAcc.AccID, Deposit: 0, Withdraw: $scope.advance_Amount, TransactionRemarks: $scope.advance_Remarks, ProjectID: 0, ActivityID: $scope.ActivityID, ExpenseID: 0 };
-           
+
+            console.log(JSON.stringify(advanceItem));
+            return;
+
             advanceService.addItem(advanceItem)
             .then(function (resp) {
                 if (resp.data.Response == "OK") {
                    
-                    AddTransaction(TranData);
+                    //AddTransaction(TranData);
+                    $scope.paymentDiv = false;
+                    $scope.appRemarks = "";
+                    $scope.paymentAdvance = false;
+                    $scope.advance_Remarks = "";
+                    getDataForApproval();
+
+                    GetAdvanceData();
+
                 }
                 else {
                     alert("Error");
