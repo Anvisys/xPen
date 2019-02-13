@@ -92,7 +92,7 @@
 
         $scope.model.receivePayment = function (invoice)
         {
-            alert(invoice);
+           // alert(invoice);
             $scope.selInvoice = invoice;
             $scope.newReceivePaymentDiv = true;
         }
@@ -119,7 +119,7 @@
 
           var item =[CostTransaction, GSTTransaction, TDSTransaction];
             console.log(JSON.stringify(item));
-            transactionService.AddTransactions(item)
+            transactionService.AddPayment(item)
                    .then(function (data) {
                        $scope.other_progress = false;
                        if (data.data.Response == "OK") {
@@ -241,6 +241,30 @@
           
         }
 
+        $scope.AddQuickExpense = function () {
+            $scope.QuickExpense_progress = true;
+            var date = new Date();
+            var Activity = {
+                ActivityName: $scope.expense_name, EmployeeID: $rootScope.UserId,
+                ProjectID: $scope.PrjId, CreatedBy: $rootScope.UserId,
+                ActivityDescription: $scope.expense_remarks, CreationDate: date, ExpenseAmount: $scope.expense_amount,
+                ActivityStatus: "Submit", OrgID: $rootScope.OrgID, ApproverID: $rootScope.UserId
+            };
+
+            activityService.CreateActivity(Activity)
+                .then(function (resp) {
+                    $scope.QuickExpense_progress = false;
+                    if (resp.data.Response == "OK") {
+                        $scope.model.QuickExpenseForm = false;
+                        GetActivitiesForProject($scope.PrjId)
+                    }
+                    else {
+                        alert("Error");
+                    }
+
+                });
+        }
+
         $scope.AddActivity = function()
         {
             $scope.newActivity_progress = true;
@@ -252,16 +276,17 @@
                 ActivityStatus: "Initiated", OrgID: $rootScope.OrgID, ApproverID: $rootScope.UserId
             };
 
-    
+       
             activityService.CreateActivity(Activity)
             .then(function (resp) {
                 $scope.newActivity_progress = false;
+              
                 if (resp.data.Response == "OK") {
-                    $scope.NewActivityForm = false;
+                    $scope.model.NewActivityForm = false;
                     GetActivitiesForProject($scope.PrjId);
                 }
                 else {
-                    alert("Error");
+                    alert("Error Creating Activity");
                 }
 
             });
@@ -272,7 +297,7 @@
             GetProjectData();
             GetInvoiceData();
             GetPurchaseInvoiceData();
-
+           
             accountService.getAccountList()
                .then(function (data) {
 
@@ -290,20 +315,21 @@
         {
             projectService.getProjectData($scope.PrjId)
             .then(function (data) {
-               
+                console.log(JSON.stringify(data));
                 $scope.Project = data[0];
 
             });
 
         }
 
+     
 
         function GetInvoiceData()
         {
             $scope.sellItems = {};
             invoiceService.getSellForProject($scope.PrjId)
             .then(function (data) {
-                alert(JSON.stringify(data));
+                //alert(JSON.stringify(data));
                 $scope.model.InvoiceList = data;
 
             });
@@ -321,9 +347,10 @@
 
 
         function GetActivitiesForProject(pid) {
+          
             activityService.GetActivitiesByProject(pid)
             .then(function (data) {
-               // alert(JSON.stringify(data));
+             
                 $scope.model.ActivityList = data;
 
             });

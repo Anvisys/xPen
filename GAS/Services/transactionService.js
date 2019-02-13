@@ -91,7 +91,7 @@
             var jsonData = angular.toJson(transaction);
 
             return $http({
-                url: $rootScope.APIUrl + 'api/transaction/Payment',
+                url: $rootScope.APIUrl + 'api/transaction/Items',
                 method: "POST",
                 data: jsonData,
                 headers: {

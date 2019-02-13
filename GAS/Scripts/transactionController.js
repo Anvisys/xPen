@@ -61,9 +61,9 @@
             };*/
 
             var TranData = {
-                TransName: $scope.transfer_name, AccID: $scope.selFromAcc.AccID, TransactionID: $scope.selToAcc.AccID, Deposit: $scope.transfer_amount, Withdraw: $scope.transfer_amount,
-                TransactionRemarks: $scope.transfer_remark, ProjectID: 0, ActivityID: 0, InvoiceID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
-                TransactionDate: date,TransType: 'Transfer'
+                TransName: $scope.transfer_name, AccID: $scope.selFromAcc.AccID, TransactionID: $scope.selToAcc.AccID, Deposit: $scope.transfer_amount,
+                Withdraw: $scope.transfer_amount,TransactionRemarks: $scope.transfer_remark, ProjectID: 0, ActivityID: 0, InvoiceID: 0, ExpenseID: 0,
+                OrgID: $rootScope.OrgID,TransactionDate: date,TransType: 'Transfer'
             };
       
             transactionService.Transfer(TranData)

@@ -233,9 +233,9 @@
                                 <div class="col-md-4">
                                     <input name="ExpenseName" class="form-control" tabindex="1" type="text" placeholder="Expense Name" ng-model="expense_name" style="width:150px;" required>
                                 </div><div class="col-md-4">
-                                    <input name="Amount" class="form-control"  tabindex="2" type="text" placeholder="Amount" ng-model="expense_amount" style="width:150px;" required min-amount />
+                                    Amount:<input name="Amount" class="form-control"  tabindex="2" type="number" placeholder="0.00" ng-model="expense_amount" style="width:150px;" required min-amount />
                                 </div><div class="col-md-4">
-                                    <input name="Remark" class="form-control"   tabindex="3" type="text" ng-model="expense_remarks" style="width:150px;" required text-length />
+                                    <input name="Remark" class="form-control"   tabindex="3" type="text" placeholder="Remarks" ng-model="expense_remarks" style="width:150px;" required text-length />
                                 </div>
                             </div>
                         </form>

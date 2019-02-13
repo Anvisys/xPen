@@ -112,7 +112,7 @@
             expenseItemService.addPayment(PaymentData)
             .then(function (resp) {
                 if (resp.data.Response == "OK") {
-                    alert("Payment Done");
+                       $scope.paymentDiv = false;
                 }
                 else {
                     alert("Error");
@@ -174,7 +174,7 @@
                 if (resp.data.Response == "OK") {
                     $scope.rejectAdvance = false;
                     $scope.advRejectRemarks = "";
-                    GetAdvanceData();
+                    GetAdvanceData("Open");
                 }
                 else {
                     alert("Error");
@@ -254,7 +254,7 @@
             var date = new Date();
             var expenseItem = [{
                 ActivityID: $scope.selActivity.ActivityID, ItemName: "StatusUpdate", ExpenseDescription: $scope.rejRemark,
-                ExpenseAmount: 0, ReceiveAmount: 0, Remarks: $scope.rejRemark, ExpenseDate: date, SelectedRow: false, Status: "Rejected"
+                ExpenseAmount: 0, ReceiveAmount: 0, Remarks: $scope.rejRemark, ExpenseDate: date, SelectedRow: false, Action: "Rejected"
             }];
 
             expenseItemService.addItem(expenseItem)
@@ -262,7 +262,7 @@
                 if (resp.data.Response == "OK") {
                     $scope.rejectDiv = false;
                     $scope.appRemarks = "";
-                    getDataForApproval();
+                    getDataForApproval("Open");
                 }
                 else {
                     alert("Error");
