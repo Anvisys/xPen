@@ -8,7 +8,14 @@
         $scope.TotalTDS = 0;
         $scope.PurchaseList = [];
         $scope.SellList = [];
+        $scope.thisDay = new Date();
         $scope.CurrentMonth = new Date();
+        $scope.latestShowing = false;
+
+        if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth()) ) {
+           
+            $scope.latestShowing = true;
+        }
 
   
         $scope.Next = function () {
@@ -24,6 +31,11 @@
             GetTaxPaidList();
             GetTDSBaseline();
             GetGSTBaseline();
+            if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth())) {
+                $scope.latestShowing = true;
+            }
+            
+
         }
 
         $scope.Previous = function () {
@@ -38,6 +50,8 @@
             GetTaxPaidList();
             GetTDSBaseline();
             GetGSTBaseline();
+            $scope.latestShowing = false;
+          
         }
 
 

@@ -25,7 +25,7 @@
                     <div class="input-group-addon">
                         <span ng-click="Previous()" title="Previous Month" class="glyphicon glyphicon-arrow-left"></span>
                         <label style="padding-left:10px;padding-right:10px; color:blue;"> {{CurrentMonth| date:"MMM,yy"}}</label>
-                        <span ng-click="Next()" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
+                        <span ng-click="Next()" ng-hide="IsLatest" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
                     </div>
                     <div class="input-group-addon">
                         <span ng-click="ShowData()" class="fa fa-search"></span>
@@ -77,10 +77,10 @@
                             <td>{{ expense.EntryDate| date:"ddMMM,yy @ h:mma" }}</td>
                             <td>{{ expense.AccountName}}</td>
                             <td>{{ expense.TransType}}</td>
-                            <td>{{ expense.Withdraw }}</td>
-                            <td>{{ expense.Deposit}}</td>
-                            <td>{{ expense.Balance}}</td>
-                            <td>{{ expense.AccountBalance}}</td>
+                            <td>{{ expense.Withdraw | currency : "&#8377" : 2}}</td>
+                            <td>{{ expense.Deposit| currency : "&#8377" : 2}}</td>
+                            <td>{{ expense.Balance| currency : "&#8377" : 2}}</td>
+                            <td>{{ expense.AccountBalance| currency : "&#8377" : 2}}</td>
                             <td>{{ expense.TransName}}</td>
                             <td>{{ expense.TransactionRemarks}}</td>
 

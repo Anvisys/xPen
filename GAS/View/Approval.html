@@ -63,9 +63,9 @@
 
                                 </div>
                                 <div class="col-sm-4 padding-5">
-                                    Expenses: {{ ip.Expenses }} &nbsp;
-                                    Paid :  {{ ip.Advance + ip.Settlement }}<br />
-                                    Payable:  {{ip.Expenses- ip.Advance - ip.Settlement }}  <br />
+                                    Expenses: {{ ip.Expenses | currency : "&#8377" : 2}} &nbsp;
+                                    Paid :  {{ ip.Advance + ip.Settlement | currency : "&#8377" : 2}}<br />
+                                    Payable:  {{ip.Expenses- ip.Advance - ip.Settlement | currency : "&#8377" : 2}}  <br />
                                     <div class="btn-group " uib-dropdown style="width:130px;">
                                         <button id="split-button" type="button" class="btn btn-danger btn-sm">{{ ip.ActivityStatus }}</button>
                                         <button type="button" class="btn btn-danger btn-sm" uib-dropdown-toggle>
@@ -134,8 +134,8 @@
                                 </td>
 
                                 <td>
-                                    {{ adv.RequestAmount }}<br />
-                                    {{ adv.ReceivedAmount }}
+                                    {{ adv.RequestAmount | currency : "&#8377" : 2}}<br />
+                                    {{ adv.ReceivedAmount | currency : "&#8377" : 2}}
                                 </td>
 
                                 <td>
