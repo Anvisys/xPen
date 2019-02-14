@@ -13,8 +13,16 @@
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
         //var year = new Date().getFullYear;
-        //var Month = new Date().
+        //var Month = new Date();
+        $scope.thisDay = new Date();
         $scope.CurrentMonth = new Date();
+
+        $scope.IsLatest = false;
+
+        if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth())) {
+
+            $scope.IsLatest = true;
+        }
 
         if (typeof $routeParams.id != 'undefined') {
 
@@ -26,13 +34,23 @@
             
             $scope.CurrentMonth.setMonth($scope.CurrentMonth.getMonth() + 1);
             GetTransaction();
+            if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth())) {
 
+                $scope.IsLatest = true;
+            }
         }
 
         $scope.Previous = function ()
         {
             $scope.CurrentMonth.setMonth($scope.CurrentMonth.getMonth() - 1);
             GetTransaction();
+            if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth())) {
+
+                $scope.IsLatest = true;
+            }
+            else {
+                $scope.IsLatest = false;
+            }
         }
 
        

@@ -92,8 +92,8 @@
                         <tr ng-repeat="exp in transactionList">
                             <td>{{ $index + 1 }}</td>
                             <td>{{ exp.ExpenseDate | date:"ddMMM,yy" }}</td>
-                            <td>{{ exp.ReceiveAmount }}</td>
-                            <td>{{ exp.ExpenseAmount }}</td>
+                            <td>{{ exp.ReceiveAmount | currency : "&#8377" : 2}}</td>
+                            <td>{{ exp.ExpenseAmount | currency : "&#8377" : 2}}</td>
 
                         </tr>
 

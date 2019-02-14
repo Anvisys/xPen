@@ -30,7 +30,7 @@
                                     <td>{{$index + 1}}</td>
                                     <td>{{ex.Year}}</td>
                                     <td>{{ex.Month}}</td>
-                                    <td><a ng-click="ShowDetail(ex)">{{ex.Expense}}</a></td>
+                                    <td><a ng-click="ShowDetail(ex)">{{ex.Expense| currency : "&#8377" : 2}}</a></td>
                                 </tr>
                             </table>
                     </div>
@@ -57,7 +57,7 @@
                             <td>{{ expense.ExpenseDate| date:"ddMMM @ h:mma"}}</a></td>
                             <td>{{ expense.ExpenseType}}</td>
                             <td>
-                                {{ expense.ExpenseAmount }}
+                                {{ expense.ExpenseAmount | currency : "&#8377" : 2}}
                             </td>
                             <td>{{ expense.ExpenseDescription}}</td>
 

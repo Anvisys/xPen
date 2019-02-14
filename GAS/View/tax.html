@@ -12,7 +12,7 @@
          
                 <span ng-click="Previous()" title="Previous Month" class="glyphicon glyphicon-arrow-left"></span>
                 <label style="padding-left:10px;padding-right:10px; color:blue;"> {{CurrentMonth| date:"MMM,yy"}}</label>
-                <span ng-click="Next()" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
+                <span ng-click="Next()" ng-hide="latestShowing" title="Next Month" class="glyphicon glyphicon-arrow-right"></span>
           
         </div>
 
