@@ -7,9 +7,15 @@
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
         $scope.invoice_date = new Date();
-        $scope.CGST = "0";
-        $scope.SGST = "0";
-        $scope.IGST = "0";
+        $scope.pwork_cost = 0;
+        $scope.pCGST = 0;
+        $scope.pSGST = 0;
+        $scope.pIGST = 0;
+        $scope.pTDS = 0;
+        $scope.CGST = 0;
+        $scope.SGST = 0;
+        $scope.IGST = 0;
+        $scope.TDS = 0;
         $scope.model = {};
         $scope.model.trans_date = new Date();
        
@@ -40,7 +46,7 @@
                 $scope.project_progress = false;
                 // alert(JSON.stringify(resp));
                 if (resp.data.Response == "OK") {
-                    $scope.work_cost = "";
+                    $scope.work_cost = 0;
                     $scope.CGST = 0;
                     $scope.SGST = 0;
                     $scope.IGST = 0;
@@ -95,6 +101,11 @@
            // alert(invoice);
             $scope.selInvoice = invoice;
             $scope.newReceivePaymentDiv = true;
+
+            $scope.received_cost = invoice.ServiceCost;
+            $scope.received_GST = invoice.IGST + invoice.CGST + invoice.SGST;
+            $scope.received_TDS = invoice.TDS;
+       
         }
 
         $scope.AddPayment = function ()
@@ -241,6 +252,13 @@
           
         }
 
+        $scope.QuickExpense = function () {
+            $scope.expense_amount = 0;
+            $scope.expense_remarks = "";
+            $scope.expense_name = "";
+            $scope.model.QuickExpenseForm = true;
+        }
+
         $scope.AddQuickExpense = function () {
             $scope.QuickExpense_progress = true;
             var date = new Date();
@@ -309,6 +327,7 @@
                 .then(function (data) {
 
                     $scope.Accounts = data;
+                    $scope.selAcc = data[0];
                 });
 
 
