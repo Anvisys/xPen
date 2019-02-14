@@ -31,6 +31,11 @@
 
         }
 
+        $scope.ToggleFilter = function () {
+
+            $scope.ShowFilter = !$scope.ShowFilter;
+        }
+
 
         $scope.Remove = function(user)
         {
@@ -108,7 +113,7 @@
         {
             userService.GetByMobile($scope.SearchMobile)
                             .then(function (data) {
-                                //alert(JSON.stringify(data));
+                               console.log(JSON.stringify(data));
 
                                 if (data == null)
                                 {
@@ -117,17 +122,21 @@
                                else if (data.OrgId == $rootScope.OrgID)
                                 {
 
-                                    $scope.UserText = "User already added in organization.";
+                                    $scope.UserText = "User " + data.UserName + "(" + data.UserMobile +") already added in organization.";
                                }
                                else if (data.OrgId != 0)
                                {
-                                   $scope.UserText = "User is part of some organization;";
+                                    $scope.UserText = "User " + data.UserName + "(" + data.UserMobile+") is part of some organization;";
+
                                }
                                else if (data.OrgId == 0)
                                 {
 
-                                   $scope.UserText = data.UserName + " " + data.UserMobile + " " + data.UserEmail;
-                                   $scope.SelectedUser = data;
+                                  // $scope.UserName = data.UserName + " " + data.UserMobile + " " + data.UserEmail;
+                                    $scope.UserText = "User Name :" + data.UserName + "(" + data.UserMobile + "), Email : " + data.UserEmail
+                                        + ";";
+                                    $scope.SelectedUser = data;
+
                                 }
                                 
                             });

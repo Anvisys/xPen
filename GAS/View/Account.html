@@ -37,7 +37,7 @@
                             <td><a title="Detail Transaction" href="#!Transaction/{{a.AccountName}}">{{ a.AccountName }}</a></td>
                             <td>{{ a.AccountType }}</td>
                             <td>{{ a.AccountNumber }}</td>
-                            <td>{{ a.AccountBalance }}</td>
+                            <td>{{ a.AccountBalance  | currency : "&#8377" : 2  }}</td>
                             <td class="hidden-xs">{{ a.AccountDescription }}</td>
                             <td ng-hide="true"><span class="fa fa-bar-chart" title="Daily Transaction" ng-click="ShowTrend(a)"></span></td>
                             <td ng-hide="true" ng-class='{open: open}'>

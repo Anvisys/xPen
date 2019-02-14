@@ -14,31 +14,52 @@
                 <div class="panel panel-default">
                     <div class="panel-heading bg_greyBlue" style="position: relative;height:50px;">
                         User/Employee List
+
+
+
                         <span ng-hide="false" class="fa fa-plus-square fa-3x" title="New User" ng-click="NewUser()" style="float:right;padding-right: 6px;color:#fff"></span>
-                        <span ng-hide="false" class="fa fa-user-plus fa-3x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;" ></span>
+                        <span ng-hide="false" class="fa fa-user-plus fa-3x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;"></span>
+                        <span ng-hide="false" class="fa fa-filter  fa-3x" title="Filter" ng-click="ToggleFilter()" style="float:right;padding-right: 6px;color:#fff"></span>
                         <!--<img src="Images/Icon/icon_AddUser_white.png" title="Add New User" ng-click="NewUser()" style="width:20px;height:20px;border-radius:50%;margin-left:10px;
-                             position: absolute;top: 10px; right: 50px;" />
-                        <img src="Images/Icon/icon_ExistUser_white.png" title="Add Existing User" ng-click="existingUserDiv=true" style="width:30px;height:30px;border-radius:50%;
-                            position: absolute;top: 5px; right: 10px;" />-->
+         position: absolute;top: 10px; right: 50px;" />
+    <img src="Images/Icon/icon_ExistUser_white.png" title="Add Existing User" ng-click="existingUserDiv=true" style="width:30px;height:30px;border-radius:50%;
+        position: absolute;top: 5px; right: 10px;" />-->
+                    </div>
+
+                    <div ng-show="ShowFilter" style="display:inline-block;background-color:grey; z-index:500; position: absolute;top:30px; right: 90px; padding:10px;">
+                        <ul style=" list-style-type: none;margin: 0;padding: 0;color:white;">
+                            <li ng-click="userType = ''; ShowFilter =false" style="cursor:pointer;">
+                                Show All
+                            </li>
+                            <li ng-click="userType = 'Employee'; ShowFilter =false" style="cursor:pointer;">
+                                Employee
+                            </li>
+                            <li ng-click="userType = 'Manager';ShowFilter =false" style="cursor:pointer;">
+                                Manager
+                            </li>
+                            <li ng-click="userType = 'Admin'; ShowFilter =false" style="cursor:pointer;">
+                                Admin
+                            </li>
+                        </ul>
                     </div>
 
                     <div style="max-height:{{ScreenHeight}};overflow-x:hidden;overflow-y:scroll;">
                         <div style="max-height:{{ScreenHeight}}; width:100%;">
-                  
-                            <div class="row" ng-init="imgsrc = 'UserImage_'+ user.UserId" ng-repeat="user in userList" ng-class-odd="'bg_lightGrey'" ng-click="Show(user)">
-                              
-                                <div class="col-sm-3 col-xs-3" style="padding-top: 10px; padding-left: 22px;" >
+
+                            <div class="row" ng-init="imgsrc = 'UserImage_'+ user.UserId" ng-repeat="user in userList| filter:userType" ng-class-odd="'bg_lightGrey'" ng-click="Show(user)">
+
+                                <div class="col-sm-3 col-xs-3" style="padding-top: 10px; padding-left: 22px;">
                                     <img ng-src="{{UserImages['UserImage_'+ user.UserId]}}" ng-m ng-model="UImage" style="border-radius:50%; height:40px; width:40px;" />
-                                    
+
                                 </div>
                                 <div class="col-sm-3 col-xs-3 padding-10" style="height:50px;">
                                     {{ user.UserName }}({{ user.UserId}})
                                     <br />{{ user.UserRole }}
                                 </div>
-                              
-                        
+
+
                                 <div class="col-sm-3 col-xs-3 padding-10">{{ user.UserEmail }} <br /> {{ user.UserMobile }}</div>
-                               
+
                                 <div class="col-sm-3 col-xs-3 padding-10">
                                     <div class="btn-group" uib-dropdown>
                                         <button id="split-button" type="button" class="btn btn-primary btn-sm">Action</button>
@@ -49,7 +70,7 @@
                                         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
 
                                             <li role="menuitem"><a href="#!UserTrans/{{user.UserId}}">Detail</a></li>
-                                            <li role="menuitem"><a ng-click="Remove(user)">Remove User</a></li>
+                                            <li role="menuitem"><a ng-click="Remove(user)" ng-hide="{{user.UserRole=='Admin'}}">Remove User</a></li>
 
                                         </ul>
                                     </div>
@@ -213,9 +234,24 @@
                                 Search By Mobile : <input name="MobileNumber" tabindex="0" class="form-control" type="text" ng-model="SearchMobile" style="width:187px;" required text-length>
                                 <span ng-click="GetUser()" class="fa fa-search fa-2x"></span>
                             </div>
-                            <div class="row">
-                                <label>{{UserText}}</label>
+
+                            <div class="row" style="margin-top:5px;">
+                                <label>
+                                    {{UserText}}
+                                </label>
+                              </div>
+
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-xs-3">  Role:</div>
+                                      <div class="col-xs-9">
+                                          <div class="input-group" style="padding:5px;">
+                                              <span class="input-group-addon" style="color:black;"><i class="fa fa-users" style="border:none;"></i></span>
+                                              <select class="form-control" ng-model="user_role" ng-options="x for x in roles" style="width:150px;"></select>
+
+                                          </div>
+                                      </div>
                             </div>
+
                         </form>
                     </div>
                     </div>

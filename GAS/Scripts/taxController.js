@@ -117,7 +117,7 @@
         {
             var TDS = {
                 TDSDeducted: $scope.items.deducted, OrgID: $rootScope.OrgID, TDSPayable: $scope.tds_amount,
-                PreviousTDS: 0, Penalty: 0, TaxMonth: $scope.SelectedMonth
+                PreviousTDS: 0, Penalty: 0, TaxMonth: $scope.CurrentMonth
             }
            // alert(JSON.stringify(TDS));
             taxService.baselineTDS(TDS)
@@ -132,7 +132,7 @@
         $scope.BaselineGST = function () {
             var GST = {
                 GSTReceived: $scope.tax.IGST, OrgID: $rootScope.OrgID, GSTInput: $scope.tax.IGSTI,
-                PreviousGSTDues: 0, GSTPayable: $scope.gst_amount, Penalty: 0, TaxMonth: $scope.SelectedMonth
+                PreviousGSTDues: 0, GSTPayable: $scope.gst_amount, Penalty: 0, TaxMonth: $scope.CurrentMonth
             }
             // alert(JSON.stringify(TDS));
             taxService.baselineGST(GST)
@@ -166,8 +166,8 @@
 
         $timeout(function () {
             $scope.CurrentMonth = new Date();
-            $scope.year = $scope.SelectedMonth.getFullYear();
-            $scope.month = $scope.SelectedMonth.getMonth() + 1;
+            $scope.year = $scope.CurrentMonth.getFullYear();
+            $scope.month = $scope.CurrentMonth.getMonth() + 1;
             //alert($scope.year + "/" + $scope.month);
             GetSellData();
             GetPurchaseData();

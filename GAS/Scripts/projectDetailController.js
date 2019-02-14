@@ -217,7 +217,7 @@
         $scope.LoadActivity = function ()
         {
            // alert("Getting Activities" + $scope.PrjId);
-            GetActivitiesForProject($scope.PrjId);
+           // GetActivitiesForProject();
         }
 
         $scope.OpenEmployeeDialog = function ()
@@ -297,19 +297,32 @@
             GetProjectData();
             GetInvoiceData();
             GetPurchaseInvoiceData();
-           
-            accountService.getAccountList()
-               .then(function (data) {
-
-                   $scope.Accounts = data;
-               });
-
-            transactionService.GetForProject($scope.PrjId)
-            .then(function (data) {
-                $scope.model.transactionList = data;
-             });
+            GetTransactionForProject();
+            GetActivitiesForProject();
+            GetAccountList();
 
         }, 10);
+
+
+        function GetAccountList() {
+            accountService.getAccountList()
+                .then(function (data) {
+
+                    $scope.Accounts = data;
+                });
+
+
+        }
+
+        function GetTransactionForProject() {
+
+            transactionService.GetForProject($scope.PrjId)
+                .then(function (data) {
+                    $scope.model.transactionList = data;
+                });
+        }
+
+
 
         function GetProjectData()
         {
@@ -346,9 +359,9 @@
         }
 
 
-        function GetActivitiesForProject(pid) {
+        function GetActivitiesForProject() {
           
-            activityService.GetActivitiesByProject(pid)
+            activityService.GetActivitiesByProject($scope.PrjId)
             .then(function (data) {
              
                 $scope.model.ActivityList = data;
