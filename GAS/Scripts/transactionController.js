@@ -70,6 +70,13 @@
             $scope.SelectUserForm = false;
         }
 
+        $scope.newTransferOpen = function () {
+            $scope.transfer_name = "";
+            $scope.transfer_amount = 0;
+            $scope.transfer_remark = "";
+            $scope.newTransfer = true;
+        }
+
         $scope.TransferUpdate = function () {
             $scope.transfer_progress = true;
             var date = new Date();
@@ -137,6 +144,13 @@
         }
 
 
+        $scope.ShowExternalOpen = function () {
+            $scope.external_name = "";
+            $scope.external_amount = 0;
+            $scope.external_Remarks = "";
+            $scope.ShowExternal = true;
+        }
+
         $scope.PayExternal = function ()
         {
             $scope.external_progress = true;
@@ -161,6 +175,14 @@
            AddTransaction(TranData);
         }
 
+
+        $scope.newSalaryOpen = function () {
+            $scope.employee_name = "";
+            $scope.salary_amount = 0;
+            $scope.salary_Remarks = "";
+            $scope.newSalary = true;
+        }
+
         $scope.PaySalary = function () {
             $scope.salary_progress = true;
             var date = new Date();
@@ -175,11 +197,17 @@
             AddTransaction(TranData);
         }
 
+        $scope.newAdvanceOpen = function () {
+            $scope.advance_name = "";
+            $scope.advance_amount = 0;
+            $scope.advance_Remarks = "";
+            $scope.newExpense = true;
+        }
+
         $scope.PayAdvance = function () {
             $scope.advance_progress = true;
             var date = new Date();
-
-
+        
             var advanceItem = {
                 ActivityID: $scope.ActivityID, AdvanceName: "Paid", RequestAmount: 0, ReceiveAmount: $scope.advance_amount,
                 AdvanceRemarks: $scope.advance_Remarks, CreationDate: date, SelectedRow: false, Status: "Paid",
@@ -285,7 +313,12 @@
               //  Array.prototype.push.apply($scope.AccountListFilter, data);
                 // $scope.AccountListFilter.Concat(data);
               //  $scope.selAccountFilter = $scope.AccountListFilter[0];
-
+                if(data.length>0)
+                    $scope.selFromAcc = data[0];
+                if (data.length>1)
+                    $scope.selToAcc = data[1];
+                else
+                    $scope.selToAcc = data[0];
             });
 
         }, 1000);

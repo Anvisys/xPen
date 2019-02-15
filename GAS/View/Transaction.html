@@ -35,10 +35,10 @@
             </div>
             <div class="col-sm-6">
                 <div class="row" style=" float:right;">
-                    <button type="button" class="btn btn-primary" ng-click="newSalary=true">Salary</button>
-                    <button type="button" class="btn btn-warning" ng-click="newTransfer=true">Add Transfer</button>
-                    <button type="button" class="btn btn-success" ng-click="newExpense=true;">Advance</button>
-                    <button type="button" class="btn btn-primary" ng-click="ShowExternal=true;">External Transaction</button>
+                    <button type="button" class="btn btn-primary" ng-click="newSalaryOpen()">Salary</button>
+                    <button type="button" class="btn btn-warning" ng-click="newTransferOpen()">Add Transfer</button>
+                    <button type="button" class="btn btn-success" ng-click="newAdvanceOpen()">Advance</button>
+                    <button type="button" class="btn btn-primary" ng-click="ShowExternalOpen()">External Transaction</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Name:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="transferName" tabindex="0" ng-model="transfer_name">
+                                        <input type="text" class="form-control" name="transferName" tabindex="1" ng-model="transfer_name"required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -113,35 +113,36 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">From Account:</label>
                                     <div class="col-sm-8">
-                                        <select tabindex="1" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                                        <select tabindex="2" class="form-control" name="Account" ng-model="selFromAcc" ng-options="FromAcc.AccountName for FromAcc in AccountList" required></select>
 
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">To Account:</label>
                                     <div class="col-sm-8">
-                                        <select tabindex="2" class="form-control" ng-model="selToAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                                        <select tabindex="3" class="form-control"name="ToAccount" ng-model="selToAcc" ng-options="ToAcc.AccountName for ToAcc in AccountList"required></select>
 
                                     </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-4 col-form-label">Amount:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="transferName" tabindex="0" ng-model="transfer_amount" required min-amount>
+                                            <input type="text" class="form-control" name="transferAmount" tabindex="4" ng-model="transfer_amount" required min-amount>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-4 col-form-label">Remark:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="transferName" tabindex="0" ng-model="transfer_remark" required text-length>
+                                            <input type="text" class="form-control" name="transferRemarks" tabindex="5" ng-model="transfer_remark" required text-length>
                                         </div>
                                     </div>
                             </form>
                         </div>
                         <div class="layout_modal_footer">
-                            <button type="button" class="btn btn-success" ng-click="TransferUpdate()" ng-disabled="Transfer.AccHolder.$invalid || Transfer.Amount.$invalid || Transfer.Remark.$invalid">Add</button>
+                            <button type="button" class="btn btn-success" tabindex="6" ng-click="TransferUpdate()" 
+                                    ng-disabled="Transfer.transferName.$invalid ||Transfer.Account.$invalid ||Transfer.ToAccount.$invalid || Transfer.transferAmount.$invalid || Transfer.transferRemarks.$invalid">Add</button>
                             &nbsp;&nbsp;
-                            <button type="button" class="btn btn-warning" ng-click="newTransfer=false">Close</button>
+                            <button type="button" tabindex="7" class="btn btn-warning" ng-click="newTransfer=false">Close</button>
                         </div>
                         <div ng-show="transfer_progress" class="loader_div">
                             <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
@@ -159,7 +160,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Name:</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" name="transferName" tabindex="0" type="text" ng-model="advance_name">
+                                        <input type="text" class="form-control" name="AdvanceName" tabindex="1" ng-model="advance_name" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -171,35 +172,36 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">From Account:</label>
                                     <div class="col-sm-6">
-                                        <select tabindex="1" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                                        <select tabindex="2" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
 
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">To Activity: :</label>
                                     <div class="col-sm-6">
-                                        {{ActivityName}} <button class="btn btn-link" ng-click="SelectActivity()">Select Activity</button>
+                                        {{ActivityName}} <button class="btn btn-link" tabindex="3" ng-click="SelectActivity()">Select Activity</button>
 
                                     </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-6 col-form-label">Amount:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" name="Amount" tabindex="0" ng-model="advance_amount" required min-amount>
+                                            <input type="text" class="form-control" name="AdvanceAmount" tabindex="4" ng-model="advance_amount" required min-amount>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-6 col-form-label">Remark:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" name="transferName" tabindex="5" ng-model="advance_Remarks" required text-length>
+                                            <input type="text" class="form-control" name="AdvanceRemarks" tabindex="5" ng-model="advance_Remarks" required >
                                         </div>
                                     </div>
                             </form>
                         </div>
                         <div class="layout_modal_footer">
-                            <button type="button" class="btn btn-success" ng-click="PayAdvance()" ng-disabled="Expense.AccHolder.$invalid || Expense.Amount.$invalid || Expense.Remark.$invalid">Add</button>
+                            <button type="button" class="btn btn-success"tabindex="6" ng-click="PayAdvance()" 
+                                    ng-disabled="Expense.AdvanceName.$invalid || Expense.AdvanceAmount.$invalid || Expense.AdvanceRemarks.$invalid">Add</button>
                             &nbsp;&nbsp;
-                            <button type="button" class="btn btn-warning" ng-click="newExpense=false">Close</button>
+                            <button type="button" class="btn btn-warning"tabindex="7" ng-click="newExpense=false">Close</button>
                         </div>
                         <div ng-show="advance_progress" class="loader_div">
                             <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
@@ -215,47 +217,47 @@
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">Employee</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="employeeName" tabindex="0" type="text" ng-model="employee_name">
+                                <input type="text" class="form-control" name="employeeName" tabindex="1"  ng-model="employee_name" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">Transaction Type:</label>
                             <div class="col-sm-6">
-                                <label class="form-control">Salary </label>
+                                <label tabindex="2" class="form-control">Salary </label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">From Account:</label>
                             <div class="col-sm-6">
-                                <select class="form-control" tabindex="2" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"></select>
+                                <select class="form-control" tabindex="3"name="Account"  ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"required></select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">Load On Project ?</label>
                             <div class="col-sm-6 form-inline">
-                                {{ProjectName}}<button class="btn btn-link" ng-click="SelectProject()">Select Project</button>
+                                {{ProjectName}}<button class="btn btn-link"tabindex="4" ng-click="SelectProject()">Select Project</button>
                            
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">Amount:</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="Amount" tabindex="4" ng-model="salary_amount">
+                                <input type="text" class="form-control" name="Amount" tabindex="5" ng-model="salary_amount" required min-amount>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-6 col-form-label">Remark:</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="Remark" tabindex="5" ng-model="salary_Remarks">
+                                <input type="text" class="form-control" name="Remark" tabindex="6" ng-model="salary_Remarks"required>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="layout_modal_footer">
                     <button type="button" class="btn btn-success" ng-click="PaySalary()" 
-                            ng-disabled="salary.AccHolder.$invalid || salary.Amount.$invalid || salary.Remark.$invalid">Add</button>
+                           tabindex="7" ng-disabled="salary.AccHolder.$invalid || salary.Amount.$invalid || salary.employeeName.$invalid ||salary.Account.$invalid || salary.Remark.$invalid">Add</button>
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-warning" ng-click="newSalary=false">Close</button>
+                    <button type="button" class="btn btn-warning"tabindex="8" ng-click="newSalary=false">Close</button>
                 </div>
                 <div ng-show="salary_progress" class="loader_div">
                     <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
@@ -305,7 +307,7 @@
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-5 col-form-label">Name:</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" name="transferName" tabindex="0"  ng-model="external_name">
+                                <input type="text" class="form-control" name="transferName" tabindex="1"  ng-model="external_name"required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -319,27 +321,28 @@
                         <div class="form-group row">
                             <label for="colFormLabel" class="col-sm-5 col-form-label">Account:</label>
                             <div class="col-sm-7">
-                                <select tabindex="1" class="form-control" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList">></select>
+                                <select tabindex="2" class="form-control" ng-model="selAcc" ng-options="acc.AccountName for acc in AccountList">></select>
                             </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabel" class="col-sm-5 col-form-label">Amount:</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="Amount" tabindex="0" ng-model="external_amount" required min-amount>
+                                    <input type="text" class="form-control" name="Amount" tabindex="3" ng-model="external_amount" required min-amount>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="colFormLabel" class="col-sm-5 col-form-label">Remark:</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="Remark" tabindex="5" ng-model="external_Remarks" required text-length>
+                                    <input type="text" class="form-control" name="Remark" tabindex="4" ng-model="external_Remarks" required >
                                 </div>
                             </div>
                     </form>
                 </div>
                 <div class="layout_modal_footer">
-                    <button type="button" class="btn btn-success" ng-click="PayExternal()" ng-disabled="newExternal.AccHolder.$invalid || newExternal.Amount.$invalid || newExternal.Remark.$invalid">Add</button>
+                    <button type="button" class="btn btn-success"tabindex="5" ng-click="PayExternal()" 
+                            ng-disabled="newExternal.transferName.$invalid || newExternal.Amount.$invalid || newExternal.Remark.$invalid">Add</button>
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-warning" ng-click="ShowExternal=false">Close</button>
+                    <button type="button" class="btn btn-warning"tabindex="6" ng-click="ShowExternal=false">Close</button>
                 </div>
                 <div ng-show="external_progress" class="loader_div">
                     <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />

@@ -283,6 +283,13 @@
                 });
         }
 
+        $scope.NewActivityForm = function () {
+            $scope.model.activity_name = "";
+            $scope.model.activity_remarks = "";
+
+            $scope.model.NewActivityForm = true;
+        }
+
         $scope.AddActivity = function()
         {
             $scope.newActivity_progress = true;
