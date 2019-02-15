@@ -17,6 +17,8 @@
         $scope.IGST = 0;
         $scope.TDS = 0;
         $scope.model = {};
+        $scope.receive_date = new Date();
+        $scope.pinvoice_date = new Date();
         $scope.model.trans_date = new Date();
        
   
@@ -32,6 +34,19 @@
         $scope.filterBytype = function (Trans) {
             return ($scope.selectedTypes.indexOf(Trans.TransType) !== -1);
         };
+        $scope.newSaleInvoiceDivOpen = function () {
+            $scope.model.newSalesInvoiceDiv = true;
+            $scope.vendor_name = "";
+            $scope.invoice_number = "";
+            $scope.work_cost = 0;
+            $scope.CGST = 0;
+            $scope.SGST = 0;
+            $scope.IGST = 0;
+            $scope.TDS = 0;
+            $scope.receive_date = new Date();
+            $scope.project_description = "";
+        }
+
 
         $scope.AddSellInvoice = function ()
         {
@@ -51,7 +66,7 @@
                     $scope.SGST = 0;
                     $scope.IGST = 0;
                     $scope.TDS = 0;
-
+                
                     $scope.model.newInvoiceDiv = false;
                     GetInvoiceData();
                 }
@@ -62,6 +77,20 @@
             });
 
 
+        }
+
+
+        $scope.newPurchaseInvoiceDivOpen = function () {
+            $scope.model.newPurchaseInvoiceDiv = true;
+            $scope.vendor_name = "";
+            $scope.pinvoice_number = "";
+            $scope.pwork_cost = 0;
+            $scope.pCGST = 0;
+            $scope.pSGST = 0;
+            $scope.pIGST = 0;
+            $scope.pTDS = 0;
+            $scope.pinvoice_date = new Date();
+            $scope.project_description = "";
         }
 
         $scope.AddPurchaseInvoice= function()
@@ -101,7 +130,7 @@
            // alert(invoice);
             $scope.selInvoice = invoice;
             $scope.newReceivePaymentDiv = true;
-
+            $scope.trans_remarks = "";
             $scope.received_cost = invoice.ServiceCost;
             $scope.received_GST = invoice.IGST + invoice.CGST + invoice.SGST;
             $scope.received_TDS = invoice.TDS;
@@ -184,10 +213,18 @@
              });
 
         }
+        $scope.makePayment = function (invoice) {
+            $scope.selInvoice = invoice;
+            $scope.newMakePaymentDiv = true;
+            $scope.paid_cost = 0;
+            $scope.payment_Remarks = "";
+        }
 
         $scope.makePayment = function (invoice) {
             $scope.selInvoice = invoice;
             $scope.newMakePaymentDiv = true;
+            $scope.paid_cost = 0;
+            $scope.payment_Remarks = "";
         }
 
         $scope.Pay = function () {
