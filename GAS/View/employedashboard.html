@@ -101,7 +101,7 @@
                     </div>
                     <div class="panel-body zero_all">
                          <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
-                                                chart-data="chartdata" chart-labels="labels" chart-options="accOptions"
+                                                chart-data="dailyExpenseData" chart-labels="labels" chart-options="accOptions"
                                                 chart-series="series" style="max-height:180px;"></canvas>
                     </div>
                 </div>
@@ -114,8 +114,10 @@
 
                     <div class="container1">
                         <h4><b>Last 2 Expense</b></h4>
-                        <p>Railway ticket <b>Rs750</b>  28/01/2019</p>
-                        <p>Hotel Booking <b>Rs1750 </b> 28/01/2019</p>
+                        <div ng-repeat="ex in latestExpenses">
+                            <p>{{ex.ItemName}} <b>{{ex.ExpenseAmount}}</b>  {{ex.ExpenseDate | date:"mediumDate"}}</p>
+                          
+                        </div>
 
                     </div>
                 </div>
@@ -124,24 +126,14 @@
             <div class="col-sm-8">
                 <div class="card mb-5">
                     <div class="container1">
-                        <h4><b>Active project</b></h4>
+                        <h4>
+                            <b>Active project</b> : {{ActiveProjectsCount}}</h4>
                         <div class="row">
-                            <div class="col-xs-3">
-                                <p>Project Name</p>
-                                <h4>CCTV</h4>
-                            </div>
-                            <div class="col-xs-3">
-                                <p>Client Name</p>
-                                <h4> BHEL</h4>
-                            </div>
-                            <div class="col-xs-3">
-                                <p>Project Number</p>
-                                <h4> CCTV/03</h4>
-                            </div>
-                            <div class="col-xs-3">
-                                <p>Strat Date</p>
-                                <h4> May 10, 2018</h4>
-                            </div>
+                            <div class="col-xs-6" ng-repeat="prj in ActiveProjects" >
+                                <p><b>Project: </b>{{prj.ProjectName}}, <b>Owner:</b> {{prj.ProjectManager}} </p>
+
+</div>
+                           
                         </div>
                     </div>
                 </div>

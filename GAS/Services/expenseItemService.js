@@ -93,8 +93,8 @@
         }
 
         function getExpenseDataForEmployee(id) {
-            return $http.get($rootScope.APIUrl + '/api/ExpenseItem/Employee/' + id)
-            .then(returnData, handleError('Error getting Accounts'));
+            return $http.get($rootScope.APIUrl + '/api/ExpenseItem/'+ $rootScope.OrgID+'/Employee/' + id)
+            .then(returnData, handleError('Error getting ExpenseItems'));
         }
 
         function getDailyOrganizationExpense()

@@ -29,7 +29,7 @@
 
         }
         function getDailyExpense(PrjId) {
-            return $http.get($rootScope.APIUrl + 'api/DailyExpense/Project/'  + PrjId)
+            return $http.get($rootScope.APIUrl + 'api/ExpenseItem/Project/'  + PrjId)
              .then(returnData, handleError('Error getting Accounts'));
         }
 

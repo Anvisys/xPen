@@ -11,16 +11,16 @@
 
         service.getExpenseByEmpStatus = getExpenseByEmpStatus;
         service.getActiveProjects = getActiveProjects;
-
+        service.getTodayExpense = getTodayExpense;
         return service;
 
         function getExpenseByEmpStatus(EmpID) {
-            return $http.get($rootScope.APIUrl + '/api/Dashboard/Organization/' + $rootScope.OrgID + '/Employee/' + EmpID)
+            return $http.get($rootScope.APIUrl + '/api/Dashboard/UnpaidExpense/' + $rootScope.OrgID + '/Employee/' + EmpID)
                 .then(handleSuccess, handleError('Error getting Accounts'));
         }
 
         function getActiveProjects(EmpID) {
-            return $http.get($rootScope.APIUrl + '/api/Dashboard/Organization/' + $rootScope.OrgID + '/Employee/' + EmpID)
+            return $http.get($rootScope.APIUrl + '/api/Dashboard/Running/' + $rootScope.OrgID + '/Employee/' + EmpID)
                 .then(handleSuccess, handleError('Error getting Accounts'));
         }
 
