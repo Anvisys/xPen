@@ -10,6 +10,10 @@
         $scope.SubmittedCount = 0;
         $scope.ApprovedCount = 0;
         $scope.TodayExpense = 0;
+        $scope.Receivable = 0;
+        $scope.ReceivedAmount = 0;
+        $scope.Payable = 0;
+        $scope.PaidAmount = 0;
 
         $scope.ActiveProjectsCount = 0;
         $scope.ActiveProjects = [{}];
@@ -21,6 +25,12 @@
 
             GetDayWiseExpense();
             GetLatestExpenses();
+
+
+            // Manager Function
+            GetIPExpenseForManager();
+            GetIPSalesForManager();
+            GetIPPurchaseForManager();
 
         }, 10);
 
@@ -91,9 +101,90 @@
         
             expenseItemService.getExpenseDataForEmployee($rootScope.UserId)
                 .then(function (data) {
-                    alert(JSON.stringify(data));
+                 
                     $scope.latestExpenses = data.$values;
 
+                });
+        }
+
+        function GetIPExpenseForManager() {
+
+            dashboardService.getExpenseByManagerStatus($rootScope.UserId)
+                .then(function (data) {
+                 
+                    for (var i = 0; i < data.length; i++) {
+
+                        if (data[i].Status === 'Added') {
+                            $scope.IPMgrValue = data[i].ExpenseAmount;
+                            $scope.IPMgrCount = data[i].ActivityCount;
+
+                        }
+                        else if (data[i].Status === 'Submitted') {
+                            $scope.SubmittedMgrValue = data[i].ExpenseAmount;
+                            $scope.SubmittedMgrCount = data[i].ActivityCount;
+                        }
+                        else if (data[i].Status === 'Approved') {
+                            $scope.ApprovedMgrValue = data[i].ExpenseAmount;
+                            $scope.ApprovedMgrCount = data[i].ActivityCount;
+                        }
+
+                    }
+
+                });
+
+        }
+
+        function GetTodayExpenseForManager() {
+
+            getTodayExpenseForManager(EmpID) 
+
+            dashboardService.getTodayExpenseForManager($rootScope.UserId)
+                .then(function (data) {
+                    alert(JSON.stringify(data));
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        if (data[i].Status === 'Added') {
+                            $scope.IPMgrValue = data[i].ExpenseAmount;
+                            $scope.IPMgrCount = data[i].ActivityCount;
+
+                        }
+                        else if (data[i].Status === 'Submitted') {
+                            $scope.SubmittedMgrValue = data[i].ExpenseAmount;
+                            $scope.SubmittedMgrCount = data[i].ActivityCount;
+                        }
+                        else if (data[i].Status === 'Approved') {
+                            $scope.ApprovedMgrValue = data[i].ExpenseAmount;
+                            $scope.ApprovedMgrCount = data[i].ActivityCount;
+                        }
+
+                    }
+                });
+
+        }
+
+        function GetIPSalesForManager() {
+            dashboardService.getIPSalesForManager($rootScope.UserId,100)
+                .then(function (data) {
+                   
+                    for (var i = 0; i < data.length; i++) {
+                        $scope.Receivable = $scope.Receivable + data[i].Receivable;
+                        $scope.ReceivedAmount = $scope.ReceivedAmount + data[i].ReceivedAmount;
+
+                        console.log(data[i].Receivable);
+                        console.log($scope.Receivable);
+                    }
+                });
+        }
+
+        function GetIPPurchaseForManager() {
+            dashboardService.getIPPurchaseForManager($rootScope.UserId,100)
+                .then(function (data) {
+                   
+                    for (var i = 0; i < data.length; i++) {
+                        $scope.Payable = $scope.Payable + data[i].Payable;
+                        $scope.PaidAmount = $scope.PaidAmount + data[i].PaidAmount;
+                    }
                 });
         }
 

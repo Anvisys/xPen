@@ -91,7 +91,7 @@
             })
             .when("/managerdashboard", {
                 templateUrl: 'GAS/View/managerdashboard.html',
-                controller: 'userTransactionCtrl'
+                controller: 'dashboardCtrl'
             })
         .otherwise({ redirectTo: '/activity' });
     });
