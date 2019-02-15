@@ -18,10 +18,10 @@
                         <div class="row">
                             <div class="col-xs-8">
                                 <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
-                                <p>Number of Activity:5</p>
+                                <p>Number of Activity:{{IPMgrCount}}</p>
                             </div>
                             <div class="col-xs-4">
-                                <p>Amount:<h4><b>Rs4500</b></h4></p>
+                                <p>Amount:<h4><b>{{IPMgrValue| currency : "&#8377" : 2}}</b></h4></p>
                             </div>
                         </div>
 
@@ -39,10 +39,10 @@
                         <div class="row">
                             <div class="col-xs-8">
                                 <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
-                                <p>Number of Activity:7</p>
+                                <p>Number of Activity:{{SubmittedMgrCount}}</p>
                             </div>
                             <div class="col-xs-4">
-                                <p>Amount:<h4><b>Rs7500</b></h4></p>
+                                <p>Amount:<h4><b>{{SubmittedMgrValue|currency : "&#8377" : 2}}</b></h4></p>
                             </div>
                         </div>
 
@@ -58,10 +58,10 @@
                         <div class="row">
                             <div class="col-xs-8">
                                 <h4 style="color: #4caf50;"><b>Approved Expense</b></h4>
-                                <p>Number of Activity:4</p>
+                                <p>Number of Activity:{{ApprovedMgrCount}}</p>
                             </div>
                             <div class="col-xs-4">
-                                <p>Amount:<h4><b>Rs2500</b></h4></p>
+                                <p>Amount:<h4><b>{{ApprovedMgrValue|currency : "&#8377" : 2}}</b></h4></p>
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
 
             <div class="col-sm-4">
                 <div class="card-header">Payment (Sale)</div>
-                <div class="shadow mb-5 bg-c1 p-3 rounded" style="height:122px;">Payable Amount (Purchase):<h4> Rs71000</h4></div>
+                <div class="shadow mb-5 bg-c1 p-3 rounded" style="height:122px;">Receivable Amount (Purchase):<h4>{{Receivable - ReceivedAmount|currency : "&#8377" : 2}}</h4></div>
 
             </div>
             <div class="col-sm-4 ">
@@ -84,7 +84,7 @@
                 <div class="shadow mb-5 p-3 rounded bg-c2" style="height:122px;">
 
 
-                    Receivable Amount (Invoices):<h4> Rs200000</h4>
+                    Payble Amount (Invoices):<h4> {{Payable - PaidAmount |currency : "&#8377" : 2}}</h4>
                     <h4 class="due">Due: <b>Rs20000</b></h4>
                 </div>
 
