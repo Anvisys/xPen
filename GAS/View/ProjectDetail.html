@@ -73,7 +73,7 @@
                     <div class="row">
 
                         <div class="col-xs-12 " style="margin:10px;">
-                            <div class="data_header" style="text-align:center;">  Sale <span class="fa fa-plus" title="Create Invoice" ng-click="model.newInvoiceDiv= true" style="margin-left:20px;"></span></div>
+                            <div class="data_header" style="text-align:center;">  Sale <span class="fa fa-plus" title="Create Invoice" ng-click="newSaleInvoiceDivOpen()" style="margin-left:20px;"></span></div>
                             <div class="customLayout" style="max-height:300px;overflow:scroll;">
                                 <table ng-init="sellItems = {}" style="max-height:250px; overflow:scroll; width:100%;">
                                     <tr>
@@ -140,7 +140,7 @@
                     <div class="row">
 
                         <div class="col-xs-12" style="margin-top:10px;">
-                            <div class="data_header" style="text-align:center;">  Purchase <span class="fa fa-plus" title="Enter Invoice" ng-click="model.newPurchaseInvoiceDiv= true" style="margin-left:20px;"></span></div>
+                            <div class="data_header" style="text-align:center;">  Purchase <span class="fa fa-plus" title="Enter Invoice" ng-click="newPurchaseInvoiceDivOpen()" style="margin-left:20px;"></span></div>
                             <div class="customLayout" style="max-height:300px;overflow:scroll;">
                                 <table ng-init="purchaseItems={}" style="max-height:250px; overflow:scroll; width:100%;">
                                     <tr>
@@ -442,10 +442,10 @@
         </div>
 
 
-        <div id="newInvoiceModal" ng-show="model.newInvoiceDiv" class="layout_modal_Window">
+        <div id="newInvoiceModal" ng-show="model.newSalesInvoiceDiv" class="layout_modal_Window">
             <div class="layout_modal_Content" style="width:590px;">
                 <div class="layout_modal_header">
-                    New Invoice <span ng-click="model.newInvoiceDiv=false" title="Close" class="fa fa-close"></span>
+                    New Sales Invoice <span ng-click="model.newSalesInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
                     <form name="NewInvoice">
@@ -583,7 +583,7 @@
                         Add
                     </button> &nbsp;&nbsp;
 
-                    <button class="btn btn-warning" ng-click="model.newInvoiceDiv= false">Cancel</button>
+                    <button class="btn btn-warning" ng-click="model.newSalesInvoiceDiv= false">Cancel</button>
                 </div>
                 <div ng-show="project_progress" class="loader_div">
                     <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
@@ -675,124 +675,109 @@
                     Purchase Invoice <span ng-click="model.newPurchaseInvoiceDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
-                    <form name ="PurchaseInvoice">
+                    <form name="PurchaseInvoice">
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="row">
+                                
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Project Name:</label>
                                     <div class="col-sm-6">
                                         <label><b>{{Project.ProjectName}}</b></label>
                                     </div>
-                                </div>
+                               
                             </div>
                             <div class="col-sm-6">
-                                <div class=" row">
+                               
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Project Number</label>
                                     <div class="col-sm-6">
                                         <label><b>{{Project.ProjectNumber}}</b></label>
                                     </div>
+                               
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="VenderName" class="form-control" tabindex="1" ng-model="vendor_name" required>
                                 </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice No:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="InvNumber" class="form-control" tabindex="2" ng-model="pinvoice_number" required>
+                                </div>
+
                             </div>
                         </div>
                         <div class="row">
+
                             <div class="col-sm-6">
-                                <div class="row">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="VenderName" class="form-control" tabindex="1" ng-model="vendor_name" required>
-                                    </div>
+
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Cost</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="cost" class="form-control" tabindex="3" ng-model="pwork_cost" required>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="row">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" name="itemDate" tabindex="4" ng-model="pinvoice_date" required />
+                                </div>
+                            </div>
+                        </div>
 
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Cost</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="cost" class="form-control" tabindex="2" ng-model="pwork_cost" required>
-                                    </div>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">SGST</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="sgst" class="form-control" tabindex="5" ng-model="pSGST" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6"tyle="padding: 8px 15px;">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">CGST</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="cgst" class="form-control" tabindex="6" ng-model="pCGST" required>
                                 </div>
                             </div>
 
                         </div>
+
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice No:</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="InvNumber" class="form-control" tabindex="3" ng-model="pinvoice_number" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
-                                    <div class="col-sm-8">
-                                        <input type="date" class="form-control" name="itemDate" tabindex="4" ng-model="pinvoice_date" required />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">SGST</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="sgst" class="form-control" tabindex="5" ng-model="pSGST" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class=" row">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">IGST</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="igst" class="form-control" tabindex="6" ng-model="pIGST" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6" style="padding: 8px 15px;">
-                                <div class="row">
-
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">TDS</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="tds" class="form-control" tabindex="7" ng-model="pTDS"required>
-                                    </div>
+                            <div class="col-sm-6"style="padding: 8px 15px;">
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">IGST</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="igst" class="form-control" tabindex="7" ng-model="pIGST" required>
                                 </div>
                             </div>
                             <div class="col-sm-6" style="padding: 8px 15px;">
-                                <div class="row">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">CGST</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="cgst" class="form-control" tabindex="8" ng-model="pCGST"required>
-                                    </div>
+                                <label for="colFormLabel" class="col-sm-4 col-form-label">TDS</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="tds" class="form-control" tabindex="8" ng-model="pTDS" required>
                                 </div>
                             </div>
-
                         </div>
+                       
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="row">
-
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Description</label>
                                     <div class="col-sm-8">
                                         <input type="text" name="Discription" class="form-control" tabindex="9" ng-model="project_description" required>
                                     </div>
-                                </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="row">
                                     <label for="colFormLabel" class="col-sm-8 col-form-label">Grand Total:</label>
                                     <div class="col-sm-4">
                                         <label>{{pwork_cost+pCGST+pSGST+pIGST | currency : "&#8377" : 2}}</label>
                                     </div>
-                                </div>
                             </div>
-
                         </div>
+
                     </form>
                 </div>
                 <div class="layout_modal_footer">
@@ -808,7 +793,7 @@
         </div>
 
         <div id="newMakePaymentModal" ng-show="newMakePaymentDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="height:200px;width:600px;">
+            <div class="layout_modal_Content" style="height:250px;width:675px;">
                 <div class="layout_modal_header">
                     Purchase Invoice <span ng-click="newMakePaymentDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
@@ -825,6 +810,35 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Cost Paid</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="cost" class="form-control" tabindex="1" ng-model="paid_cost" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Account name</label>
+                                    <div class="col-sm-8">
+                                        <select tabindex="2" class="form-control" name="Account" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Remarks</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="remarks" class="form-control" tabindex="3" ng-model="payment_Remarks" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice date</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" name="itemDate" class="form-control" tabindex="4" ng-model="receive_date" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="row">
 
                                 <div class="col-xs-6">
                                     <label style="width:100px;">Cost Paid</label>
@@ -844,7 +858,7 @@
                                     <label style="width:100px;">Invoice date</label>
                                     <input style="width:130px;" type="date" name="itemDate" ng-model="receive_date" required />
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
                     </form>
