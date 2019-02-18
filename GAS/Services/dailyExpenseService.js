@@ -11,6 +11,7 @@
 
         service.getDailyExpenseForOrganizaion = getDailyExpenseForOrganizaion;
         service.getDailyExpenseForProject = getDailyExpenseForProject;
+        service.getDailyExpenseForManager = getDailyExpenseForManager;
         service.getDailyExpenseForEmployee = getDailyExpenseForEmployee;
         return service;
 
@@ -21,6 +22,11 @@
 
         function getDailyExpenseForProject(PrjId) {
             return $http.get($rootScope.APIUrl + '/api/DailyExpense/Project/' + PrjId)
+                .then(handleSuccess, handleError('Error getting DailyExpense'));
+        }
+
+        function getDailyExpenseForManager(EmpID) {
+            return $http.get($rootScope.APIUrl + '/api/DailyExpense/' + $rootScope.OrgID + '/Manager/' + EmpID)
                 .then(handleSuccess, handleError('Error getting DailyExpense'));
         }
 

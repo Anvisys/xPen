@@ -16,15 +16,17 @@
         service.getTodayExpenseForManager = getTodayExpenseForManager;
         service.getIPSalesForManager = getIPSalesForManager;
         service.getIPPurchaseForManager = getIPPurchaseForManager;
+        service.getIPSalesForAdmin = getIPSalesForAdmin;
+        service.getIPPurchaseForAdmin = getIPPurchaseForAdmin;
         return service;
 
         function getExpenseByEmpStatus(EmpID) {
-            return $http.get($rootScope.APIUrl + '/api/Dashboard/UnpaidExpense/' + $rootScope.OrgID + '/Employee/' + EmpID)
+            return $http.get($rootScope.APIUrl + 'api/Dashboard/UnpaidExpense/' + $rootScope.OrgID + '/Employee/' + EmpID)
                 .then(handleSuccess, handleError('Error getting Accounts'));
         }
 
         function getExpenseByManagerStatus(EmpID) {
-            return $http.get($rootScope.APIUrl + '/api/Dashboard/UnpaidExpense/' + $rootScope.OrgID + '/Manager/' + EmpID)
+            return $http.get($rootScope.APIUrl + 'api/Dashboard/UnpaidExpense/' + $rootScope.OrgID + '/Manager/' + EmpID)
                 .then(handleSuccess, handleError('Error getting Accounts'));
         }
 
@@ -46,14 +48,28 @@
 
 
         function getIPSalesForManager(EmpID, Margin) {
-            return $http.get($rootScope.APIUrl + '/api/dashboard/IPSalesInvoice/' + $rootScope.OrgID + '/Employee/' + EmpID + "/" + Margin)
+            return $http.get($rootScope.APIUrl + 'api/dashboard/IPSalesInvoice/' + $rootScope.OrgID + '/Employee/' + EmpID + "/" + Margin)
                 .then(handleSuccess, handleError('Error getting SalesData'));
         }
 
         function getIPPurchaseForManager(EmpID, Margin) {
-            return $http.get($rootScope.APIUrl + '/api/dashboard/IPPurchaseInvoice/' + $rootScope.OrgID + '/Employee/' + EmpID + "/" + Margin)
+            return $http.get($rootScope.APIUrl + 'api/dashboard/IPPurchaseInvoice/' + $rootScope.OrgID + '/Employee/' + EmpID + "/" + Margin)
                 .then(handleSuccess, handleError('Error getting PurchaseData'));
         }
+
+
+
+        function getIPSalesForAdmin(Margin) {
+            return $http.get($rootScope.APIUrl + 'api/dashboard/IPSalesInvoice/' + $rootScope.OrgID  + "/" + Margin)
+                .then(handleSuccess, handleError('Error getting SalesData'));
+        }
+
+        function getIPPurchaseForAdmin(Margin) {
+            return $http.get($rootScope.APIUrl + 'api/dashboard/IPPurchaseInvoice/' + $rootScope.OrgID  + "/" + Margin)
+                .then(handleSuccess, handleError('Error getting PurchaseData'));
+        }
+
+
 
         function handleSuccess(res) {
 

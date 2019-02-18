@@ -14,7 +14,9 @@
         $scope.ReceivedAmount = 0;
         $scope.Payable = 0;
         $scope.PaidAmount = 0;
-
+        $scope.MgrAdded = 0;
+        $scope.MgrSubmitted = 0;
+        $scope.MgrApproved = 0;
         $scope.ActiveProjectsCount = 0;
         $scope.ActiveProjects = [{}];
 
@@ -31,6 +33,11 @@
             GetIPExpenseForManager();
             GetIPSalesForManager();
             GetIPPurchaseForManager();
+            GetTodayExpenseForManager();
+            GetDayWiseExpenseForManager();
+
+
+         
 
         }, 10);
 
@@ -38,9 +45,7 @@
            
             dashboardService.getExpenseByEmpStatus($rootScope.UserId)
                 .then(function (data) {
-                       
-
-                    for (var i = 0; i < data.length; i++) {
+                     for (var i = 0; i < data.length; i++) {
                       
                         if (data[i].Status === 'Added'  ) {
                             $scope.IPValue = data[i].ExpenseAmount;
@@ -81,21 +86,17 @@
             $scope.labels = [];
             dailyExpenseService.getDailyExpenseForEmployee($rootScope.UserId)
                 .then(function (data) {
-                  
-
-                   // $scope.dailyExpenseData = data.$values;
+                         // $scope.dailyExpenseData = data.$values;
 
                     for (i = 0; i < data.length; i++) {
                         Expense.push(data[i].ExpenseAmount);
                         Received.push(data[i].ReceiveAmount);
                         $scope.labels.push(new Date(data[i].ExpenseDate).getDate());
-
                     }
-
                     $scope.dailyExpenseData = [Expense, Received];
-
                 });
         }
+
 
         function GetLatestExpenses() {
         
@@ -133,29 +134,25 @@
                 });
 
         }
-
+        
         function GetTodayExpenseForManager() {
-
-            getTodayExpenseForManager(EmpID) 
 
             dashboardService.getTodayExpenseForManager($rootScope.UserId)
                 .then(function (data) {
-                    alert(JSON.stringify(data));
-
+                  
                     for (var i = 0; i < data.length; i++) {
 
                         if (data[i].Status === 'Added') {
-                            $scope.IPMgrValue = data[i].ExpenseAmount;
-                            $scope.IPMgrCount = data[i].ActivityCount;
-
+                            $scope.MgrAdded = data[i].ExpenseAmount;
+                           
                         }
                         else if (data[i].Status === 'Submitted') {
-                            $scope.SubmittedMgrValue = data[i].ExpenseAmount;
-                            $scope.SubmittedMgrCount = data[i].ActivityCount;
+                            $scope.MgrSubmitted = data[i].ExpenseAmount;
+                         
                         }
                         else if (data[i].Status === 'Approved') {
-                            $scope.ApprovedMgrValue = data[i].ExpenseAmount;
-                            $scope.ApprovedMgrCount = data[i].ActivityCount;
+                            $scope.MgrApproved = data[i].ExpenseAmount;
+                       
                         }
 
                     }
@@ -171,22 +168,53 @@
                         $scope.Receivable = $scope.Receivable + data[i].Receivable;
                         $scope.ReceivedAmount = $scope.ReceivedAmount + data[i].ReceivedAmount;
 
-                        console.log(data[i].Receivable);
-                        console.log($scope.Receivable);
                     }
                 });
         }
 
         function GetIPPurchaseForManager() {
+
+            $scope.DueAmount = 0;
+
             dashboardService.getIPPurchaseForManager($rootScope.UserId,100)
                 .then(function (data) {
-                   
+                    console.log(JSON.stringify(data));
                     for (var i = 0; i < data.length; i++) {
                         $scope.Payable = $scope.Payable + data[i].Payable;
                         $scope.PaidAmount = $scope.PaidAmount + data[i].PaidAmount;
+                        var invDate = new Date(data[i].InvoiceDate);
+                        var date = new Date(new Date().getTime() - 7*24*60*60);
+                        
+
+                        if (invDate > date) {
+                            $scope.DueAmount = $scope.DueAmount + data[i].Payable;
+                        }
                     }
                 });
         }
+
+        function GetDayWiseExpenseForManager() {
+         
+            var mgrExpense = [];
+            var mgReceived = [];
+            $scope.Mgrlabels = [];
+            dailyExpenseService.getDailyExpenseForManager($rootScope.UserId)
+                .then(function (data) {
+                  
+                    for (i = 0; i < data.length; i++) {
+                     
+                        mgrExpense.push(data[i].ExpenseAmount);
+                        mgReceived.push(data[i].ReceiveAmount);
+                        $scope.Mgrlabels.push(new Date(data[i].ExpenseDate).getDate());
+
+                    }
+
+                    $scope.dailyMgrExpenseData = [mgrExpense, mgReceived];
+
+                });
+        }
+
+       
 
     })
 

@@ -107,7 +107,7 @@
                 ActivityName: $scope.expense_name, EmployeeID: $scope.selectedUserID,
                 ProjectID: $scope.activity_Project.ProjectID, CreatedBy: $rootScope.UserId,
                 ActivityDescription: $scope.expense_remarks, CreationDate: date, ExpenseAmount: $scope.expense_amount,
-                ActivityStatus: "Submited", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
+                ActivityStatus: "Quick", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
             };
 
             activityService.CreateActivity(Activity)

@@ -85,14 +85,14 @@
 
 
                     Payble Amount (Invoices):<h4> {{Payable - PaidAmount |currency : "&#8377" : 2}}</h4>
-                    <h4 class="due">Due: <b>Rs20000</b></h4>
+                    <h4 class="due">Due: <b>{{DueAmount  |currency : "&#8377" : 2}}</b></h4>
                 </div>
 
             </div>
 
             <div class="col-sm-4">
                 <div class="card-header">Project Alert</div>
-                <div class="shadow p-3 mb-5 bg-c4 rounded" style="height:122px;">
+                <div class="shadow p-3 mb-5 bg-c4 rounded" style="height:122px;color:red">
                     <h4>Project: NBSZ App</h4><h4 class="blink_me"> Expense overbudget</h4>
                 </div>
             </div>
@@ -102,19 +102,20 @@
         <div class="row">
 
             <div class="col-sm-4 ">
-                <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> Rs12000</h4></div>
-                <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> Rs14000</h4> </div>
+                <div class="shadow p-3 mb-5 bg-c1 rounded"  >Today Expense:<h4> {{MgrAdded +MgrSubmitted + MgrApproved |currency : "&#8377" : 2}}</h4></div>
+                <div class="shadow p-3 mb-5 bg-c2 rounded" >Today Approved amount:<h4> {{MgrApproved |currency : "&#8377" : 2}}</h4> </div>
 
 
             </div>
             <div class="col-sm-8">
-                <div class="shadow" style="height:200px;background-image:url('Images/Icon/graph.jpg');">
+                <div class="shadow" style="height:200px;">
                     <div class="panel-heading" style="background-color:#FFC107;">
                         Daily Expense
                     </div>
                     <div class="panel-body zero_all">
-                        <img src="" />
-
+                        <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                chart-data="dailyMgrExpenseData" chart-labels="Mgrlabels" chart-options="accOptions"
+                                chart-series="series" style="max-height:180px;"></canvas>
                     </div>
                 </div>
             </div>
