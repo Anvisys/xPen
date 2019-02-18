@@ -1,14 +1,19 @@
 ﻿(function () {
 
     var app = angular.module("gas");
-    app.controller("mainCtrl", function (accountService, transactionService, expenseItemService, invoiceService,taxService, $timeout, $scope, $rootScope, $cookies) {
+    app.controller("mainCtrl", function (accountService, transactionService, expenseItemService,dashboardService, invoiceService,taxService, $timeout, $scope, $rootScope, $cookies) {
 
         $scope.AccountList = [];
         $scope.ActivitySummary = [];
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
-
+        $scope.GST_Paid = 0;
         $scope.CurrentMonth = new Date();
+        $scope.Receivable = 0;
+        $scope.ReceivedAmount = 0;
+        $scope.Payable = 0;
+        $scope.PaidAmount = 0;
+
 
             $timeout(function () {
                 GetAccountList();
@@ -23,6 +28,8 @@
 
                 GetTransaction();
 
+                GetIPSalesForAdmin();
+                GetIPPurchaseForAdmin();
             }, 10);
 
 
@@ -209,7 +216,7 @@
 
 
         function GetTaxData() {
-
+            $scope.TDS_Paid = 0;
             taxService.GetLastTDS()
             .then(function (data) {
               
@@ -263,6 +270,38 @@
 
                 });
 
+        }
+
+        function GetIPSalesForAdmin() {
+            dashboardService.getIPSalesForAdmin( 100)
+                .then(function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        $scope.Receivable = $scope.Receivable + data[i].Receivable;
+                        $scope.ReceivedAmount = $scope.ReceivedAmount + data[i].ReceivedAmount;
+
+                    }
+                });
+        }
+
+        function GetIPPurchaseForAdmin() {
+
+            $scope.DueAmount = 0;
+
+            dashboardService.getIPPurchaseForAdmin( 100)
+                .then(function (data) {
+                    console.log(JSON.stringify(data));
+                    for (var i = 0; i < data.length; i++) {
+                        $scope.Payable = $scope.Payable + data[i].Payable;
+                        $scope.PaidAmount = $scope.PaidAmount + data[i].PaidAmount;
+                        var invDate = new Date(data[i].InvoiceDate);
+                        var date = new Date(new Date().getTime() - 7 * 24 * 60 * 60);
+
+                        if (invDate > date) {
+                            $scope.DueAmount = $scope.DueAmount + data[i].Payable;
+                        }
+                    }
+                });
         }
 
     });
