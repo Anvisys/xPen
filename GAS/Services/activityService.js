@@ -158,7 +158,7 @@
 
 
         function handleSuccess(res) {
-           
+            alert(JSON.stringify(res));
             return res.data.$values;
         }
 

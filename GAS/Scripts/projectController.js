@@ -171,7 +171,7 @@
                 ProjectID: $scope.ProjectID
             };
 
-            // alert(JSON.stringify(data));
+        console.log(JSON.stringify(data));
             projectService.UpdateStatus(data)
             .then(function (res) {
                 $scope.status_progress = false;
@@ -254,7 +254,7 @@
         $scope.ShowExpense = function(id)
         {
             GetProjectExpense(id);
-            GetActivitiesForProject(id)
+           // GetActivitiesForProject(id)
             }
 
         function GetProjectExpense(id)

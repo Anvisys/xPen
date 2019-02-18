@@ -17,18 +17,18 @@
                     </div>
                     <div class="card-body container1">
                         <div class="row">
-                            <div class="col-xs-6"><h4>Kotak Account</h4></div>
-                            <div class="col-xs-6"><h4>Rs400000</h4></div>
+                            <div class="col-xs-6"><h4>Current Balance</h4></div>
+                            <div class="col-xs-6"><h4>{{CurrentBalance  |currency : "&#8377" : 2}}</h4></div>
 
                         </div>
                         <div class="row">
-                            <div class="col-xs-6"><h4>SBI Account</h4></div>
-                            <div class="col-xs-6"><h4>Rs700000</h4></div>
+                            <div class="col-xs-6"><h4>Last Transaction</h4></div>
+                            <div class="col-xs-6"><h4>{{LastTransaction  |currency : "&#8377" : 2}}</h4></div>
 
                         </div>
                         <div class="row">
-                            <div class="col-xs-6"><h4>HDFC Account</h4></div>
-                            <div class="col-xs-6"><h4>Rs300000</h4></div>
+                            <div class="col-xs-6"><h4>Account:</h4></div>
+                            <div class="col-xs-6"><h4>{{AccountName  |currency : "&#8377" : 2}}</h4></div>
 
                         </div>
 
@@ -38,7 +38,7 @@
             <div class="col-md-4">
                 <div class="card" style="height:180px;">
                     <div class="card-header card-header-color1">
-                        Account Info ( Jun,18 )
+                        Account Info ( {{$scope.CurrentMonth | date:"MMM,yy"}} )
                     </div>
                     <div class="card-body container1">
                         <div class="row">
@@ -48,7 +48,7 @@
                                         <h5 class="ring_title" style="color:grey;">  Deposit </h5>
                                     </div>
                                 </div>
-                                <h4 class="ring_value" style="color:green;font-weight:400;">Rs15000</h4>
+                                <h4 class="ring_value" style="color:green;font-weight:400;">{{currMDeposit |currency : "&#8377" : 2}}</h4>
                             </div>
                             <div class="col-xs-4">
                                 <div class="OuterRing" style=" background-color:#e5c100;">
@@ -56,7 +56,7 @@
                                         <h5 class="ring_title" style="color:grey;">  Withdraw </h5>
                                     </div>
                                 </div>
-                                <h4 class="ring_value" style="color:red; font-weight:400">Rs45000</h4>
+                                <h4 class="ring_value" style="color:red; font-weight:400">{{currMWithdraw |currency : "&#8377" : 2}}</h4>
                             </div>
                             <div class="col-xs-4">
                                 <div class="OuterRing" style=" background-color:#88b7ad;">
@@ -64,7 +64,7 @@
                                         <h5 class="ring_title" style="color:grey;">  Balance </h5>
                                     </div>
                                 </div>
-                                <h4 class="ring_value" style="color:gray;">Rs200000</h4>
+                                <h4 class="ring_value" style="color:gray;">{{CurrentBalance |currency : "&#8377" : 2}}</h4>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
 
                 <div class="card">
                     <div class="card-header card-header-color1">
-                        TDS/GST ( Jun,18 )
+                        TDS/GST (  {{$scope.CurrentMonth | date:"MMM,yy"}} )
                     </div>
                     <div class="container1">
 

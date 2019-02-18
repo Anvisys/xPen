@@ -8,6 +8,8 @@
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
 
+        $scope.CurrentMonth = new Date();
+
             $timeout(function () {
                 GetAccountList();
               
@@ -18,6 +20,9 @@
                 var date = new Date();
                 GetTransactionForDate(date.toUTCString());
                 GetUnpaidInvoice();
+
+                GetTransaction();
+
             }, 10);
 
 
@@ -227,6 +232,37 @@
                    $scope.GSTTransactionDate = data.TransactionDate;
                }
            });
+        }
+
+        function GetTransaction() {
+            $scope.currMDeposit = 0;
+            $scope.currMWithdraw = 0;
+
+            $scope.CurrentBalance = 0;
+            $scope.LastTransaction = 0;
+            $scope.AccountName = "";
+
+            transactionService.getByMonth($scope.CurrentMonth.getFullYear(), $scope.CurrentMonth.getMonth() + 1)
+                .then(function (data) {
+
+                    if (data === "") { }
+                    else {
+                        if (data[0].Deposit) {
+                            $scope.LastTransaction = - data[0].Withdraw;
+                        }
+                        else {
+                            $scope.LastTransaction = data[0].Deposit;
+                        }
+                        $scope.currMDeposit = $scope.currMDeposit + data[0].Deposit;
+                        $scope.currMWithdraw = $scope.currMWithdraw + data[0].Withdraw;
+
+                        $scope.CurrentBalance = data[0].Balance;
+
+                        $scope.AccountName = data[0].AccountName;
+                    }
+
+                });
+
         }
 
     });
