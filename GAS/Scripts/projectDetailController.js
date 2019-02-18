@@ -50,15 +50,16 @@
 
         $scope.AddSellInvoice = function ()
         {
-
+            
             var Invoice = {
                 InvoiceNumber: $scope.invoice_number, OrgId: $scope.OrgID, ProjectId: $scope.PrjId,
                 ServiceCost: $scope.work_cost, CGST: $scope.CGST, SGST: $scope.SGST, IGST: $scope.IGST,TDS:0,TDS:$scope.TDS,
                 InvoiceDate: $scope.invoice_date, InvoiceType: 0
             };
+            $scope.sales_progress = true;
             invoiceService.addSellInvoice(Invoice)
             .then(function (resp) {
-                $scope.project_progress = false;
+                $scope.sales_progress = false;
                 // alert(JSON.stringify(resp));
                 if (resp.data.Response == "OK") {
                     $scope.work_cost = 0;
@@ -101,10 +102,10 @@
                 InvoiceDate: $scope.pinvoice_date, InvoiceType: 1
             };
 
-         
+            $scope.purchase_progress = true;
             invoiceService.addPurchaseInvoice(Invoice)
             .then(function (resp) {
-                $scope.project_progress = false;
+                $scope.purchase_progress = false;
                 // alert(JSON.stringify(resp));
                 if (resp.data.Response == "OK") {
                     $scope.pwork_cost = 0;
@@ -159,9 +160,13 @@
 
           var item =[CostTransaction, GSTTransaction, TDSTransaction];
             console.log(JSON.stringify(item));
+
+            $scope.paymentReceive_progress = true;
+
             transactionService.AddPayment(item)
-                   .then(function (data) {
-                       $scope.other_progress = false;
+                .then(function (data) {
+
+                    $scope.paymentReceive_progress = false;
                        if (data.data.Response == "OK") {
                            $scope.received_cost = 0;
                            $scope.received_GST = 0;
@@ -192,27 +197,7 @@
            AddTransaction(TranData);
         }
 
-        function AddTransaction(TranData)
-        {
-            transactionService.AddPayment(TranData)
-             .then(function (data) {
-                 $scope.other_progress = false;
-                 if (data.data.Response == "OK") {
-                     $scope.received_cost = 0;
-                     $scope.received_tax = 0;
-                     $scope.received_tds = 0;
-                     $scope.newReceivePaymentDiv = false;
-                     $scope.paid_cost = 0;
-                     $scope.newMakePaymentDiv = false;
-                     GetInvoiceData();
-                     GetPurchaseInvoiceData();
-                 }
-                 else if (data.data.Response == "Fail") {
-                     alert("Could not Update, try later");
-                 }
-             });
-
-        }
+    
         $scope.makePayment = function (invoice) {
             $scope.selInvoice = invoice;
             $scope.newMakePaymentDiv = true;
@@ -220,12 +205,7 @@
             $scope.payment_Remarks = "";
         }
 
-        $scope.makePayment = function (invoice) {
-            $scope.selInvoice = invoice;
-            $scope.newMakePaymentDiv = true;
-            $scope.paid_cost = 0;
-            $scope.payment_Remarks = "";
-        }
+    
 
         $scope.Pay = function () {
             var Payment = {
@@ -240,7 +220,7 @@
                 TransactionRemarks: $scope.payment_Remarks, ProjectID: $scope.PrjId, ActivityID: 0, ExpenseID: 0,TransactionID:0, InvoiceID: $scope.selInvoice.InvoiceId, OrgID: $scope.OrgID,
                 TransType: "Purchase", TransactionDate: $scope.receive_date
             };
-
+            $scope.purchasePayment_progress = true;
             AddTransaction(TranData);
 
         /*    invoiceService.makePayment(Payment)
@@ -261,6 +241,28 @@
 
         }
 
+
+        function AddTransaction(TranData) {
+            transactionService.AddPayment(TranData)
+                .then(function (data) {
+                    $scope.other_progress = false;
+                    $scope.purchasePayment_progress = false;
+                    if (data.data.Response == "OK") {
+                        $scope.received_cost = 0;
+                        $scope.received_tax = 0;
+                        $scope.received_tds = 0;
+                        $scope.newReceivePaymentDiv = false;
+                        $scope.paid_cost = 0;
+                        $scope.newMakePaymentDiv = false;
+                        GetInvoiceData();
+                        GetPurchaseInvoiceData();
+                    }
+                    else if (data.data.Response == "Fail") {
+                        alert("Could not Update, try later");
+                    }
+                });
+
+        }
 
         $scope.LoadActivity = function ()
         {

@@ -56,9 +56,9 @@
                     <img on-toggle="" src="../../Images/Icon/excel.jpg" title="Export to Excel" ng-click="exportToExcel('#TransactionData')" style="width:30px;height:30px;border-radius:50%;
                              position: absolute;top:5px; right: 50px;" />
                 </div>
-                <div style="max-height:{{ScreenHeight}};overflow:scroll;">
+                <div style="max-height:{{ScreenHeight}};">
 
-                    <table id="TransactionData" style="width:100%;">
+                    <table id="TransactionData" style="width:100%; overflow-y:scroll;">
                         <tr class="padding-10">
                             <th>#</th>
                             <th>Date Time</th>
@@ -127,7 +127,7 @@
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-4 col-form-label">Amount:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="transferAmount" tabindex="4" ng-model="transfer_amount" required min-amount>
+                                            <input type="number" class="form-control" name="transferAmount" tabindex="4" ng-model="transfer_amount" required min-amount>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -145,13 +145,13 @@
                             <button type="button" tabindex="7" class="btn btn-warning" ng-click="newTransfer=false">Close</button>
                         </div>
                         <div ng-show="transfer_progress" class="loader_div">
-                            <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                            <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
                         </div>
                     </div>
                 </div>
 
                 <div id="newExpenseDialog" ng-show="newExpense" class="layout_modal_Window">
-                    <div class="layout_modal_Content" style="width:380px;position:relative">
+                    <div class="layout_modal_Content" style="width:400px;position:relative">
                         <div class="layout_modal_header"> Expense:  <span ng-click="newExpense=false" class="fa fa-close"></span> </div>
                         <div class="layout_modal_body">
                             <form name="Expense" style="width:340px;margin:10px auto; text-align:left;">
@@ -186,7 +186,7 @@
                                     <div class="form-group row">
                                         <label for="colFormLabel" class="col-sm-6 col-form-label">Amount:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" name="AdvanceAmount" tabindex="4" ng-model="advance_amount" required min-amount>
+                                            <input type="number" class="form-control" name="AdvanceAmount" tabindex="4" ng-model="advance_amount" required min-amount>
                                         </div>
                                     </div>
                                     <div class="form-group row">

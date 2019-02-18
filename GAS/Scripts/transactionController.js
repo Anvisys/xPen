@@ -186,13 +186,13 @@
         $scope.PaySalary = function () {
             $scope.salary_progress = true;
             var date = new Date();
-            var TranData = {
+            var TranData = [{
                 TransName: $scope.employee_name + "_Salary", AccID: $scope.selFromAcc.AccID, Deposit: 0, Withdraw: $scope.salary_amount,
                 TransactionRemarks: $scope.salary_Remarks, ProjectID: $scope.ProjectID, ActivityID: 0, InvoiceID: 0, ExpenseID: 0,
                 TransactionDate: date,OrgID: $rootScope.OrgID,
                 TransType:"Salary"
-            };
-            //alert(JSON.stringify(TranData));
+            }];
+          console.log(JSON.stringify(TranData));
 
             AddTransaction(TranData);
         }

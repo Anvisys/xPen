@@ -299,7 +299,7 @@
                 </div>
             </div>
             <div ng-show="newActivity_progress" class="loader_div">
-                <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:310px;" src="Images/Icon/ajax-loader.gif" />
+                <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
             </div>
         </div>
 
@@ -517,10 +517,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="row">
+                                   <div class="row">
 
                                         <label for="colFormLabel" class="col-sm-4 col-form-label">SGST</label>
-                                        <div class="col-sm-8">
+                                        <div  class="col-sm-8">
                                             <input type="number" name="sgst" class="form-control" tabindex="5" ng-model="SGST" required>
                                         </div>
                                     </div>
@@ -578,15 +578,15 @@
                 </div>
 
                 <div class="layout_modal_footer ">
-                    <button class="btn btn-success" ng-click="AddSellInvoice()"
+                    <button class="btn btn-success" tabindex="10"ng-click="AddSellInvoice()"
                             ng-disabled="NewInvoice.VendorName.$invalid || NewInvoice.WorkCost.$invalid || NewInvoice.InvoiceNumber.$invalid || NewInvoice.itemDate.$invalid || NewInvoice.sgst.$invalid || NewInvoice.igst.$invalid || NewInvoice.tds.$invalid || NewInvoice.cgst.$invalid || NewInvoice.Description.$invalid" >
                         Add
                     </button> &nbsp;&nbsp;
 
-                    <button class="btn btn-warning" ng-click="model.newSalesInvoiceDiv= false">Cancel</button>
+                    <button class="btn btn-warning" tabindex="11" ng-click="model.newSalesInvoiceDiv= false">Cancel</button>
                 </div>
-                <div ng-show="project_progress" class="loader_div">
-                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                <div ng-show="sales_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
                 </div>
             </div>
 
@@ -596,7 +596,7 @@
 
 
         <div id="newReceivePaymentModal" ng-show="newReceivePaymentDiv" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:600px;">
+            <div class="layout_modal_Content" style="width:670px;">
                 <div class="layout_modal_header">
                     Receive Payment <span ng-click="newReceivePaymentDiv=false" title="Close" class="fa fa-close"></span>
                 </div>
@@ -605,49 +605,60 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <label style="width:105px;">Invoice Number:</label>
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice Number:</label>
                                     <label>{{selInvoice.InvoiceNumber}}</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <label style="width:115px;">Total Payable:</label>
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Total Payable:</label>
                                     <label>{{selInvoice.ServiceCost+selInvoice.CGST+selInvoice.SGST+ selInvoice.IGST - selInvoice.TDS | currency : "&#8377" : 2}}</label>
                                 </div>
                                 <div class="col-xs-6">
-                                    <label style="width:135px;">Amount Received</label>
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Amount Received</label>
                                     <label>{{selInvoice.ReceivedAmount | currency : "&#8377" : 2}}</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Received Cost</label>
-                                    <input type="number" name="receiveCost" style="width:100px;" ng-model="received_cost"required />
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Received Cost</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="receiveCost" class="form-control" tabindex="5" ng-model="received_cost" required>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Received GST</label>
-                                    <input type="number" name="gst" style="width:144px;" ng-model="received_GST" required />
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Received GST</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="gst" class="form-control" tabindex="5" ng-model="received_GST" required>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Received TDS</label> 
-                                    <input type="number" name="tds" style="width:100px;" ng-model="received_TDS" required/>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Received TDS</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="tds" class="form-control" tabindex="5" ng-model="received_TDS" required>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Account</label>
-                                    <select style="width:144px;  height: 22px;" name="Account" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts" required></select>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Account</label>
+                                    <div class="col-sm-8">
+                                        <select type="number" name="Account" class="form-control" tabindex="5" ng-model="selAcc"ng-options="acc.AccountName for acc in Accounts" required></select>
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Remarks</label> 
-                                    <input type="text" name="remarks" style="width:100px;" ng-model="trans_remarks" required/>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Remarks</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="remarks" class="form-control" tabindex="5" ng-model="trans_remarks" required>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Payment Date</label> 
-                                    <input type="date" name="itemDate" ng-model="receive_date" required />
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Payment Date</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" name="itemDate" class="form-control" tabindex="5" ng-model="receive_date" required>
+                                    </div>
                                 </div>
                             </div>
 
@@ -661,8 +672,8 @@
                     </button> &nbsp;&nbsp;
                     <button class="btn btn-warning" ng-click="newReceivePaymentDiv= false">Cancel</button>
                 </div>
-                <div ng-show="project_progress" class="loader_div">
-                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                <div ng-show="paymentReceive_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
                 </div>
             </div>
         </div>
@@ -697,12 +708,10 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-
                                 <label for="colFormLabel" class="col-sm-4 col-form-label">Vendor Name:</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="VenderName" class="form-control" tabindex="1" ng-model="vendor_name" required>
                                 </div>
-
                             </div>
 
                             <div class="col-sm-6">
@@ -786,8 +795,8 @@
                     Add</button> &nbsp;&nbsp;
                     <button class="btn btn-warning" ng-click="model.newPurchaseInvoiceDiv= false">Cancel</button>
                 </div>
-                <div ng-show="project_progress" class="loader_div">
-                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                <div ng-show="purchase_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
                 </div>
             </div>
         </div>
@@ -802,10 +811,12 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <label style="width:105px;">Invoice Number:</label> <label>{{selInvoice.InvoiceNumber}}</label>
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Invoice Number:</label>
+                                    <label>{{selInvoice.InvoiceNumber}}</label>
                                 </div>
                                 <div class="col-xs-6">
-                                    <label style="width:100px;">Cost Invoiced:</label> <label>{{selInvoice.ServiceCost | currency : "&#8377" : 2}}</label>
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Cost Invoiced:</label> 
+                                    <label>{{selInvoice.ServiceCost | currency : "&#8377" : 2}}</label>
                                 </div>
                             </div>
 
@@ -837,29 +848,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!--<div class="row">
-
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Cost Paid</label>
-                                    <input type="text" name="cost" style="width:100px;" ng-model="paid_cost" required />
-                                </div>
-                                <div class="col-xs-6">
-                                    <label style="width:104px;">Account name</label>
-                                    <select style="width:130px;height:22px;" name="Account" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts "required></select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Remarks</label>
-                                    <input type="text"name="remarks" style="width:100px;" ng-model="payment_Remarks"required />
-                                </div>
-                                <div class="col-xs-6">
-                                    <label style="width:100px;">Invoice date</label>
-                                    <input style="width:130px;" type="date" name="itemDate" ng-model="receive_date" required />
-                                </div>
-                            </div>-->
-
                         </div>
                     </form>
 
@@ -871,13 +859,11 @@
                         </button> &nbsp;&nbsp;
                     <button class="btn btn-warning" ng-click="newMakePaymentDiv= false">Cancel</button>
                 </div>
-                <div ng-show="project_progress" class="loader_div">
-                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:170px;" src="Images/Icon/ajax-loader.gif" />
+                <div ng-show="purchasePayment_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
                 </div>
             </div>
         </div>
-
-
         <div id="newOtherPaymentModal" ng-show="model.newOtherPaymentDiv" class="layout_modal_Window">
             <div class="layout_modal_Content" style="width:600px;">
                 <div class="layout_modal_header">

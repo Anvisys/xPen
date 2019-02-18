@@ -99,9 +99,9 @@
 
                                             </div>
                                         </div>
-                                        <div ng-show="QuickExpense_progress" class="loader_div">
+                                        <!--<div ng-show="QuickExpense_progress" class="loader_div">
                                             <img style="height:20px;width:20px;z-index:15;position:absolute; top:50px;margin-left:auto; margin-right:auto;" src="Images/Icon/ajax-loader.gif" />
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                 <div class="col-md-4">
                                     <input name="ExpenseName" class="form-control" tabindex="1" type="text" placeholder="Expense Name" ng-model="expense_name" style="width:150px;" required>
                                 </div><div class="col-md-4">
-                                    Amount:<input name="Amount" class="form-control"  tabindex="2" type="number" placeholder="0.00" ng-model="expense_amount" style="width:150px;" required min-amount />
+                                    <input name="Amount" class="form-control"  tabindex="2" type="number" placeholder="0.00" ng-model="expense_amount" style="width:150px;" required min-amount />
                                 </div><div class="col-md-4">
                                     <input name="Remark" class="form-control"   tabindex="3" type="text" placeholder="Remarks" ng-model="expense_remarks" style="width:150px;" required text-length />
                                 </div>
