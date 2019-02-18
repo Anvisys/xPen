@@ -434,6 +434,47 @@
             });
         }
 
+
+        ////////////////
+        //$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        //$scope.format = $scope.formats[0];
+        //$scope.altInputFormats = ['M!/d!/yyyy'];
+
+
+        //$scope.today = function () {
+        //    $scope.dt = new Date();
+        //};
+
+
+        //$scope.open1 = function () {
+        //    $scope.popup1.opened = true;
+        //};
+
+        //$scope.popup1 = {
+        //    opened: false
+        //};
+
+        //$scope.dateOptions = {
+        //    dateDisabled: disabled,
+        //    formatYear: 'yy',
+        //    maxDate: new Date(2020, 5, 22),
+        //    minDate: new Date(),
+        //    startingDay: 1
+        //};
+
+        //$scope.clear = function () {
+        //    $scope.dt = null;
+        //};
+
+        //function disabled(data) {
+        //    var date = data.date,
+        //        mode = data.mode;
+        //    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        //}
+       
+        ///////
+
+
     });
 
 })();
