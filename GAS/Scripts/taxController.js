@@ -62,7 +62,13 @@
             $scope.TDS_Payable = TDS
             $scope.tds_penalty = 0;
         }
-        
+        $scope.newShowTDSForm = function () {
+            $scope.ShowTDSForm = true;
+            $scope.TDS_Payable = TDS
+            $scope.tds_penalty = 0;
+            $scope.tds_amount = 0;
+            $scope.trans_remarks = "";
+        }
         $scope.PayTDS= function(TDS)
         {
             $scope.ShowTDSForm = true;
@@ -78,14 +84,14 @@
                 TransactionID: 0, InvoiceID: $scope.TDS_ID,
                 TransType: "TDS", TransactionDate: $scope.transaction_date
             };
-
+            $scope.TDS_progress = true;
             transactionService.AddPayment(TranData)
               .then(function (data) {
-
+                  $scope.TDS_progress = false;
                   if (data.data.Response == "OK") {
                       $scope.ShowTDSForm = false;
                       $scope.trans_remarks = "";
-                      $scope.tds_amount = "";
+                      $scope.tds_amount = 0;
                   }
                   else if (data.data.Response == "Fail") {
                       alert("Could not Update, try later");
@@ -111,7 +117,7 @@
                 TransactionRemarks: $scope.trans_remarks, ProjectID: $scope.ProjectID, ActivityID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
                 TransType: "GST", TransactionDate: $scope.payment_date
             };
-
+            $scope.GST_progress = true;
             transactionService.AddPayment(TranData)
               .then(function (data) {
                   $scope.GST_progress = false;
