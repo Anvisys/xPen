@@ -27,6 +27,7 @@
         $rootScope.Role = "Visitor";
         $scope.showlogin = false;
         $scope.progress = false;
+
         $scope.ToggelLogin = function () {
             $location.url('home');
             $scope.showlogin = !$scope.showlogin;
@@ -73,12 +74,12 @@
                      }
                      else if (JSON.parse(localStorage.users).UserRole == "Individual") {
                          $location.url('expense');
-                         window.location.href = 'Index.html#!/activity';
+                         window.location.href = 'Index.html#!/main';
                      }
                      else if (JSON.parse(localStorage.users).UserRole == "Employee") {
                          
                         //$location.url('expense');
-                         window.location.href = 'Index.html#!/employedashboard';
+                         window.location.href = 'Index.html#!/main';
                      }
                     else if (JSON.parse(localStorage.users).UserRole == "Admin") {
                          //$location.url('main');
@@ -86,7 +87,7 @@
                      }
                      else if (JSON.parse(localStorage.users).UserRole == "Manager") {
                          
-                         window.location.href = 'Index.html#!/managerdashboard';
+                         window.location.href = 'Index.html#!/main';
                      }
 
                  }
