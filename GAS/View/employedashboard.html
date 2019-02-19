@@ -11,138 +11,400 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <h4 style="font-size:22px;">Dashboard</h4>
+                <h4 >{{Dashboard}}</h4>
             </div>
-            <div class="col-sn-6">
-                <h5 style="text-align:right;">
-                    <button class="btn btn-primary btn-sm SeeMore2 fa fa-exchange"  ng-click="SeeMore()">&nbsp;My Expense</button>
-
-                </h5>
-            </div>
-        </div>
-       
-
-        <div class="row">
-
-            <div class="col-sm-4">
-                <div class="card mb-5">
-
-                    <div class="container1">
-
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
-                                <p>Number of Activity:{{IPCount}}</p>
-                            </div>
-                            <div class="col-xs-4">
-                                <p>Amount:<h4><b>{{IPValue| currency : "&#8377" : 2}}</b></h4></p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
+            <div class="col-sm-6" style="text-align:right;">
+             
+                    <button class="btn btn-primary btn-sm " ng-hide="Role!='Admin'" ng-click="ShowAdmin()">Admin</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-hide="Role=='Employee'" ng-click="ShowManager()">Manager</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-hide="Role=='Employee'" ng-click="ShowEmployee()">Employee</button>
 
             </div>
-            <div class="col-sm-4">
-                <div class="card mb-5">
-
-                    <div class="container1">
-
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
-                                <p>Number of Activity:{{SubmittedCount}}</p>
-                            </div>
-                            <div class="col-xs-4">
-                                <p>Amount:<h4><b>{{SubmittedValue|currency : "&#8377" : 2}}</b></h4></p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card mb-5">
-
-                    <div class="container1">
-
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <h4 style="color: #4caf50;"><b>Approved Expense</b></h4>
-                                <p>Number of Activity:{{ApprovedCount}}</p>
-                            </div>
-                            <div class="col-xs-4">
-                                <p>Amount:<h4><b>{{ApprovedValue|currency : "&#8377" : 2}}</b></h4></p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-sm-4">
-                <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{ TodayExpense|currency : "&#8377" : 2 }}</h4></div>
-                <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> {{ApprovedValue|currency : "&#8377" : 2}}</h4> </div>
-
-
-            </div>
-            <div class="col-sm-8">
-                <div class="shadow" style="height:200px;">
-                    <div class="panel-heading" style="background-color:#FFC107;">
-                        Daily Expense
-                    </div>
-                    <div class="panel-body zero_all">
-                         <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
-                                                chart-data="dailyExpenseData" chart-labels="labels" chart-options="accOptions"
-                                                chart-series="series" style="max-height:180px;"></canvas>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card mb-5">
-
-                    <div class="container1">
-                        <h4><b>Last 2 Expense</b></h4>
-                        <div ng-repeat="ex in latestExpenses">
-                            <p>{{ex.ItemName}} <b>{{ex.ExpenseAmount}}</b>  {{ex.ExpenseDate | date:"mediumDate"}}</p>
-                          
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-8">
-                <div class="card mb-5">
-                    <div class="container1">
-                        <h4>
-                            <b>Active project</b> : {{ActiveProjectsCount}}</h4>
-                        <div class="row">
-                            <div class="col-xs-6" ng-repeat="prj in ActiveProjects" >
-                                <p><b>Project: </b>{{prj.ProjectName}}, <b>Owner:</b> {{prj.ProjectManager}} </p>
-
-</div>
-                           
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
         
+        <div class="container-fluid" ng-show="EmployeeDashboard" id="EmployeeDashboard" >
+
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
+                                    <p>Number of Activity:{{IPCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{IPValue| currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
+                                    <p>Number of Activity:{{SubmittedCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{SubmittedValue|currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #4caf50;"><b>Approved Expense</b></h4>
+                                    <p>Number of Activity:{{ApprovedCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{ApprovedValue|currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{ TodayExpense|currency : "&#8377" : 2 }}</h4></div>
+                    <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> {{ApprovedValue|currency : "&#8377" : 2}}</h4> </div>
+
+
+                </div>
+                <div class="col-sm-8">
+                    <div class="shadow" style="height:200px;">
+                        <div class="panel-heading" style="background-color:#FFC107;">
+                            Daily Expense
+                        </div>
+                        <div class="panel-body zero_all">
+                            <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                    chart-data="dailyExpenseData" chart-labels="labels" chart-options="accOptions"
+                                    chart-series="series" style="max-height:180px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+                            <h4><b>Last 2 Expense</b></h4>
+                            <div ng-repeat="ex in latestExpenses">
+                                <p>{{ex.ItemName}} <b>{{ex.ExpenseAmount}}</b>  {{ex.ExpenseDate | date:"mediumDate"}}</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-8">
+                    <div class="card mb-5">
+                        <div class="container1">
+                            <h4>
+                                <b>Active project</b> : {{ActiveProjectsCount}}
+                            </h4>
+                            <div class="row">
+                                <div class="col-xs-6" ng-repeat="prj in ActiveProjects">
+                                    <p><b>Project: </b>{{prj.ProjectName}}, <b>Owner:</b> {{prj.ProjectManager}} </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="ManagerDashboard" ng-controller="mgrCtrl" ng-show="ManagerDashboard" class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
+                                    <p>Number of Activity:{{IPMgrCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{IPMgrValue| currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
+                                    <p>Number of Activity:{{SubmittedMgrCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{SubmittedMgrValue|currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card mb-5">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #4caf50;"><b>Approved Expense</b></h4>
+                                    <p>Number of Activity:{{ApprovedMgrCount}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Amount:<h4><b>{{ApprovedMgrValue|currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+
+                <div class="col-sm-4">
+                    <div class="card-header">Payment (Sale)</div>
+                    <div class="shadow mb-5 bg-c1 p-3 rounded" style="height:122px;">Receivable Amount (Purchase):<h4>{{Receivable - ReceivedAmount|currency : "&#8377" : 2}}</h4></div>
+
+                </div>
+                <div class="col-sm-4 ">
+                    <div class="card-header">Payment (Purchase)</div>
+                    <div class="shadow mb-5 p-3 rounded bg-c2" style="height:122px;">
+
+
+                        Payble Amount (Invoices):<h4> {{Payable - PaidAmount |currency : "&#8377" : 2}}</h4>
+                        <h4 class="due">Due: <b>{{DueAmount  |currency : "&#8377" : 2}}</b></h4>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card-header">Project Alert</div>
+                    <div class="shadow p-3 mb-5 bg-c4 rounded" style="height:122px;color:red">
+                        <h4>Project: NBSZ App</h4><h4 class="blink_me"> Expense overbudget</h4>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-4 ">
+                    <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{MgrAdded +MgrSubmitted + MgrApproved |currency : "&#8377" : 2}}</h4></div>
+                    <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> {{MgrApproved |currency : "&#8377" : 2}}</h4> </div>
+
+
+                </div>
+                <div class="col-sm-8">
+                    <div class="shadow" style="height:200px;">
+                        <div class="panel-heading" style="background-color:#FFC107;">
+                            Daily Expense
+                        </div>
+                        <div class="panel-body zero_all">
+                            <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                    chart-data="dailyMgrExpenseData" chart-labels="Mgrlabels" chart-options="accOptions"
+                                    chart-series="series" style="max-height:180px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="AdminDashboard" ng-controller="mainCtrl" ng-show="AdminDashboard" class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-4 ">
+                    <div class="card" style="height:180px;">
+                        <div class="card-header card-header-color1">
+                            Account blance
+                        </div>
+                        <div class="card-body container1">
+                            <div class="row">
+                                <div class="col-xs-6"><h4>Current Balance</h4></div>
+                                <div class="col-xs-6"><h4>{{CurrentBalance  |currency : "&#8377" : 2}}</h4></div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6"><h4>Last Transaction</h4></div>
+                                <div class="col-xs-6"><h4>{{LastTransaction  |currency : "&#8377" : 2}}</h4></div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6"><h4>Account:</h4></div>
+                                <div class="col-xs-6"><h4>{{AccountName }}</h4></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="height:180px;">
+                        <div class="card-header card-header-color1">
+                            Account Info ( {{CurrentMonth | date:"MMM,yy"}} )
+                        </div>
+                        <div class="card-body container1">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="OuterRing" style=" background-color:#e58a7a;">
+                                        <div class="InnerRing" style=" background-color:#ffffff;">
+                                            <h5 class="ring_title" style="color:grey;">  Deposit </h5>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value" style="color:green;font-weight:400;">{{currMDeposit |currency : "&#8377" : 2}}</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="OuterRing" style=" background-color:#e5c100;">
+                                        <div class="InnerRing" style=" background-color:#ffffff;">
+                                            <h5 class="ring_title" style="color:grey;">  Withdraw </h5>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value" style="color:red; font-weight:400">{{currMWithdraw |currency : "&#8377" : 2}}</h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="OuterRing" style=" background-color:#88b7ad;">
+                                        <div class="InnerRing" style=" background-color:#ffffff;">
+                                            <h5 class="ring_title" style="color:grey;">  Balance </h5>
+                                        </div>
+                                    </div>
+                                    <h4 class="ring_value" style="color:gray;">{{CurrentBalance |currency : "&#8377" : 2}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="card">
+                        <div class="card-header card-header-color1">
+                            TDS/GST (  {{CurrentMonth | date:"MMM,yy"}} )
+                        </div>
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #673AB7;"><b>TDS </b></h4>
+                                    <p>Paid:{{TDS_Paid |currency : "&#8377" : 2}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Payable:<h4><b>{{TDSPayable |currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="card">
+
+                        <div class="container1">
+
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h4 style="color: #4caf50;"><b>GST </b></h4>
+                                    <p>Paid:{{GST_Paid |currency : "&#8377" : 2}}</p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <p>Payable:<h4><b>{{GSTPayable |currency : "&#8377" : 2}}</b></h4></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+
+
+                <div class="col-sm-4">
+                    <div class="card-header">Payment (Sale)</div>
+                    <div class="shadow mb-5 bg-c1 p-3 rounded" style="height:122px;">Payable Amount (Purchase):<h4> {{Receivable - ReceivedAmount|currency : "&#8377" : 2}}</h4></div>
+
+                </div>
+                <div class="col-sm-4 ">
+                    <div class="card-header">Payment (Purchase)</div>
+                    <div class="shadow mb-5 p-3 rounded bg-c2" style="height:122px;">
+
+
+                        Receivable Amount (Invoices):<h4> {{Payable - PaidAmount |currency : "&#8377" : 2}}</h4>
+                        <h4 class="due">Due: <b>{{DueAmount  |currency : "&#8377" : 2}}</b></h4>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card-header">Project Alert</div>
+                    <div class="shadow p-3 mb-5 bg-c4 rounded" style="height:122px;">
+                        <h4>Project: NBSZ App</h4><h4 class="blink_me"> Expense overbudget</h4>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
     </div>
+
+    
   
 </body>
 

@@ -6,12 +6,12 @@
     app.config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'GAS/View/Activity.html',
-                controller: 'activityCtrl'
+                templateUrl: 'GAS/View/employedashboard.html',
+                controller: 'dashboardCtrl'
             })
         .when("/main", {
-            templateUrl: "GAS/View/main.html",
-            controller: "mainCtrl"
+            templateUrl: "GAS/View/employedashboard.html",
+            controller: "dashboardCtrl"
         })
 
         .when("/user", {
@@ -93,7 +93,7 @@
                 templateUrl: 'GAS/View/managerdashboard.html',
                 controller: 'dashboardCtrl'
             })
-        .otherwise({ redirectTo: '/activity' });
+        .otherwise({ redirectTo: '/main' });
     });
 
     

@@ -19,6 +19,48 @@
         $scope.MgrApproved = 0;
         $scope.ActiveProjectsCount = 0;
         $scope.ActiveProjects = [{}];
+        alert($rootScope.Role);
+        alert('Setting Controller');
+        if ($rootScope.Role == "Admin") {
+            ShowAdmin();
+        }
+        else if ($rootScope.Role == "Manager") {
+            ShowManager();
+        }
+        else {
+            ShowEmployee();
+        }
+
+        $scope.ShowAdmin = function () {
+            ShowAdmin();
+        }
+        $scope.ShowManager = function () {
+            ShowManager();
+        }
+        $scope.ShowEmployee = function () {
+            ShowEmployee();
+        }
+
+        function ShowAdmin() {
+            $scope.AdminDashboard = true;
+            $scope.ManagerDashboard = false;
+            $scope.EmployeeDashboard = false;
+            $scope.Dashboard = "Admin Dashboard";
+        }
+
+        function ShowManager() {
+            $scope.AdminDashboard = false;
+            $scope.ManagerDashboard = true;
+            $scope.EmployeeDashboard = false;
+            $scope.Dashboard = "Manager Dashboard";
+        }
+
+        function ShowEmployee() {
+            $scope.AdminDashboard = false;
+            $scope.ManagerDashboard = false;
+            $scope.EmployeeDashboard = true;
+            $scope.Dashboard = "Employee Dashboard";
+        }
 
         $timeout(function () {
 
@@ -29,14 +71,13 @@
             GetLatestExpenses();
 
 
-            // Manager Function
+            /* Manager Function
             GetIPExpenseForManager();
             GetIPSalesForManager();
             GetIPPurchaseForManager();
             GetTodayExpenseForManager();
             GetDayWiseExpenseForManager();
-
-
+           */
          
 
         }, 10);

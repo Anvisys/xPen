@@ -62,7 +62,7 @@
 
                                     </div>
 
-                                    <div ng-show="ProjectList.length>0" class="container-fluid zero_margin" style="max-height:325px;overflow-x:hidden;overflow-y:scroll; width:100%;">
+                                    <div ng-show="activityList.length>0" class="container-fluid zero_margin" style="max-height:325px;overflow-x:hidden;overflow-y:scroll; width:100%;">
                                         <div id="ActivityData" style="width:100%;">
 
                                             <div class="row" ng-repeat="activity in activityList| filter:search:false" ng-click="ShowExpense(activity.ActivityID)" ng-class-odd="'bg_lightGrey'">

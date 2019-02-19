@@ -5,6 +5,7 @@
     app.config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('APIInterceptor');
     }]);
+
     app.service('APIInterceptor', [function () {
         var service = this;
 
@@ -14,6 +15,21 @@
             return config;
         };
     }]);
+
+    app.service('LoginCheck', [function () {
+        var service = this;
+
+        service.request = function (config) {
+            var UserObj = JSON.parse(localStorage.users);
+            alert(1);
+            if (typeof localStorage.users === 'undefined') {
+                alert('Session Out');
+            }
+
+            return config;
+        };
+    }]);
+
 }());
 
 

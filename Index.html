@@ -84,6 +84,9 @@
     <script src="GAS/Scripts/dashboardController.js"></script>
     <script src="GAS/Services/dashboardService.js"></script>
     <script src="GAS/Services/dailyExpenseService.js"></script>
+    <script src="GAS/Scripts/managerConroller.js"></script>
+    <!--<script src="GAS/Services/constantService.js"></script>-->
+
 
     <link type="text/css" rel="stylesheet" href="styles/gap.css" />
     <link type="text/css" rel="stylesheet" href="styles/xpen.css" />
@@ -193,9 +196,9 @@
 
                         <ul class="nav nav-pills nav-stacked">
 
-                            <li ng-class="getClass('main')"><a href="#!main" ng-show="Role=='Admin'"><i class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;Dashboard</i></a></li>
-                            <li ng-class="getClass(' employedashboard')"><a href="#!employedashboard"><i class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;EmpDashboard</i></a></li>
-                            <li ng-class="getClass('managerdashboard')"><a href="#!managerdashboard" ng-show="Role=='Manager'||Role=='Admin'"><i class="fa fa-tachometer fa-2x" style="color:#000;" aria-hidden="true">&nbsp;ManagerDashboard</i></a></li>
+                            <li ng-class="getClass('main')"><a href="#!old" ng-show="false"><i class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;oldDashboard</i></a></li>
+                            <li ng-class="getClass('main')"><a href="#!main"><i  class="fa fa-tachometer" style="color:#000;" aria-hidden="true">&nbsp;Dashboard</i></a></li>
+                            <li ng-class="getClass('managerdashboard')"><a href="#!managerdashboard" ng-show="false"><i class="fa fa-tachometer fa-2x" style="color:#000;" aria-hidden="true">&nbsp;ManagerDashboard</i></a></li>
                             <li ng-class="getClass('user')"><a href="#!user" ng-show="Role=='Admin'||Role=='SuperAdmin'"><i class="fa fa-user" style="color:#000;" aria-hidden="true">&nbsp;User</i></a></li>
                             <li ng-class="getClass('accounts')"><a href="#!accounts" ng-show="Role=='Admin'"><i class="fa fa-th-large" style="color:#000;" aria-hidden="true">&nbsp;Accounts</i></a></li>
                             <li ng-class="getClass('project')"><a href="#!project" ng-show="Role=='Admin'||Role=='Manager'||Role=='Employee'"><i class="fa fa-tasks fa-2x" style="color:#000;" aria-hidden="true">&nbsp;My Projects</i></a></li>

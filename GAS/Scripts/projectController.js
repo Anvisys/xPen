@@ -1,7 +1,7 @@
 ﻿(function () {
 
     var app = angular.module("gas");
-    app.controller("projectCtrl", function ($timeout,activityService, projectService, expenseItemService, accountService, transactionService, $scope, $rootScope, $cookies) {
+    app.controller("projectCtrl", function ($timeout, activityService, projectService, dailyExpenseService, accountService, transactionService, $scope, $rootScope, $cookies) {
         $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
         $scope.ProjectList = [];
         $scope.newProjectDiv = false;
@@ -171,7 +171,7 @@
                 ProjectID: $scope.ProjectID
             };
 
-        console.log(JSON.stringify(data));
+     
             projectService.UpdateStatus(data)
             .then(function (res) {
                 $scope.status_progress = false;
@@ -264,16 +264,16 @@
             var Received = [];
             $scope.labels = [];
             // expenseItemService.getExpenseDataForProject(id)
-            projectService.getDailyExpense(id)
+            dailyExpenseService.getDailyExpenseForProject(id)
             .then(function (data) {
-               
-                $scope.expenseList = data.$values;
+                console.log(JSON.stringify(data));
+                $scope.expenseList = data;
 
-                for (i = 0; i < data.$values.length; i++) {
-                    Expense.push(data.$values[i].ExpenseAmount);
-                    Received.push(data.$values[i].ReceiveAmount);
+                for (i = 0; i < data.length; i++) {
+                    Expense.push(data[i].ExpenseAmount);
+                    Received.push(data[i].ReceiveAmount);
                   
-                    $scope.labels.push(new Date(data.$values[i].ExpenseDate).getDate());
+                    $scope.labels.push(new Date(data[i].ExpenseDate).getDate());
                     //var id = '#bar_' + i.toString();
                     //var ctx = $(id).get(0).getContext("2d");
                     //var myLineChart1 = new Chart(ctx).Line(data, line_chart_options);

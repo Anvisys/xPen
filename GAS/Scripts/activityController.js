@@ -192,8 +192,10 @@
 
         function GetActivitieData()
         {
+            console.log($rootScope.UserId, $scope.filterStatus);
             activityService.GetActivitiesByEmployee($rootScope.UserId, $scope.filterStatus)
-                     .then(function (data) {
+                .then(function (data) {
+                 
                          $scope.activityList = data.$values;
 
                          GetExpenseData(data.$values[0].ActivityID);
@@ -247,7 +249,7 @@
             $scope.labels = [];
             expenseItemService.getExpenseDataForActivity(ID).
                then(function (data) {
-                   
+                   console.log(JSON.stringify(data));
 
                    $scope.expenseList = data;
 

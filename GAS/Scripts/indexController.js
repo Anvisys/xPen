@@ -2,13 +2,15 @@
 
     var app = angular.module('gas');
 
-    app.controller('indexCtrl', function ($timeout,$location,profileService, $scope, $rootScope, $cookies) {
+    app.controller('indexCtrl', function ($timeout,$location,profileService,$scope,$rootScope,$cookies) {
           $rootScope.APIUrl = "http://www.kevintech.in/GAService/";
          //$rootScope.APIUrl = "http://localhost:23699/";
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
         $scope.showProfileDD1 = false;
         $scope.DDMenu = false;
+
+
         $scope.LogOff = function () {
            
           $rootScope.UserId = 0;
@@ -40,67 +42,53 @@
         $scope.ShowProfile1 = function () {
             $scope.showProfileDD1 = !$scope.showProfileDD1;
         };
-        $scope.SeeMore = function () {
-            $('.SeeMore2').click(function () {
-                var $this = $(this);
-                $this.toggleClass('SeeMore2');
-                if ($this.hasClass('SeeMore2')) {
-                    $this.text('My Expense');
-                } else {
-                    $this.text('Project Expense');
-                }
-            });
-        }
+    
 
 
-        $scope.ShowProfile = function () {
-            $scope.showProfileDD = !$scope.showProfileDD;
-        };
+        //$scope.ShowProfile = function () {
+        //    $scope.showProfileDD = !$scope.showProfileDD;
+        //};
 
         $scope.init = function () {
-           
-                                    if (typeof  localStorage.users == 'undefined') {
-                                                window.location.href = 'Login.html';
-                                                return;
-                                                }
-                                    else if (localStorage.users === null) {
-                  
-                                            window.location.href = 'Login.html';
-                                            return;
-                                        }
-                             else {
-                                        var UserObj = JSON.parse(localStorage.users);
-
-                                        
-                                    $rootScope.Email = UserObj.UserEmail;
-                                    $rootScope.UserMobile = UserObj.UserMobile;
-                                    $rootScope.Role = UserObj.UserRole;
-                                    $rootScope.UserId = UserObj.UserId;
+                if (localStorage.users === null || typeof  localStorage.users === 'undefined') {
+                window.location.href = 'Login.html';
+                return;
+                }
+                else if (localStorage.users === null) {
+                        window.location.href = 'Login.html';
+                        return;
+                    }
+                    else {
+                        var UserObj = JSON.parse(localStorage.users);
+                        $rootScope.Email = UserObj.UserEmail;
+                        $rootScope.UserMobile = UserObj.UserMobile;
+                        $rootScope.Role = UserObj.UserRole;
+                        $rootScope.UserId = UserObj.UserId;
                         
-                                    $rootScope.UserName = UserObj.UserName;
-                                    $rootScope.OrgName = UserObj.OrgName;
-                                    $rootScope.OrgID = UserObj.OrgId;
-                                    $rootScope.SolutionType = UserObj.AccountType;
-                                    $rootScope.ImageData = localStorage.ProfileImage;
-                                    $rootScope.UserToken = UserObj.UserToken;
+                        $rootScope.UserName = UserObj.UserName;
+                        $rootScope.OrgName = UserObj.OrgName;
+                        $rootScope.OrgID = UserObj.OrgId;
+                        $rootScope.SolutionType = UserObj.AccountType;
+                        $rootScope.ImageData = localStorage.ProfileImage;
+                        $rootScope.UserToken = UserObj.UserToken;
+                       // $location.url('main');
+                        //$rootScope.AbsUrl = "http://localhost:23699/";
 
-                                    //$rootScope.AbsUrl = "http://localhost:23699/";
-
-                                    //  alert(JSON.parse(localStorage.users).UserRole);
-                             /*       if (JSON.parse(localStorage.users).UserRole == "Individual") {
-                                        $location.url('expense');
-                                    }
-                                    else if (JSON.parse(localStorage.users).UserRole == "SuperAdmin") {
-                                        $location.url('request');
-                                    }
-                                    else if (JSON.parse(localStorage.users).UserRole == "Admin") {
-                                        $location.url('main');
-                                    }
-                                    else if (JSON.parse(localStorage.users).UserRole == "Manager") {
-                                        $location.url('project');
-                                    }
-                                */
-                                    }
+                        //  alert(JSON.parse(localStorage.users).UserRole);
+                    /*       if (JSON.parse(localStorage.users).UserRole == "Individual") {
+                            $location.url('expense');
+                        }
+                        else if (JSON.parse(localStorage.users).UserRole == "SuperAdmin") {
+                            $location.url('request');
+                        }
+                        else if (JSON.parse(localStorage.users).UserRole == "Admin") {
+                            $location.url('main');
+                        }
+                        else if (JSON.parse(localStorage.users).UserRole == "Manager") {
+                            $location.url('project');
+                        }
+                    */
+                        }
                                    
                     profileService.GetImage($rootScope.UserId)
                        .then(function (data) {
@@ -113,8 +101,7 @@
                            else {
                                localStorage.ProfileImage = $rootScope.ProfileImage = "Images/Icon/profile.jpg";
                            }
-          
-               });
+                             });
     };
 
     $timeout($scope.init);
