@@ -53,9 +53,11 @@
 
         $scope.ShowNewActivityForm = function ()
         {
+     
             $scope.Employee = $rootScope.UserId + "(" + $rootScope.UserName + ")";
             $scope.ActivityType = "Detail";
             $scope.SelectProjectForm = true;
+           
             }
 
         $scope.AddActivity = function () {
@@ -150,7 +152,6 @@
             if ($scope.ActivityType == "Quick") {
                 $scope.activity_name = "";
                 $scope.activity_remarks = "";
-
                 $scope.SelectProjectForm = false;
                 $scope.QuickExpenseForm = true;
             }
@@ -162,20 +163,27 @@
                 $scope.NewActivityForm = true;
             }
         }
-
+        $scope.CancelProjectWindow = function () {
+            $scope.SelectProjectForm = false;
+        }
         $scope.exportToExcel = function (tableId) { // ex: '#my-table'
+            $scope.table = tableId;
+            // Add dialog asking
+            $scope.showExcelDialog = true;
          
-            var name = "Activities_" + $rootScope.UserId;
-
-            $scope.exportHref = Excel.tableToExcel(tableId, name);
-
-            $timeout(function () { location.href = $scope.exportHref; }, 100); // trigger download
-
         }
 
+        $scope.Download = function () {
+            var name = "Activities_" + $rootScope.UserId;
 
+            $scope.exportHref = Excel.tableToExcel($scope.table, name);
 
-
+            $timeout(function () { location.href = $scope.exportHref; }, 100); // trigger download
+        }
+      
+        $scope.CancelDialog = function () {
+            $scope.showExcelDialog = false;
+        }
 
         $timeout(function () {
            

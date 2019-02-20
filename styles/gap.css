@@ -154,7 +154,7 @@
     width: 100%;
     overflow: auto; /*Enable scroll if needed*/
     /*background-color: #e6e2e2;*/
-    background-color: rgba(10, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 .layout_modal_container {
     position: absolute;
@@ -165,41 +165,46 @@
     .layout_modal_Content {
         background-color: #fefefe;
         margin: 10% auto; /* 15% from the top and centered */
-        border: 4px solid #e6e2e2;
-        border-radius: 5px;
+        /*border: 4px solid #e6e2e2;*/
+        border-radius: 8px;
     }
 
 .layout_modal_header {
-    color: white;
-    font-size: large;
+    color: #fff;
+    /*font-size: large;*/
     text-align: left;
-    padding: 5px;
+    padding: 15px;
     margin: 0px;
     border-bottom: 1px solid grey;
-    background-color: #3f51b5;
+    background-color: #337ab7;
+    border-radius: 5px 5px 0px 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:16px;
+    box-sizing:border-box
     /*background-color:#4CAF50;*/
     /*background-color: #9898a5;*/
 }
 
     .layout_modal_header span{float:right;}
 
-    .layout_modal_body {
-        color: black;
-        /*font-size: small;*/
-        text-align: left;
-        padding: 15px;
-        margin: 0px;
-        
-    }
+.layout_modal_body {
+    color: black;
+    /*font-size: small;*/
+    text-align: left;
+    padding: 15px;
+    margin: 0px;
+    
+}
 
-    .layout_modal_footer {
-        color: black;
-        font-size: medium;
-        text-align: right;
-        padding: 2px;
-        margin-bottom: 5px;
-        padding-right:20px;
-    }
+.layout_modal_footer {
+    color: black;
+    font-size: medium;
+    text-align: right;
+    padding: 10px;
+    /*margin-bottom: 5px;
+        padding-right:20px;*/
+    border-top: 1px solid #e5e5e5;
+}
     
            /* Card - Shadow Box
 --------------------------------------------------------------------------------------------------------------- */
@@ -637,4 +642,10 @@ element.style {
 }
 .fa-3x {
     font-size: 2em;
+}
+
+.btn-header {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }

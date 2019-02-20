@@ -291,14 +291,23 @@
             return date;
         };
 
-        $scope.exportToExcel = function (tableId) { // ex: '#my-table'
-           // alert(1);
+        $scope.exportTransaction = function (tableId) { // ex: '#my-table'
+            
+            $scope.table = tableId;
+            $scope.showExcelDialog = true;
+            
+        }
+
+        $scope.Download = function () {
             var name = "Transaction_" + $scope.CurrentMonth.getMonth() + "_" + $scope.CurrentMonth.getFullYear();
 
             $scope.exportHref = Excel.tableToExcel(tableId, name);
 
             $timeout(function () { location.href = $scope.exportHref; }, 100); // trigger download
+        }
 
+        $scope.CancelDialog = function () {
+            $scope.showExcelDialog = false;
         }
 
         $timeout(function () {

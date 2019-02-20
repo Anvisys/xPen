@@ -19,8 +19,7 @@
         $scope.MgrApproved = 0;
         $scope.ActiveProjectsCount = 0;
         $scope.ActiveProjects = [{}];
-        alert($rootScope.Role);
-        alert('Setting Controller');
+
         if ($rootScope.Role == "Admin") {
             ShowAdmin();
         }

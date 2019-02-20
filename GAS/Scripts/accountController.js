@@ -5,11 +5,12 @@
         $scope.newAccount_progress = false;
         $scope.chartColors = ["#ffc67f", "#3a3a4d", "#0ed2c4"];
         $scope.series = ['Withdraw', 'Deposit'];
+
         var contentHeight = window.innerHeight - 100;
         $scope.ScreenHeight = contentHeight + "px";
 
-       var row1 = 0.5* contentHeight;
-        var row2 = 0.5 * contentHeight;
+       var row1 = 0.6* contentHeight;
+        var row2 = 0.4 * contentHeight;
         $scope.row1Height = row1 + "px";
         $scope.row2Height = row2 + "px";
 

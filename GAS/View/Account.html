@@ -8,13 +8,13 @@
 </head>
 <body>
 
-    <div class="container-fluid zero_margin">
+    <div class="container-fluid zero_all">
 
 
 
-        <div class="row padding-10 zero_margin">
+        <div class="row padding-10 zero_all">
 
-            <div class="col-xs-12 col-sm-8 padding-10">
+            <div class="col-xs-12 col-sm-8 padding-10" >
                 <div class="panel panel-default">
                     <div class="panel-heading bg_greyBlue">
                         Accounts
@@ -61,7 +61,7 @@
                     </table>
                 </div>
 
-                <div class="hidden-xs" style="margin-top:10px;">
+                <div class="hidden-xs col-sm-12" style="margin-top:10px; ">
                     <div class="panel panel-default">
                         <div class="panel-heading bg_greyBlue" style="background-color:#dbd7e3;">
                             Daily Transaction from {{accName}}
@@ -70,12 +70,12 @@
 
                         <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
                                 chart-data="data" chart-labels="labels" chart-options="accOptions"
-                                chart-series="series" style="width:100%;"></canvas>
+                                chart-series="series" style="width:100%;max-height:{{row2Height}};"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 padding-10">
-                <button ng-hide="true" class="btn btn-danger" ng-click="OpenNewAccount()">New Account</button>
+              
                 <div class="panel panel-default">
                     <div class="panel-heading bg_greyBlue">
                         Transaction from {{accName}} Accounts

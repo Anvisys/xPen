@@ -11,7 +11,9 @@
         $scope.thisDay = new Date();
         $scope.CurrentMonth = new Date();
         $scope.latestShowing = false;
-
+        $scope.transaction_date = new Date();
+        $scope.payment_date = new Date();
+   
         if (($scope.thisDay.getFullYear() <= $scope.CurrentMonth.getFullYear()) && ($scope.thisDay.getMonth() <= $scope.CurrentMonth.getMonth()) ) {
            
             $scope.latestShowing = true;
@@ -35,7 +37,6 @@
                 $scope.latestShowing = true;
             }
             
-
         }
 
         $scope.Previous = function () {
@@ -64,7 +65,6 @@
         }
         $scope.newShowTDSForm = function () {
             $scope.ShowTDSForm = true;
-            $scope.TDS_Payable = TDS
             $scope.tds_penalty = 0;
             $scope.tds_amount = 0;
             $scope.trans_remarks = "";
@@ -72,7 +72,6 @@
         $scope.PayTDS= function(TDS)
         {
             $scope.ShowTDSForm = true;
-            $scope.TDS_Payable = TDS
             $scope.tds_penalty = 0;
             $scope.tds_amount = TDS + $scope.tds_penalty;
         }
@@ -100,6 +99,13 @@
 
         }
 
+
+        $scope.newShowGSTForm = function () {
+            $scope.ShowGSTForm = true;
+            $scope.GST_penalty = 0;
+            $scope.gst_amount = 0;
+            $scope.trans_remarks = "";
+        }
 
         $scope.PayGST = function (p)
         {
@@ -160,10 +166,8 @@
                 $scope.gst_amount = 0;
                 $scope.showGSTBaseline = false;
             });
-
         }
-
-
+        
         $scope.SelectProject = function ()
         {
             $scope.ProjectID = 0;

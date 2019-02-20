@@ -72,7 +72,7 @@
                             <label class="heading_label">Paid Amount:</label> <label class="text_label" style="width:100px;"> {{GST_Paid}} </label>
                             </div>
                         <div class="col-xs-6">
-                            <button class="btn btn-success" style="margin:auto;" ng-click="ShowGSTForm=true" ng-show="GST_Payable>GST_Paid">Pay</button>
+                            <button class="btn btn-success" style="margin:auto;" ng-click="newShowGSTForm()" ng-show="GST_Payable>GST_Paid">Pay</button>
                         </div>
                             <div ng-show="GST_Paid>0">
                               <label class="heading_label"> Paid Date: </label><label class="text_label"> {{gstTransDate| date:"mediumDate"}}</label>  <label class="heading_label">Remarks:</label><label class="text_label" style="width:100px;"> {{gstTransRemarks}} </label><br />
@@ -185,49 +185,41 @@
 
 
         <div id="newTDSPaymentModal" ng-show="ShowTDSForm" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:660px;">
+            <div class="layout_modal_Content" style="width:690px;">
                 <div class="layout_modal_header">
                     TDS Payment <span ng-click="ShowTDSForm=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
                     <form class="TDSPay">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Project Name:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Project Number</label>
-                                </div>
-                            </div>
-
+                            
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label"> Payable: </label> {{TDS_Payable}}
                                 </div>
-                                <div class="col-sm-6" >
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Penalty</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="penalty" class="form-control" tabindex="1" ng-model="tds_penalty" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px;">
                                 <div class="col-sm-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">From Account: </label>
                                     <div class="col-sm-8">
                                         <select tabindex="2" name="Account" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList" required></select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Amount</label>
                                     <div class="col-sm-8">
                                         <input type="number" name="TdsAmount" class="form-control" tabindex="3" ng-model="tds_amount" required>
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Penalty</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="penalty" class="form-control" tabindex="1" ng-model="tds_penalty" required>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" style="margin-top: 10px;">
                                 <div class="col-sm-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Remarks</label>
                                     <div class="col-sm-8">
@@ -257,49 +249,41 @@
         </div>
 
         <div id="newGSTPaymentModal" ng-show="ShowGSTForm" class="layout_modal_Window">
-            <div class="layout_modal_Content" style="width:700px;">
+            <div class="layout_modal_Content" style="width:690px;">
                 <div class="layout_modal_header">
                     GST Payment<span ng-click="ShowGSTForm=false" title="Close" class="fa fa-close"></span>
                 </div>
                 <div class="layout_modal_body">
                     <form class="GSTPay">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Project Name: </label> 
-                                    <button class="btn btn-link" ng-click="SelectProject()">{{ProjectName}}</button><br />
-                                </div>
-                            </div>
-
+                           
                             <div class="row" style="margin-top:10px;">
-                                <div class="col-xs-6" >
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label"> GST : </label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="GSTPayble" class="form-control" tabindex="1" ng-model="GST_Payable" required>
-                                    </div>
+                                <div class="col-xs-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label"> Payble : </label>
+                                    {{GST_Payable}}
                                 </div>
-                                <div class="col-xs-6" >
-                                    <label for="colFormLabel" class="col-sm-4 col-form-label"> Penalty : </label>
-                                    <div class="col-sm-8">
-                                        <input type="number" name="GSTPenalty" class="form-control" tabindex="2" ng-model="GST_penalty" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" style="margin-top:10px;">
                                 <div class="col-xs-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label"> Account: </label>
                                     <div class="col-sm-8">
-                                        <select tabindex="3" name="Account" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList"required></select>
+                                        <select tabindex="3" name="Account" class="form-control" ng-model="selFromAcc" ng-options="acc.AccountName for acc in AccountList" required></select>
                                     </div>
-                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top:10px;">
                                 <div class="col-xs-6">
                                     <label for="colFormLabel" class="col-sm-4 col-form-label">Amount: </label>
                                     <div class="col-sm-8">
                                         <input type="number" name="GSTAmount" class="form-control" tabindex="4" ng-model="gst_amount" required>
                                     </div>
                                 </div>
+                                <div class="col-xs-6">
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label"> Penalty : </label>
+                                    <div class="col-sm-8">
+                                        <input type="number" name="GSTPenalty" class="form-control" tabindex="2" ng-model="GST_penalty" required>
+                                    </div>
                                 </div>
+                            </div>
 
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-xs-6">

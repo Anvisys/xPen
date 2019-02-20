@@ -42,7 +42,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="container-fluid zero_margin" style="max-height:{{row1Height}};overflow-x:hidden;overflow-y:scroll; width:100%;">
+                    <div class="container-fluid zero_margin" style="overflow-x:hidden;overflow-y:scroll; width:100%; height:{{row1Height}};">
                         <div style="max-height:{{row1Height}};width:100%;">
                             <div class="row" style="border-bottom:solid 1px #404040;;" ng-repeat="p in ProjectList" ng-click="ShowExpense(p.ProjectID)" ng-class-odd="'bg_lightGrey'">
                                 <div class="col-xs-12" style=" border-bottom:solid 1px #cccccc;">
@@ -67,7 +67,8 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-4" style="padding:5px;">
-                                    <uib-progressbar animate="false" value="dynamic" type="success"><b>{{p.WorkCompletion}}%</b></uib-progressbar>
+                                    <uib-progressbar animate="true" value="p.WorkCompletion" ng-model="p.WorkCompletion" type="success"><b>{{p.WorkCompletion}}%</b></uib-progressbar>
+
                                     <button class="btn btn-default btn-sm" ng-click="editStatus(p)" value="ddButton">{{p.Status}}</button>
                                     
                                     <a class="btn btn-primary btn-sm" href="#!PrjDetail/{{p.ProjectID}}">Show Details</a>
@@ -85,14 +86,14 @@
                     <span class="fa fa-plus" title="Create Project" ng-click="open()" style="margin-left:20px;"></span>
                 </div>-->
 
-                <div class="col-md-3 padding-10" >
+                <div class="col-md-3 hidden-sm hidden-xs padding-10" >
 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default"  style="height:{{row1Height}};">
                         <div class="panel-heading bg_greyBlue" style="background-color:#9898a5;">
                             Project Daily Expenses
                         </div>
 
-                        <div style="max-height:{{row1Height}};overflow-x:hidden;overflow-y:scroll;">
+                        <div style="overflow-x:hidden;overflow-y:scroll;">
                             <table style="width:100%;">
                                 <tr>
                                     <th>#</th>
@@ -130,7 +131,7 @@
                     <div class="panel-heading bg_greyBlue">Daily Expense / Received</div>
 
                     <canvas id="bar" class="chart chart-bar" chart-data="projectdata" chart-labels="labels" chart-colors="colors"
-                            chart-series="series" style="max-height:300px;width:100%;"></canvas>
+                            chart-series="series" style="max-height:{{row2Height}};width:100%;"></canvas>
                 </div>
             </div>
            
