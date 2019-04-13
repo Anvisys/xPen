@@ -8,28 +8,24 @@
 
     <div class="container-fluid">
         <div class="row form-group">
-            <div class="col-sm-6">
+            <!--<div class="col-sm-6">
                 <div class="form-inline" style="text-align:center;">
                 <label class="heading_label">Filter</label> 
-                <input class="form-control" style="width:250px;" ng-model="searchText">
+                <input class="form-control" style="width:250px;" ng-model="searchActivity">
                 </div>
-            </div>
+            </div>-->
             <div class="col-sm-6"></div>
         </div>
-        <div ng-hide="true" id="filter" class="row">
-            <div class="col-xs-12">
-                Status : <select tabindex="1" ng-model="selStatus" ng-options="x for x in Status"></select>
-
-                <span ng-click="FilterData()" class="fa fa-search"></span>
-            </div>
-
-        </div>
+ 
 
         <div id="review_list" class="row">
-            <div class="col-md-8 padding-10">
-                <div class="panel panel-default" style="position:relative;">
+            <div class="col-xs-12  col-md-8 padding-10">
+                <div class="panel panel-content" style="position:relative;">
                     <div class="panel-heading bg_greyBlue" style="height:40px;">
                         Work for Approval
+
+                        <input type="text" class="inline-filter" style="margin-left:20%;"
+                               placeholder="Search Text" ng-model="searchActivity">
                         <img on-toggle="" src="Images/Icon/excel.jpg" title="Export to Excel" ng-click="exportToExcel('#ActivityData')" style="width:30px;height:30px;border-radius:50%;
                              position: absolute;top:5px; right: 60px;" />
                         <img on-toggle="" src="Images/Icon/logo_Filter.png" title="Add New Project" ng-click="ToggleFilter()" style="width:30px;height:30px;border-radius:50%;
@@ -49,56 +45,68 @@
                             </li>
                         </ul>
                     </div>
-                    <div style="max-height:{{ScreenHeight}}; overflow-x:hidden; overflow-y:-webkit-paged-x;">
+                    <div class="panel-body" style="max-height:{{ScreenHeight}}; overflow-x:hidden; overflow-y:-webkit-paged-x;">
                         <div style="width:100%;">
-                            <div class="row" ng-repeat="ip in reviewList | filter:searchText" ng-class-odd="'bg_lightGrey'">
+                            <div class="row" ng-repeat="ip in reviewList | filter:searchActivity" ng-class-odd="'bg_lightGrey'">
 
-                                <div class="col-sm-2" style="padding-left:22px;padding-top:5px;padding-bottom:5px;">
-                                    <img ng-src="{{UserImages['UserImage_'+ ip.EmployeeID]}}" ng-m ng-model="UImage" style="border-radius:50%; height:50px; width:50px;border:1px double grey;" />
+                                <div class="col-xs-2 col-sm-2" style="padding-left:22px;padding-top:5px;padding-bottom:5px;">
+
+                                    <img class="image-profile" ng-src="{{UserImages['UserImage_'+ ip.EmployeeID]}}" ng-m ng-model="UImage" />
                                     <br />
-                                    {{ ip.Employee}}
+                                    <label class="inline-heading hidden-xs">Sent By:</label>   {{ ip.Employee}}
                                 </div>
 
-                                <div class="col-sm-4 padding-5">
-                                    {{ ip.ActivityName}} <br />
-                                    {{ ip.ActivityDescription}}<br />
-                                    {{ ip.ProjectName}}
+                                <div class="col-xs-8 col-sm-8 padding-5">
+                                    <div class="col-xs-12">
+                                        <b> Activity: </b> {{ ip.ActivityName}} ({{ ip.ProjectName}}),
+                                        <b>Remarks: </b> {{ ip.ActivityDescription}} <br />
 
-                                </div>
-                                <div class="col-sm-4 padding-5">
-                                    Expenses: {{ ip.Expenses | currency : "&#8377" : 2}} &nbsp;
-                                    Paid :  {{ ip.Advance + ip.Settlement | currency : "&#8377" : 2}}<br />
-                                    Payable:  {{ip.Expenses- ip.Advance - ip.Settlement | currency : "&#8377" : 2}}  <br />
-                                    <div class="btn-group " uib-dropdown style="width:130px;">
-                                        <button id="split-button" type="button" class="btn btn-danger btn-sm">{{ ip.ActivityStatus }}</button>
-                                        <button type="button" class="btn btn-danger btn-sm" uib-dropdown-toggle>
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Split button!</span>
-                                        </button>
-                                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button" style="z-index:100;">
+                                    </div>
+                                    <div class="col-xs-12" style="background-color:azure; border-radius:3px;">
+                                        <div class="col-xs-4">
+                                            <b>Expenses:</b><br /> {{ ip.Expenses | currency : "&#8377" : 2}}
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <b>Paid :</b> <br />  {{ ip.Advance + ip.Settlement | currency : "&#8377" : 2}}<br />
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <b>Payable:</b> <br />  {{ip.Expenses- ip.Advance - ip.Settlement | currency : "&#8377" : 2}}
+                                        </div>
 
-                                            <li role="menuitem"><a ng-click="Approve(ip)" ng-disabled="ip.ActivityStatus=='Approved'">Approve</a></li>
-                                            <li role="menuitem"><a ng-click="Reject(ip)">Reject</a></li>
-                                            <li class="divider"></li>
-                                            <li role="menuitem" ng-show="ip.Settlement== 0 && ip.ActivityStatus== 'Approved' && Role=='Admin'"><a ng-click="PayForm(ip)">Pay</a></li>
-                                        </ul>
+
+
                                     </div>
                                 </div>
-                                <div class="col-sm-2 padding-5">
-                                    <img ng-src="{{UserImages['UserImage_'+ ip.Approver]}}" ng-m ng-model="UImage" style="border-radius:50%; height:40px; width:40px;border:1px double grey;" />
-                                    <br />
-                                    {{ ip.ApproverName}}
-                                </div>
 
-                                <div ng-hide="true"><span class="fa fa-check" ng-click="Approve(ip)" ng-show="ip.ActivityStatus== 'Submitted'||ip.ActivityStatus=='Modified'||ip.ActivityStatus=='Request'"></span></div>
-                                <div ng-hide="true"><span class="fa fa-close" ng-click="Reject(ip)" ng-show="ip.ActivityStatus== 'Submitted'||ip.ActivityStatus=='Modified'||ip.ActivityStatus=='Request'"></span></div>
-                                <div ng-hide="true"><span class="fa fa-close" ng-click="PayForm(ip)" ng-show="ip.Settlement== 0 && ip.ActivityStatus== 'Approved' && Role=='Admin'"></span></div>
+
+                                <div ng-show="Role=='Manager'" class="col-xs-2 padding-5" style="text-align:center;">
+
+                                    <img class="image-profile-small" ng-src="{{UserImages['UserImage_'+ ip.Approver]}}" ng-m ng-model="UImage" />
+                                    <br />
+
+                                    <i class="fa fa-check fa-3x" ng-click="Approve(ip)" style="color:green"></i>
+                                    <i class="fa fa-3x fa-times" ng-click="Reject(ip)" style="color:red;"></i>
+                                </div>
+                                <div ng-show="Role=='Admin'" class="col-xs-2 padding-5" style="text-align:center;">
+
+                                    <img class="image-profile-small" ng-src="{{UserImages['UserImage_'+ ip.Approver]}}" ng-m ng-model="UImage" />
+                                    <br />
+                                    <label title="{{ip.ApproverName}}" class="inline-heading  hidden-xs">Owner:{{ ip.ApproverName}}</label>   <br />
+                                    <button type="button" class="btn btn-success btn-sm" ng-click="PayForm(ip)" >Pay</button>
+
+                                </div>
 
                             </div>
 
 
                         </div>
                     </div>
+
+                    <div ng-show="reviewList_progress" class="loader_div">
+                        <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
+                    </div>
+
+
                 </div>
             </div>
 
@@ -108,9 +116,8 @@
                 <div class="panel panel-default" style="position:relative;">
                     <div class="panel-heading bg_greyBlue" style="height:40px;">
                         Advance for Approval
-                        <img on-toggle="" src="Images/Icon/logo_Filter.png" title="Filter" ng-click="ToggleAdvanceFilter()" style="width:30px;height:30px;border-radius:50%;
-                             position: absolute;top:5px; right: 20px;" />
-
+                        
+                        <i class="fa fa-filter fa-3x btn-header" title="Filter" ng-click="ToggleAdvanceFilter()" style=" position: absolute;top:5px; right: 20px; color:white;"></i>
                     </div>
                     <div ng-show="ShowAdvanceFilter" class="filterdesign">
                         <ul style=" list-style-type: none;margin: 0;padding: 0;color:white;">
@@ -162,10 +169,6 @@
 
                                 </td>
 
-
-                                <td ng-hide="true"><span class="fa fa-check" ng-click="ApproveAdv(adv)" ng-show="adv.AdvanceStatus== 'Submitted'||adv.AdvanceStatus=='Modified'||adv.AdvanceStatus=='Request'"></span></td>
-                                <td ng-hide="true"><span class="fa fa-close" ng-click="RejectAdv(adv)" ng-show="adv.AdvanceStatus== 'Submitted'||adv.AdvanceStatus=='Modified'||adv.AdvanceStatus=='Request'"></span></td>
-                                <td ng-hide="true"><span class="fa fa-close" ng-click="PayFormAdv(adv)" ng-show="adv.AdvanceStatus== 'Approved' && Role=='Admin'"></span></td>
                             </tr>
                         </table>
                     </div>
@@ -223,20 +226,53 @@
         <div ng-show="paymentDiv" class="layout_modal_Window">
             <div class="layout_modal_Content" style="width:350px;">
                 <div class="layout_modal_header"> payment<span ng-click="Cancel()" class="fa fa-close"></span> </div>
-                <form name="newPayment" style="width:320px;margin:25px auto; text-align:left;">
-                    <label style="width:150px;">Name: </label> <input name="AccHolder" tabindex="0" type="text" ng-model="payment_name" style="width:150px;" required> <br />
-
-                    <div>
-                        <label style="width:150px;"> Account: </label> <select tabindex="2" style="width: 47%; height: 26px;" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts"></select><br />
-                    </div>
-                    <label style="width:150px;"> Amount :</label> <input name="Amount" tabindex="3" type="text" ng-model="paid_Amount" style="width:150px;" required /><br />
-                    <label style="width:150px;"> Remark :</label>  <input name="Remark" tabindex="4" type="text" ng-model="paid_Remarks" style="width:150px;" required /><br />
-                </form>
-                <div class="layout_modal_footerr" style="text-align:right;padding-right: 25px; padding-bottom: 8px;">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="PaySubmit()" ng-disabled="newPayment.AccHolder.$invalid || newPayment.Amount.$invalid || newPayment.Remark.$invalid">Add</button>
-                    &nbsp;&nbsp; <button class="btn btn-danger btn-sm" type="button" ng-click="Cancel()">Cancel</button>
+                <div class="layout_modal_body">
+                    <form name="newPayment">
+                        <div class="container-fluid">
+                            <div class="row" style=" margin-top:10px">
+                               
+                                    <label for="colFormLabel" class="col-xs-4 col-form-label">Name: </label>
+                                    <div class="col-xs-8">
+                                        <input type="text" name="AccHolder" class="form-control" tabindex="1" ng-model="payment_name" required>
+                                    </div>
+                            </div>
+                            <div class="row "  style=" margin-top:10px">
+                               
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Account: </label>
+                                    <div class="col-sm-8">
+                                        <select name="account" class="form-control" tabindex="2" ng-model="selAcc" ng-options="acc.AccountName for acc in Accounts "></select>
+                                    </div>
+                             
+                            </div>
+                            <div class="row"  style=" margin-top:10px">
+                              
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label">Amount : </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" name="Amount" tabindex="3" type="text" ng-model="paid_Amount" required>
+                                    </div>
+                          
+                            </div>
+                            <div class="row"  style=" margin-top:10px">
+                             
+                                    <label for="colFormLabel" class="col-sm-4 col-form-label"> Remark : </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" name="Remark" tabindex="4" type="text" ng-model="paid_Remarks" required>
+                                    </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
+                <div class="layout_modal_footer">
+                    <button class="btn btn-success" ng-click="PaySubmit()" ng-disabled="newPayment.AccHolder.$invalid || newPayment.Amount.$invalid || newPayment.account.$invalid || newPayment.Remark.$invalid">
+                        Add
+                    </button>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-danger btn-sm" type="button" ng-click="Cancel()">Cancel</button>
+                </div>
+                <div ng-show="Payment_progress" class="loader_div">
+                    <img style="height:20px;width:20px;z-index:15;position:absolute; top:50%;left:50%;" src="Images/Icon/ajax-loader.gif" />
+                </div>
             </div>
         </div>
 

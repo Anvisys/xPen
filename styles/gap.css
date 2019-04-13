@@ -649,3 +649,33 @@ element.style {
     height: 30px;
     border-radius: 50%;
 }
+
+
+.inline-heading {
+    font-size: small;
+    font-weight:bold;
+    font-style:italic;
+    display:inline;
+}
+
+.inline-filter {
+    width: 200px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    height: 25px;
+    color: black;
+}
+
+.image-profile {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border: 1px double grey;
+}
+.image-profile-small {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    border: 1px double grey;
+}

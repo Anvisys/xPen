@@ -10,13 +10,12 @@
             No Account or Project Added. First create a account and project
         </div>
         <div class="row zero_margin">
-            <div class="col-xs-12 col-md-5" style="margin-top:5px;">
+            <div class="col-xs-12 col-md-5" >
                 <div class="input-group" style="width:300px;">
 
                     <!--<div class="input-group-addon" style="padding:0px;">
                         <select tabindex="2" ng-model="filterStatus" ng-options="x for x in AccountList" style="margin:0px;"></select>
                     </div>-->
-
 
                     <select class="input-group-addon" ng-model="filterAccount" style="width:200px; height:40px;">
                         <option ng-selected="true" value="{{undefined}}">All</option>
@@ -35,12 +34,10 @@
             </div>
             <div class="col-md-3"></div>
             <div class="col-xs-12 col-md-4" style="float:right;margin-top:5px;">
-              
                     <button type="button" class="btn btn-sm btn-primary" ng-click="newSalaryOpen()">Salary</button>
                     <button type="button" class="btn  btn-sm btn-warning" ng-click="newTransferOpen()">Add Transfer</button>
                     <button type="button" class="btn  btn-sm btn-success" ng-click="newAdvanceOpen()">Advance</button>
                     <button type="button" class="btn  btn-sm btn-primary" ng-click="ShowExternalOpen()">External</button>
-         
             </div>
         </div>
 
@@ -49,7 +46,7 @@
 
         <div class="row">
 
-            <div class="panel panel-default" style="margin:10px; position:relative; z-index:2;">
+            <div class="panel panel-default" style="margin:10px; position:relative;z-index:2;">
                 <div class="panel-heading bg_greyBlue" style="height:40px;">
                     Transaction Details
                     <span ng-hide="true" ng-click="exportToExcel('#TransactionData')" title="Export to Excel" style="margin-left:20px;cursor:pointer;">Export <img width="10" height="10" src="../../Images/Icon/excel.jpg" /></span>
@@ -62,27 +59,27 @@
                         <div  class="row col-sm-12 padding-10" >
                             <div class="hidden-xs hidden-sm  hidden-md hidden-lg"><b>#</b></div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><b>Date Time</b></div>
-                            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"><b>Account</b></div>
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><b>Account</b></div>
                             <div class=" hidden-xs  hidden-sm hidden-md hidden-lg"><b>Type</b></div>
-                            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2"><b>Amount</b></div>
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><b>Amount</b></div>
                             
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><b>Balance</b></div>
-                            <div class="col-sm-1  hidden-xs col-md-2 col-lg-2"><b>Account Balance</b></div>
-                            <div class="col-sm-1  hidden-xs col-md-2 col-lg-2"><b>Name /  Remarks</b></div>
+                            <div class="col-sm-2  hidden-xs col-md-2 col-lg-2"><b>Account Balance</b></div>
+                            <div class="col-sm-2  hidden-xs col-md-2 col-lg-2"><b>Name /  Remarks</b></div>
                           
 
                         </div>
                         <div class="row repeated-item" style="border-top:solid 1px blue" ng-repeat="expense in expenses|orderBy:sortDate| filter:{AccountName: filterAccount}:false">
-                            <div class="col-sm-1  hidden-xs  hidden-md hidden-lg">{{ $index + 1 }}</div>
+                            <div class="hidden-sm  hidden-xs  hidden-md hidden-lg">{{ $index + 1 }}</div>
                             <div class=" hidden-xs col-sm-2 col-md-2 col-lg-2"><b>{{ $index + 1 }}-</b> {{ expense.EntryDate| date:"ddMMM,yy@h:mma" }}</div>
-                            <div class="col-xs-2 col-sm-2 hidden-md hidden-lg">{{ expense.EntryDate| date:"ddMMM,yy" }}</div>
-                            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">{{ expense.AccountName}}</div>
-                            <div class="col-sm-1  hidden-xs hidden-md hidden-lg">{{ expense.TransType}}</div>
+                            <div class="col-xs-2 hidden-sm hidden-md hidden-lg">{{ expense.EntryDate| date:"ddMMM,yy" }}</div>
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">{{ expense.AccountName}}</div>
+                            <div class="hidden-sm  hidden-xs hidden-md hidden-lg">{{ expense.TransType}}</div>
                             <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><P ng-hide="expense.Withdraw==0">W: {{ expense.Withdraw | currency : "&#8377" : 2}}</P><p ng-hide="expense.Deposit==0">D: {{ expense.Deposit| currency : "&#8377" : 2}}</p></div>
 
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">{{ expense.Balance| currency : "&#8377" : 2}}</div>
-                            <div class="col-sm-1  hidden-xs col-md-2 col-lg-2">{{ expense.AccountBalance| currency : "&#8377" : 2}}</div>
-                            <div class="col-sm-1  hidden-xs col-md-2 col-lg-2">{{ expense.TransName}} / {{ expense.TransactionRemarks}}</div>
+                            <div class="col-sm-2  hidden-xs col-md-2 col-lg-2">{{ expense.AccountBalance| currency : "&#8377" : 2}}</div>
+                            <div class="col-sm-2  hidden-xs col-md-2 col-lg-2"> {{ expense.TransName}} {{ expense.TransactionRemarks}}</div>
                          
 
                         </div>

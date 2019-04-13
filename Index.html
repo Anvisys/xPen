@@ -97,9 +97,9 @@
 </head>
 <body ng-controller="indexCtrl">
 
-    <div class="container-fluid zero_all">
+    <div class="container-fluid zero_all" >
         <div class="row zero_all" id="MyHeaderSmall" style="position:static;">
-            <header id="header" style="position:static;width:100%;">
+            <header id="header" style="position:absolute;width:100%;">
                 <div class="row  bg_11 col-xs-12 hidden-md hidden-lg zero_all" style="height:60px;">
 
                     <div class="col-xs-4">
@@ -136,7 +136,7 @@
             </header>
 
         </div>
-        <div class="row zero_all" id="MyHeader" style="position:static;">
+        <div class="row zero_all" id="MyHeader" style="position:absolute;">
             <header id="header" style="position:fixed;width:100%;z-index:999;">
                 <div class="row  bg_11 hidden-xs hidden-sm zero_all theme_header" style="height:60px;">
                     <div class="col-md-5">
@@ -147,7 +147,7 @@
                     </div>
                     <div class="col-sm-5">
                         <div id="profile_button" style="float:right; margin-right:10px; ">
-                            <img id="ImgProfileIcon" ng-src="{{ProfileImage}}" style="height:50px;width:50px; border-radius:50%;" />
+                            <img id="ImgProfileIcon" ng-src="{{ImageData}}" style="height:50px;width:50px; border-radius:50%;" />
                             <b ng-mouseover="ShowProfile1()" class="caret"></b>
                             <label id="lblAdmin" text="Amit Bansal">{{UserName}}   as</label>
                             <label id="lblUType" text="Admin">{{Role}}</label>
@@ -169,7 +169,7 @@
 
 
 
-        <div class="container-fluid" style="height:100%;margin-top: 50px; ">
+        <div class="container-fluid" style="height:100%;margin-top: 60px; ">
             <div class="row">
                 <!--<div class="row zero_margin" style="position:relative; ">
             -->
@@ -177,7 +177,7 @@
                     <div style=" position: fixed; height: 100%; background-color: #e7e7e7; width: inherit; display: inline;">
                         <div style="height:130px;background-image:url('Images/Icon/user-img-background.jpg');">
                             <div id="profile_button" style="text-align:center; ">
-                                <img id="ImgProfileIcon" ng-src="{{ProfileImage}}" style="height:65px;width:65px; border-radius:50%;margin:7px;" />
+                                <img id="ImgProfileIcon" ng-src="{{ImageData}}" style="height:65px;width:65px; border-radius:50%;margin:7px;" />
                                 <br />
                                 <p>
                                     <label id="lblAdmin" text="Amit Bansal">{{UserName}} as</label>

@@ -292,11 +292,12 @@
         }, 10);
 
         function getDataForApproval(status) {
-
+            $scope.reviewList_progress = true;
             if ($rootScope.Role == "Manager") {
 
                 activityService.GetActivitiesByApprover($scope.UserID, status)
-                     .then(function (data) {
+                    .then(function (data) {
+                        $scope.reviewList_progress = false;
                          //alert(JSON.stringify(data));
                          $scope.reviewList = data;
 
@@ -310,7 +311,8 @@
             else if ($rootScope.Role == "Admin") {
               
                 activityService.GetAll(status)
-                     .then(function (data) {
+                    .then(function (data) {
+                        $scope.reviewList_progress = false;
                          //alert(JSON.stringify(data));
                          $scope.reviewList = data;
 
