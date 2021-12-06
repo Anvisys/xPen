@@ -1,4 +1,4 @@
-﻿.bg_1 {
+.bg_1 {
     background-image: radial-gradient(#fff,#f7f7f7);
     opacity: 0.95;
 }
@@ -11,7 +11,15 @@
 
         /* Top Bar
 --------------------------------------------------------------------------------------------------------------- */
-#topbar{padding:1px 0; font-size:.8rem; text-transform:uppercase; position: fixed;top: 0;right: 0;left:0;}
+#topbar {
+	padding: 1px 0;
+	font-size: .8rem;
+	text-transform: uppercase;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+}
 
 #topbar *{margin:0; padding:0; list-style:none;}
 #topbar  ul li {display:inline-block; margin-right:0px; padding-right:15px;}
@@ -20,7 +28,7 @@
 
 /* Top Bar */
 #topbar, #topbar ul li{border-color:rgba(255,255,255,.2);}
-#topbar div:last-of-type li:first-child a{color:#ffffff;}
+/*#topbar div:last-of-type li:first-child a{color:#ffffff;}*/
          #topbar li{font-size:small;color:#000;}
 	  #topbar a{font-size:small;color:#000;}	 
 		 
@@ -198,11 +206,26 @@
 }
 
 
-@media (max-width: 800px) {
-    .padding-10 {
-        padding: 0px !important;
-        margin: 0px;
-    }
+@media (max-width: 767px) {
+	.padding-10 {
+		padding: 0px !important;
+		margin: 0px;
+	}
+	#topbar {
+		padding-top: 20px;
+	}
+	.top-main-menu{
+		margin-right:20px !important;
+		padding:6px 12px !important;
+		background-color:transparent !important;
+		border:0;
+	}
+	.top-main-menu .glyphicon {
+		font-size: 24px;
+	}
+	#topbar ul li {
+		display: inline-block;
+	}
 }
 
 	@media (max-width: 800px) {
