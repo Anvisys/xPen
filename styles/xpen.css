@@ -224,7 +224,8 @@
 		font-size: 24px;
 	}
 	#topbar ul li {
-		display: inline-block;
+		display: block;
+		padding:10px;
 	}
 }
 
