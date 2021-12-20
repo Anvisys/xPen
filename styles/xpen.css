@@ -150,8 +150,8 @@
 		 }
 
 
-           	@media (max-width: 800px) {
-	   .Description_Left{
+@media (max-width: 800px) {
+	  .Description_Left{
 		width:90%; margin:auto; padding-top:10px;
 	  }
 	}
@@ -205,7 +205,12 @@
     margin:0px;
 }
 
-
+.dropdown-layout {
+	width: 120px;
+	height: 35px;
+	border: 1px solid #cfbfbf;
+	border-radius: 5px;
+}
 @media (max-width: 767px) {
 	.padding-10 {
 		padding: 0px !important;
@@ -250,8 +255,14 @@
             }
 }
 .loginBox {
-    top: 60px!important;
-    right: 97px!important;
+	transition: all linear 0.5s;
+	position: fixed;
+	top: 35px;
+	right: 150px;
+	elevation: above;
+	width: 300px;
+	background-color: #efefef;
+	border-radius: 5px;
 }
 .project_text {
     font-size: 13px;
@@ -297,6 +308,14 @@
 	margin: 0 20px;
 }
 @media (max-width: 767px) {
+	.loginBox {
+		top: 50px;
+		right: 0;
+		elevation: above;
+		width: 100%;
+		background-color: #efefef;
+		border-radius: 5px;
+	}
 	.footer-titles div {
 		margin: 10px 25px;
 	}
