@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="styles/xpen.css" />
 </head>
 <body>
     <div class="container-fluid" style="background-color:#BED4FF;padding:0px;">
@@ -10,7 +11,7 @@
 
                 <img src="Login/Images/dashboard_icon.png" style="width:100%; border-radius:3px;" />
             </div>
-            <div class="col-sm-3" style="text-align:left;">
+            <div class="col-sm-4" style="text-align:left;">
 
                 <p style="font-size:20px;color:black;"> You have selected :<strong style="color:blueviolet;"> {{SelAccountType}}</strong> type plan</p>
 
@@ -39,8 +40,8 @@
 
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div style="width:500px;background-color:#efefef;  border-radius:5px;">
+            <div class="col-sm-5">
+                <div style="width:500px;background-color:#efefef;  border-radius:5px;position:absolute;top:-49px;right:30px">
                     <div class="layout_modal_header" style="background-color:#8093B8">
                         Registration Form
                     </div>
@@ -48,7 +49,7 @@
                         <div class="container-fluid ">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <select tabindex="1" ng-model="SelAccountType" ng-options="x for x in AccountType" ng-change="SelectionChange()" style="margin:10px;"></select>
+                                    <select tabindex="1" class="dropdown-layout" ng-model="SelAccountType" ng-options="x for x in AccountType" ng-change="SelectionChange()" style="margin:10px;"></select>
                                 </div>
                             </div>
                             <div class="row">
@@ -95,7 +96,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-primary" ng-click="Register()" style="margin:20px;">Register</button>
+                            <button type="button" class="btn btn-primary" ng-click="Register()" style="margin:20px 0;">Register</button>
 
                         </div>
                     </form>
