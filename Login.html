@@ -56,7 +56,7 @@
         <div id="topbar" class="row bg_1 hidden-xs zero_margin" style="height:60px;position:fixed; z-index:5;">
             <div style="margin-top:15px;">
                 <div class="col-md-5 col-sm-5">
-                    <img src="Images/Icon/logo_xpen_blue_transp.png" style="height:30px;width:30px; margin-left:20px;" />
+                    <a href="#"><img src="Images/Icon/logo_xpen_blue_transp.png" style="height:30px;width:30px; margin-left:20px;" /></a>
                 </div>
                 <div class="col-md-2 col-sm-2" style="text-align:center;">
                     <h3 class="center_heading">xPen</h3>
@@ -92,11 +92,12 @@
                 </form>
             </div>
 
-            <div class="row" style="width:200px;height:30px;text-align:center; margin-top:10px; ">
+            <div class="row" style="text-align:center; margin-top:10px; margin-bottom:10px;">
                 <img ng-show="progress" style="height:20px;width:20px;z-index:15;" src="Images/Icon/ajax-loader.gif" />
-                <a href="#!forgot" ng-hide="progress" ng-click="showlogin=false" style="left:40px;position:absolute;text-decoration:none;">Forgot Password</a>
+                <a href="#!forgot" ng-hide="progress" ng-click="showlogin=false">Forgot Password</a>
+                <label class="response_label">{{response}}</label>
             </div>
-            <label class="response_label" style="width:180px;margin-left:10px;height:20px;">{{response}}</label>
+            
             <div ng-show="progress" style="width:100%;height:100%; position:absolute; top:0px;left:0px; background-color: rgba(0,0,0,0.05);text-align:center;">
 
             </div>
@@ -111,32 +112,10 @@
 
 
     <style>
-        .loginBox {
-            transition: all linear 0.5s;
-            position: fixed;
-            top: 35px;
-            right: 150px;
-            elevation: above;
-            height: 220px;
-            width: 300px;
-            background-color: #efefef;
-            border-radius: 5px;
-        }
-
-        .layout_modal_header {
-            color: white;
-            font-size: medium;
-            text-align: left;
-            padding: 5px;
-            margin: 0px;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            background-color: #4CAF50;
-        }
-
-            .layout_modal_header span {
-                float: right;
-            }
+        
+        .layout_modal_header span {
+            float: right;
+         }
 
         .response_label {
             font-size: smaller;
