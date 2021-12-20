@@ -257,8 +257,8 @@
 .loginBox {
 	transition: all linear 0.5s;
 	position: fixed;
-	top: 35px;
-	right: 150px;
+	top: 60px;
+	right: 98px;
 	elevation: above;
 	width: 300px;
 	background-color: #efefef;
