@@ -2,35 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <style>
+        .position-absolute {
+            position: absolute;
+            top:0;
+            right:0;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid" style="background-color:#BED4FF;padding:0px;">
-        <div class="row" style="height:50px;"></div>
-
-        <div class="row">
-            <div class="col-sm-6">
-
+        <div class="row" style="position:relative;">
+            <div class="col-sm-6 col-xs-12">
                 <img src="Login/Images/forgot.png" style="height:300px;text-align:right;margin-left: 141px;" />
-
-
             </div>
-            <div class="col-sm-6">
-                <div style="height:200px; width:400px;background-color:#efefef;  border-radius:5px;">
+            <div class="col-sm-6 col-xs-12 position-absolute">
+                <div style="height:200px; width:auto;background-color:#efefef;border-radius:5px;float:right;margin-right:95px;">
                     <div class="layout_modal_header">
                         Retrieve Password
                     </div>
                     <div class="container-fluid ">
-
                         <div class="row">
-                            <div class="col-xs-6"><input type="text" placeholder="Contact Mobile" ng-model="ContactMobile" style="height:30px;padding: 5px; width:150px;margin:10px;" /></div>
-                            <div class="col-xs-6">
-                                <input type="text" placeholder="Contact Email" ng-model="ContactEmail" style="height:30px;padding: 5px; width:150px;margin:10px;" />
-
+                            <div class="col-xs-12"><input type="text" placeholder="Contact Mobile" ng-model="ContactMobile" style="height:30px;padding: 5px; width:150px;margin-top:10px;" /></div>
+                            <div class="col-xs-12">
+                                <input type="text" placeholder="Contact Email" ng-model="ContactEmail" style="height:30px;padding: 5px; width:150px;margin-top:10px;" />
                             </div>
                         </div>
-
-                        <button type="button" style="margin-left: 29px;" class="btn btn-primary" x:name="btnLogin" ng-click="Forgot()">Submit</button>
-
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary" x:name="btnLogin" ng-click="Forgot()">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
