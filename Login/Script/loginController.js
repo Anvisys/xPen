@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
@@ -23,7 +23,7 @@
     function LoginController($scope, $rootScope, UserService, $location, $timeout) {
 
           //  $rootScope.APIUrl = "http://localhost:23699/";
-               $rootScope.APIUrl = "http://www.kevintech.in/GAService/";
+               $rootScope.APIUrl = "http://www.kevintech.in/xPen-WebApi/";
         $rootScope.Role = "Visitor";
         $scope.showlogin = false;
         $scope.progress = false;
