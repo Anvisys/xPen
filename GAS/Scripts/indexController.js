@@ -1,9 +1,9 @@
-﻿(function () {
+(function () {
 
     var app = angular.module('gas');
 
     app.controller('indexCtrl', function ($timeout,$location,profileService,$scope,$rootScope,$cookies) {
-          $rootScope.APIUrl = "http://www.kevintech.in/GAService/";
+        $rootScope.APIUrl = "http://www.kevintech.in/xPen-WebApi/";
          //$rootScope.APIUrl = "http://localhost:23699/";
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
