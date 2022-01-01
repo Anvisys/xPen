@@ -100,10 +100,10 @@
     <div class="container-fluid zero_all" >
         <div class="row zero_all" id="MyHeaderSmall" style="position:static;">
             <header id="header" style="position:absolute;width:100%;">
-                <div class="row  bg_11 col-xs-12 hidden-md hidden-lg zero_all" style="height:60px;">
+                <div class="bg_11 col-xs-12 hidden-md hidden-lg zero_all" style="padding:10px 0;">
 
                     <div class="col-xs-4">
-                        <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px;  margin-left:20px;" />
+                        <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px;" />
                     </div>
                     <div class="col-xs-4" style="text-align:center;">
                         <h3 class="center_heading" style="color:white;">{{ OrgName}}</h3>
@@ -140,15 +140,15 @@
             <header id="header" style="position:fixed;width:100%;z-index:999;">
                 <div class="row  bg_11 hidden-xs hidden-sm zero_all theme_header" style="height:60px;">
                     <div class="col-md-5">
-                        <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px; margin-left:20px;" />
+                        <img src="Images/Icon/logo_xpen_white_transp.png" style="height:30px;width:30px; margin-left:20px;margin-top:12px;" />
                     </div>
                     <div class="col-md-2" style="text-align:center;">
-                        <h4 style="color:#fff;"> {{ OrgName}}</h4>
+                        <h4 style="color:#fff;margin-top:20px;"> {{ OrgName}}</h4>
                     </div>
                     <div class="col-sm-5">
-                        <div id="profile_button" style="float:right; margin-right:10px; ">
+                        <div id="profile_button" style="float:right; margin-right:10px;cursor:pointer;" ng-click="ShowProfile1()">
                             <img id="ImgProfileIcon" ng-src="{{ImageData}}" style="height:50px;width:50px; border-radius:50%;" />
-                            <b ng-mouseover="ShowProfile1()" class="caret"></b>
+                            <b class="caret"></b>
                             <label id="lblAdmin" text="Amit Bansal">{{UserName}}   as</label>
                             <label id="lblUType" text="Admin">{{Role}}</label>
                         </div>
