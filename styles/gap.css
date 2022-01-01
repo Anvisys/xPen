@@ -1,4 +1,4 @@
-﻿ .nav, .pagination, .carousel, .panel-title, a, span { cursor: pointer; } 
+ .nav, .pagination, .carousel, .panel-title, a, span { cursor: pointer; } 
 
  body{
      margin:0px;
@@ -58,19 +58,22 @@
             min-width: 120px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index:9;
+            top:34px;
+            right:20px;
             text-align:center;
             border-radius:5px;
     
         }
 
 
-        .layout-dropdown-content a{
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            background-color:transparent;
-        }
+            .layout-dropdown-content a {
+                color: black;
+                padding: 8px 16px;
+                border-bottom: 1px solid #a19292;
+                text-decoration: none;
+                display: block;
+                background-color: transparent;
+            }
 
         .layout-dropdown-content button {
             color: black;
@@ -678,4 +681,14 @@ element.style {
     height: 25px;
     width: 25px;
     border: 1px double grey;
+}
+
+@media (max-width: 767px) {
+    .layout-dropdown-content {
+        position: absolute;
+        top: 4px;
+        right: -15px;
+        text-align: center;
+        border-radius: 5px;
+    }
 }
