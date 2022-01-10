@@ -4,6 +4,10 @@
 
     app.controller('indexCtrl', function ($timeout,$location,profileService,$scope,$rootScope,$cookies) {
         $rootScope.APIUrl = "http://www.kevintech.in/xPen-WebApi/";
+        $rootScope.ImageUrl = "http://www.kevintech.in/xPen-WebApi/";
+
+
+
          //$rootScope.APIUrl = "http://localhost:23699/";
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
@@ -12,7 +16,6 @@
 
 
         $scope.LogOff = function () {
-           
           $rootScope.UserId = 0;
           localStorage.users = null;
           localStorage.ProfileImage = null;
@@ -28,7 +31,7 @@
 
         $scope.ShowDDMenu = function ()
         {
-         
+            alert("Show DD Menu");
             $scope.DDMenu = !$scope.DDMenu;
         }
 
@@ -50,27 +53,26 @@
         //};
 
         $scope.init = function () {
-                if (localStorage.users === null || typeof  localStorage.users === 'undefined') {
+            alert(localStorage.users);
+            if (!localStorage.users) {
+                alert(1);
                 window.location.href = 'Login.html';
                 return;
                 }
-                else if (localStorage.users === null) {
-                        window.location.href = 'Login.html';
-                        return;
-                    }
-                    else {
-                        var UserObj = JSON.parse(localStorage.users);
-                        $rootScope.Email = UserObj.UserEmail;
-                        $rootScope.UserMobile = UserObj.UserMobile;
-                        $rootScope.Role = UserObj.UserRole;
-                        $rootScope.UserId = UserObj.UserId;
+            else {
+                alert(2);
+                var UserObj = JSON.parse(localStorage.users);
+                $rootScope.Email = UserObj.UserEmail;
+                $rootScope.UserMobile = UserObj.UserMobile;
+                $rootScope.Role = UserObj.UserRole;
+                $rootScope.UserId = UserObj.UserId;
                         
-                        $rootScope.UserName = UserObj.UserName;
-                        $rootScope.OrgName = UserObj.OrgName;
-                        $rootScope.OrgID = UserObj.OrgId;
-                        $rootScope.SolutionType = UserObj.AccountType;
-                        $rootScope.ImageData = localStorage.ProfileImage;
-                        $rootScope.UserToken = UserObj.UserToken;
+                $rootScope.UserName = UserObj.UserName;
+                $rootScope.OrgName = UserObj.OrgName;
+                $rootScope.OrgID = UserObj.OrgId;
+                $rootScope.SolutionType = UserObj.AccountType;
+                $rootScope.ImageData = localStorage.ProfileImage;
+                $rootScope.UserToken = UserObj.UserToken;
                        // $location.url('main');
                         //$rootScope.AbsUrl = "http://localhost:23699/";
 
@@ -104,7 +106,7 @@
                              });
     };
 
-    $timeout($scope.init);
+    $timeout($scope.init,10);
     });
 
 })();

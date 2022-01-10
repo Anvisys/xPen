@@ -81,3 +81,4 @@ packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/RoslynLa
 packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/RoslynLatest/vbc.exe.config
 packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/RoslynLatest/vbc.rsp
 packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/tools/RoslynLatest/VBCSCompiler.exe
+/packages

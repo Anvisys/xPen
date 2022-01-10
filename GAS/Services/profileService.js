@@ -14,19 +14,21 @@
         service.ChangePassword = ChangePassword;
         return service;
 
+
         function GetImage(id) {
+            console.log("Image URL" + $rootScope.ImageUrl);
             // alert(id);
-            return $http.get($rootScope.APIUrl + 'api/Image/' + id)
+            return $http.get($rootScope.ImageUrl + 'api/Image/' + id)
                 .then(returndata, handleError('Error getting all users'));
         }
 
         function GetByMobile(mobile) {
-            return $http.get($rootScope.APIUrl + 'api/User/Mobile/' + mobile)
+            return $http.get($scope.ImageUrl + 'api/User/Mobile/' + mobile)
                 .then(returndata, handleError('Error getting user for Mobile'));
         }
 
         function ChangePassword(userId,pwd) {
-            return $http.get($rootScope.APIUrl + 'api/User/Change/UserID/' + userId + "/lock/" + pwd)
+            return $http.get($rootScope.ImageUrl + 'api/User/Change/UserID/' + userId + "/lock/" + pwd)
                 .then(returndata, handleError('Error getting user for Mobile'));
         }
      
