@@ -6,8 +6,6 @@
         $rootScope.APIUrl = "http://www.kevintech.in/xPen-WebApi/";
         $rootScope.ImageUrl = "http://www.kevintech.in/xPen-WebApi/";
 
-
-
          //$rootScope.APIUrl = "http://localhost:23699/";
         var contentHeight = window.innerHeight - 150;
         $scope.ScreenHeight = contentHeight + "px";
