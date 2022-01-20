@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
@@ -61,18 +61,22 @@
                     </table>
                 </div>
 
-                <div class="hidden-xs col-sm-12" style="margin-top:10px; ">
-                    <div class="panel panel-default">
-                        <div class="panel-heading bg_greyBlue" style="background-color:#dbd7e3;">
-                            Daily Transaction from {{accName}}
+                <div class="row">
+                    <div class="hidden-xs col-sm-12" style="margin-top:10px; ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading bg_greyBlue" style="background-color:#dbd7e3;margin-bottom:10px;">
+                                Daily Transaction from {{accName}}
+                            </div>
+
+
+                            <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
+                                    chart-data="data" chart-labels="labels" chart-options="accOptions"
+                                    chart-series="series" style="width:100%;max-height:{{row2Height}};"></canvas>
                         </div>
-
-
-                        <canvas id="bar" class="chart chart-bar" chart-colors="chartColors"
-                                chart-data="data" chart-labels="labels" chart-options="accOptions"
-                                chart-series="series" style="width:100%;max-height:{{row2Height}};"></canvas>
                     </div>
                 </div>
+
+
             </div>
             <div class="col-xs-12 col-sm-4 padding-10">
               
