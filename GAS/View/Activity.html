@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
@@ -63,7 +63,7 @@
 
                     </div>
 
-                    <div ng-show="activityList.length>0" class="container-fluid zero_margin" style="max-height:325px;overflow-x:hidden;overflow-y:scroll; width:100%;">
+                    <div ng-show="activityList.length>0" class="container-fluid zero_margin" style="max-height:325px;overflow-x:hidden;overflow-y:auto; width:100%;">
                         <div id="ActivityData" style="width:100%;">
 
                             <div class="row" ng-repeat="activity in activityList| filter:filterActivity" ng-click="ShowExpense(activity.ActivityID)">
@@ -114,7 +114,7 @@
                         Project Daily Expenses
                     </div>
 
-                    <div style="max-height:{{screenHeight}};overflow:scroll;">
+                    <div style="max-height:{{screenHeight}};overflow:auto;">
                         <table style="width:100%;">
                             <tr>
                                 <th>#</th>
