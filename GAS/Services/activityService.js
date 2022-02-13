@@ -73,7 +73,6 @@
 
 
         function GetActivitiesByEmployee(id, status) {
-
             return $http.get($rootScope.APIUrl + 'api/Activity/Organization/' + $rootScope.OrgID + '/Employee/' + id + '/Status/' + status)
                 .then(returndata, handleError('Error getting all users'));
         }

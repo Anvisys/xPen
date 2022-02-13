@@ -14,23 +14,17 @@
                 <h4 >{{Dashboard}}</h4>
             </div>
             <div class="col-sm-6" style="text-align:right;">
-             
                     <button class="btn btn-primary btn-sm " ng-hide="Role!='Admin'" ng-click="ShowAdmin()">Admin</button>
                     <button type="button" class="btn btn-primary btn-sm" ng-hide="Role=='Employee'" ng-click="ShowManager()">Manager</button>
                     <button type="button" class="btn btn-primary btn-sm" ng-hide="Role=='Employee'" ng-click="ShowEmployee()">Employee</button>
-
             </div>
         </div>
         
         <div class="container-fluid" ng-show="EmployeeDashboard" id="EmployeeDashboard" >
-
             <div class="row">
-
                 <div class="col-sm-4">
                     <div class="card mb-5">
-
                         <div class="container1">
-
                             <div class="row">
                                 <div class="col-xs-8">
                                     <h4 style="color: #673AB7;"><b>Inprogress Expense</b></h4>
@@ -40,18 +34,13 @@
                                     <p>Amount:<h4><b>{{IPValue| currency : "&#8377" : 2}}</b></h4></p>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
-
-
                 </div>
+
                 <div class="col-sm-4">
                     <div class="card mb-5">
-
                         <div class="container1">
-
                             <div class="row">
                                 <div class="col-xs-8">
                                     <h4 style="color: #ff9800;"><b>Submitted Expense</b></h4>
@@ -61,8 +50,6 @@
                                     <p>Amount:<h4><b>{{SubmittedValue|currency : "&#8377" : 2}}</b></h4></p>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -91,7 +78,7 @@
             <div class="row">
 
                 <div class="col-sm-4">
-                    <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{ TodayExpense|currency : "&#8377" : 2 }}</h4></div>
+                    <div class="shadow p-3 mb-5 bg-c1 rounded">Today Expense:<h4> {{ EmpTodayExpense|currency : "&#8377" : 2 }}</h4></div>
                     <div class="shadow p-3 mb-5 bg-c2 rounded">Today Approved amount:<h4> {{ApprovedValue|currency : "&#8377" : 2}}</h4> </div>
 
 

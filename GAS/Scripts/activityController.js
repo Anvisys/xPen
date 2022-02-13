@@ -203,13 +203,11 @@
             console.log($rootScope.UserId, $scope.filterStatus);
             activityService.GetActivitiesByEmployee($rootScope.UserId, $scope.filterStatus)
                 .then(function (data) {
-                 
-                         $scope.activityList = data.$values;
-
-                         GetExpenseData(data.$values[0].ActivityID);
+                    if (data.$values.length > 0) {
+                        $scope.activityList = data.$values;
+                        GetExpenseData(data.$values[0].ActivityID);
+                    }
                      });
-            
-           
         }
 
         function GetProjectList() {
@@ -246,7 +244,6 @@
         $scope.ShowExpense=function(activityID)
         {
             GetExpenseData(activityID);
-            
         }
 
         function GetExpenseData(ID)

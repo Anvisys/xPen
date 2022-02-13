@@ -46,7 +46,7 @@
 
         function GetDailyExpense(id)
         {
-            return $http.get($rootScope.APIUrl + 'api/DailyExpense/Employee/' + id)
+            return $http.get($rootScope.APIUrl + 'api/DailyExpense/' + $rootScope.OrgID +'/Employee/' + id)
                .then(returndata, handleError('Error getting all users'));
 
         }

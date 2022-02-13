@@ -51,14 +51,11 @@
         //};
 
         $scope.init = function () {
-            alert(localStorage.users);
-            if (!localStorage.users) {
-                alert(1);
+            if (localStorage.users === null) {
                 window.location.href = 'Login.html';
                 return;
                 }
             else {
-                alert(2);
                 var UserObj = JSON.parse(localStorage.users);
                 $rootScope.Email = UserObj.UserEmail;
                 $rootScope.UserMobile = UserObj.UserMobile;

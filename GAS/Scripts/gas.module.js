@@ -93,6 +93,10 @@
                 templateUrl: 'GAS/View/managerdashboard.html',
                 controller: 'dashboardCtrl'
             })
+            .when("/organization", {
+                templateUrl: 'GAS/View/Organization.html',
+                controller: 'organizationdCtrl'
+            })
         .otherwise({ redirectTo: '/main' });
     });
 

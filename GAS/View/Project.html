@@ -44,7 +44,7 @@
                     </div>
                     <div class="container-fluid zero_margin" style="overflow-x:hidden;overflow-y:scroll; width:100%; height:{{row1Height}};">
                         <div style="max-height:{{row1Height}};width:100%;">
-                            <div class="row" style="border-bottom:solid 1px #404040;;" ng-repeat="p in ProjectList" ng-click="ShowExpense(p.ProjectID)" ng-class-odd="'bg_lightGrey'">
+                            <div class="row" style="border-bottom:solid 1px #404040;" ng-repeat="p in ProjectList" ng-click="ShowExpense(p.ProjectID)" ng-class-odd="'bg_lightGrey'">
                                 <div class="col-xs-12" style=" border-bottom:solid 1px #cccccc;">
                                     <b>{{ p.ProjectName }}(#{{ p.ProjectNumber }})</b>, client: {{ p.ClientName }}
                                   
@@ -75,7 +75,7 @@
                                 </div>
 
                             </div>
-
+                            <label>{{projectErrorMessage}}</label>
                             </div>
                         </div>
                     </div>

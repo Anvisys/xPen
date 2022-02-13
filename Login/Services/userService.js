@@ -32,7 +32,7 @@
 
         function GetValidUser(data) {
             var jsonData = angular.toJson(data);
-         
+            alert(JSON.stringify(jsonData));
             return $http({
                 url: $rootScope.APIUrl+'api/User/Validate',
                 method: "POST",

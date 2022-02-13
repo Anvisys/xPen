@@ -103,7 +103,6 @@
 
             dashboardService.getIPPurchaseForManager($rootScope.UserId, 100)
                 .then(function (data) {
-                    console.log(JSON.stringify(data));
                     for (var i = 0; i < data.length; i++) {
                         $scope.Payable = $scope.Payable + data[i].Payable;
                         $scope.PaidAmount = $scope.PaidAmount + data[i].PaidAmount;

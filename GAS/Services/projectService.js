@@ -19,24 +19,24 @@
 
         function getAllProject(status) {
             return $http.get($rootScope.APIUrl + 'api/Project/Organization/' + $rootScope.OrgID + "/Status/" + status)
-             .then(handleSuccess, handleError('Error getting Accounts'));
+             .then(handleSuccess, handleError('Error getting Projects'));
             
         }
 
         function getProjectData(PrjId) {
             return $http.get($rootScope.APIUrl + 'api/Project/Organization/' + $rootScope.OrgID + "/Project/" + PrjId)
-             .then(handleSuccess, handleError('Error getting Accounts'));
+             .then(handleSuccess, handleError('Error getting Project Data'));
 
         }
         function getDailyExpense(PrjId) {
             return $http.get($rootScope.APIUrl + 'api/ExpenseItem/Project/'  + PrjId)
-             .then(returnData, handleError('Error getting Accounts'));
+             .then(returnData, handleError('Error getting Projects Daily Expense'));
         }
 
 
         function getProjectForManager(id, status) {
             return $http.get($rootScope.APIUrl + 'api/Project/Organization/' + $rootScope.OrgID + "/Manager/" + id + "/Status/" + status)
-            .then(handleSuccess, handleError('Error getting Accounts'));
+            .then(handleSuccess, handleError('Error getting Project for Manager'));
 
         }
 

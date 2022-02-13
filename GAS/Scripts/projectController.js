@@ -12,6 +12,7 @@
         $scope.project_progress = false;
         $scope.actions = ["Action", "Update", "Show"];
         $scope.SelectedAction = "Action";
+        $scope.projectErrorMessage = "";
 
         $scope.ProjectFilterName = "Show Close Project";
         $scope.FilterStatus = "Open";
@@ -218,21 +219,34 @@
 
                 projectService.getAllProject(status)
                      .then(function (data) {
+                         if (data.length > 0) {
+                             $scope.ProjectList = data;
+                             //alert(JSON.stringify(data[0]));
+                             GetProjectExpense(data[0].ProjectID);
+                             $scope.projectErrorMessage = ""
+                         }
+                         else {
+                             $scope.projectErrorMessage = "No Project found with status" + status + " Please change filter";
+                         }
 
-                         $scope.ProjectList = data;
-                         //alert(JSON.stringify(data[0]));
-                         GetProjectExpense(data[0].ProjectID);
+  
                      });
             }
             else if ($rootScope.Role === 'Manager') {
 
                 projectService.getProjectForManager($rootScope.UserId, status)
                     .then(function (data) {
-                      
-                        $scope.ProjectList = data;
-                        //alert(JSON.stringify(data[0]));
-                        GetProjectExpense(data[0].ProjectID);
-                        GetActivitiesForProject(data[0].ProjectID)
+                        if(data.length > 0) {
+                            $scope.ProjectList = data;
+                            //alert(JSON.stringify(data[0]));
+                            GetProjectExpense(data[0].ProjectID);
+                            GetActivitiesForProject(data[0].ProjectID);
+                            $scope.projectErrorMessage = ""
+                        }
+                        else {
+                            $scope.projectErrorMessage = "No Project found with status" + status + " Please change filter";
+                        }
+
                     });
 
             }
@@ -241,11 +255,13 @@
 
                 projectService.getProjectForManager($rootScope.UserId, status)
                     .then(function (data) {
+                        if (data.length > 0) {
+                            $scope.ProjectList = data;
+                            //alert(JSON.stringify(data[0]));
+                            GetProjectExpense(data[0].ProjectID);
+                            GetActivitiesForProject(data[0].ProjectID);
+                        }
 
-                        $scope.ProjectList = data;
-                        //alert(JSON.stringify(data[0]));
-                        GetProjectExpense(data[0].ProjectID);
-                        GetActivitiesForProject(data[0].ProjectID)
                     });
 
             }
@@ -285,10 +301,6 @@
 
          
         }
-
-        
-
-
 
         function GetActivitiesForProject(pid)
         {

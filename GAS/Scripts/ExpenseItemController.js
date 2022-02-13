@@ -151,7 +151,6 @@
         {
               activityService.GetByActivityID($scope.ActivityID)
                     .then(function (res) {
-
                         $scope.ProjectName = res.ProjectName;
                         $scope.ActivityName = res.ActivityName;
                         $scope.ActivityStatus = res.ActivityStatus;
@@ -161,9 +160,7 @@
         function GetData() {
             expenseItemService.getExpenseDataForActivity($scope.ActivityID).
             then(function (data) {
-             //alert(JSON.stringify(data));
                 $scope.expenseItems = data;
-
             });
 
         }
