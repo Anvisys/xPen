@@ -15,7 +15,11 @@
         $scope.PaidAmount = 0;
 
 
-            $timeout(function () {
+
+            if (!$rootScope.users) {
+
+                //window.location.href = 'Login.html';
+            }
                 GetAccountList();
               
                 GetDailyTransaction();
@@ -59,8 +63,9 @@
             transactionService.getDailyTransaction()
             .then(function (data) {
               //  $scope.ExpenseList = data.$values;
-              // alert(JSON.stringify(data));
-
+                if (data.$values.length == 0) {
+                    return;
+                }
                 data.$values.map(function (value) {
                     // Assuming there's a timestamp in the _time key
                     value.ExpenseDate = new Date(value.ExpenseDate);
@@ -84,7 +89,9 @@
             // expenseItemService.getExpenseData()
             expenseItemService.getDailyOrganizationExpense()
                 .then(function (data) {
-                   
+                    if (data.$values.length == 0) {
+                        return;
+                    }
                 $scope.expenseList = data.$values;
                 
                 for (i = 0; i < data.$values.length; i++) {
@@ -252,7 +259,9 @@
             transactionService.getByMonth($scope.CurrentMonth.getFullYear(), $scope.CurrentMonth.getMonth() + 1)
                 .then(function (data) {
 
-                    if (data === "") { }
+                    if (data.length == 0) {
+                        return;
+                    }
                     else {
                         if (data[0].Deposit) {
                             $scope.LastTransaction = - data[0].Withdraw;

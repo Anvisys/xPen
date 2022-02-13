@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('gas');
 
-    app.controller('dashboardCtrl', function (dashboardService, dailyExpenseService, constService, expenseItemService, $timeout, $scope, $rootScope, $cookies) {
+    app.controller('dashboardCtrl', function (dashboardService, dailyExpenseService, expenseItemService, $timeout, $scope, $rootScope, $cookies) {
 
         $scope.IPValue = 0;
         $scope.SubmittedValue = 0;
@@ -77,7 +77,6 @@
             GetTodayExpenseForManager();
             GetDayWiseExpenseForManager();
            */
-            $scope.BannerImage = constService.ImageRootDirectory + 'society-image.jpg';
 
         }, 10);
 

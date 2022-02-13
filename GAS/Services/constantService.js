@@ -2,7 +2,7 @@
     'use strict';
 
 // Storing a single constant value
-var app = angular.module('gas', []);
+    var app = angular.module('gas', []);
 
     app.constant('ConstRole', {
         ALL: '*',
@@ -18,6 +18,11 @@ var app = angular.module('gas', []);
         sessionTimeout: 'auth-session-timeout',
         notAuthenticated: 'auth-not-authenticated',
         notAuthorized: 'auth-not-authorized'
+    })
+
+    app.constant('CONST', {
+        //ImageRootDirectory: "http://www.kevintech.in/Images",
+        ImageRootDirectory: "http://www.kevintech.in/xPen-WebApi/"
     })
 
 //app.constant('config', {
