@@ -19,6 +19,8 @@
         $scope.MgrApproved = 0;
         $scope.ActiveProjectsCount = 0;
         $scope.ActiveProjects = [{}];
+        $scope.filter = "Open";
+        $scope.EmpTodayExpense = 0;
 
         if ($rootScope.Role == "Admin") {
             ShowAdmin();
@@ -123,14 +125,19 @@
             var Expense = [];
             var Received = [];
             $scope.labels = [];
-            dailyExpenseService.getDailyExpenseForEmployee($rootScope.UserId)
+            dailyExpenseService.getDailyExpenseForEmployee($rootScope.UserId, $scope.filter)
                 .then(function (data) {
                          // $scope.dailyExpenseData = data.$values;
 
                     for (i = 0; i < data.length; i++) {
                         Expense.push(data[i].ExpenseAmount);
                         Received.push(data[i].ReceiveAmount);
-                        $scope.labels.push(new Date(data[i].ExpenseDate).getDate());
+                        var expDate = new Date(data[i].ExpenseDate);
+                        $scope.labels.push(expDate.getDate());
+
+                        if ((expDate.getDate() == (new Date()).getDate()) && (expDate.getMonth() == (new Date()).getMonth()) && (expDate.getYear() == (new Date()).getYear())) {
+                            $scope.EmpTodayExpense = $scope.EmpTodayExpense + data[i].ExpenseAmount;
+                        }
                     }
                     $scope.dailyExpenseData = [Expense, Received];
                 });

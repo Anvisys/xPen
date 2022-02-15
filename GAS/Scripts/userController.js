@@ -224,24 +224,28 @@
             $scope.labels = [];
             //expenseItemService.getExpenseDataForEmployee(id)
             userService.GetDailyExpense(id)
-            .then(function (data) {
-              
-                $scope.expenseList = data.$values;
-
-                for (i = 0; i < data.$values.length; i++) {
-                    Expense.push(data.$values[i].ExpenseAmount);
-                    Received.push(data.$values[i].ReceiveAmount);
-                    $scope.labels.push(new Date(data.$values[i].ExpenseDate).getDate());
-                   
-                    if (data.$values[i].Status == "Approved") {
-                        $scope.UserPayable = $scope.UserPayable + data.$values[i].ExpenseAmount - data.$values[i].ReceiveAmount;
-                    }
-                    else {
-                        $scope.InProcess = $scope.InProcess + data.$values[i].ExpenseAmount - data.$values[i].ReceiveAmount;
-                    }
+                .then(function (data) {
+                    if (data.$values === undefined || data.$values.length == 0) {
+                    return;
                 }
+                else {
+                    $scope.expenseList = data.$values;
 
-                $scope.userdata = [Expense, Received];
+                    for (i = 0; i < data.$values.length; i++) {
+                        Expense.push(data.$values[i].ExpenseAmount);
+                        Received.push(data.$values[i].ReceiveAmount);
+                        $scope.labels.push(new Date(data.$values[i].ExpenseDate).getDate());
+
+                        if (data.$values[i].Status == "Approved") {
+                            $scope.UserPayable = $scope.UserPayable + data.$values[i].ExpenseAmount - data.$values[i].ReceiveAmount;
+                        }
+                        else {
+                            $scope.InProcess = $scope.InProcess + data.$values[i].ExpenseAmount - data.$values[i].ReceiveAmount;
+                        }
+                    }
+
+                    $scope.userdata = [Expense, Received];
+                }
             });
         }
 

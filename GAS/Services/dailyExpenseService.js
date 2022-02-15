@@ -30,7 +30,7 @@
                 .then(handleSuccess, handleError('Error getting DailyExpense'));
         }
 
-        function getDailyExpenseForEmployee(EmpID) {
+        function getDailyExpenseForEmployee(EmpID, Status) {
             return $http.get($rootScope.APIUrl + '/api/DailyExpense/' + $rootScope.OrgID + '/Employee/' + EmpID)
                 .then(handleSuccess, handleError('Error getting DailyExpense'));
         }

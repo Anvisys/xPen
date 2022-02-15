@@ -1,4 +1,5 @@
-﻿(function () {
+﻿
+(function () {
 
     var app = angular.module("gas");
     app.controller("mainCtrl", function (accountService, transactionService, expenseItemService,dashboardService, invoiceService,taxService, $timeout, $scope, $rootScope, $cookies) {
@@ -19,7 +20,11 @@
             if (!$rootScope.users) {
 
                 //window.location.href = 'Login.html';
-            }
+        }
+
+        if ($rootScope.Role == "SuperAdmin") {
+            window.location.href = 'Organization.html';
+        }
                 GetAccountList();
               
                 GetDailyTransaction();
@@ -34,7 +39,7 @@
 
                 GetIPSalesForAdmin();
                 GetIPPurchaseForAdmin();
-            }, 10);
+     
 
 
             function GetAccountList() {
@@ -63,21 +68,24 @@
             transactionService.getDailyTransaction()
             .then(function (data) {
               //  $scope.ExpenseList = data.$values;
-                if (data.$values.length == 0) {
+                if (data.$values === undefined || data.$values.length == 0) {
                     return;
                 }
-                data.$values.map(function (value) {
-                    // Assuming there's a timestamp in the _time key
-                    value.ExpenseDate = new Date(value.ExpenseDate);
-                    //alert(JSON.stringify(value));
-                    return value;
+                else {
+                    data.$values.map(function (value) {
+                        // Assuming there's a timestamp in the _time key
+                        value.ExpenseDate = new Date(value.ExpenseDate);
+                        //alert(JSON.stringify(value));
+                        return value;
 
-                });
-                $scope.todayWithdrawl = data.$values[0].ExpenseAmount;
-                $scope.todayDeposit = data.$values[0].ReceiveAmount;
-                $scope.currentBalance = data.$values[0].Balance;
-                $scope.data = data;
-                SetTransactionOption();
+                    });
+                    alert(JSON.stringify(data.$values));
+                    $scope.todayWithdrawl = data.$values[0].ExpenseAmount;
+                    $scope.todayDeposit = data.$values[0].ReceiveAmount;
+                    $scope.currentBalance = data.$values[0].Balance;
+                    $scope.data = data;
+                    SetTransactionOption();
+                }
             });
         }
 
@@ -89,7 +97,7 @@
             // expenseItemService.getExpenseData()
             expenseItemService.getDailyOrganizationExpense()
                 .then(function (data) {
-                    if (data.$values.length == 0) {
+                    if (typeof data !== 'undefined' ||  data.$values.length == 0) {
                         return;
                     }
                 $scope.expenseList = data.$values;
@@ -259,7 +267,7 @@
             transactionService.getByMonth($scope.CurrentMonth.getFullYear(), $scope.CurrentMonth.getMonth() + 1)
                 .then(function (data) {
 
-                    if (data.length == 0) {
+                    if (typeof data !== 'undefined' || data.length == 0) {
                         return;
                     }
                     else {
@@ -299,8 +307,7 @@
 
             dashboardService.getIPPurchaseForAdmin( 100)
                 .then(function (data) {
-                    console.log(JSON.stringify(data));
-                    for (var i = 0; i < data.length; i++) {
+                      for (var i = 0; i < data.length; i++) {
                         $scope.Payable = $scope.Payable + data[i].Payable;
                         $scope.PaidAmount = $scope.PaidAmount + data[i].PaidAmount;
                         var invDate = new Date(data[i].InvoiceDate);
@@ -312,7 +319,6 @@
                     }
                 });
         }
-
     });
-
+   
 })();

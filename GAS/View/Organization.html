@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="container-fluid zero_margin">
+        <div class="row zero_margin">
+            <div class="col-md-8 padding-10" style="height:{{ScreenHeight}};">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading bg_greyBlue" style="position: relative;height:50px;">
+                        Organization List
+                        <span ng-hide="false" class="fa fa-plus-square fa-3x" title="New User" ng-click="NewUser()" style="float:right;padding-right: 6px;color:#fff"></span>
+                        <span ng-hide="false" class="fa fa-user-plus fa-3x" title="Add Existing User" ng-click="existingUserDiv=true" style="float:right;padding-right: 6px;color:#fff;"></span>
+                        <span ng-hide="false" class="fa fa-filter  fa-3x" title="Filter" ng-click="ToggleFilter()" style="float:right;padding-right: 6px;color:#fff"></span>
+                    </div>
+
+                    <div ng-show="ShowFilter" style="display:inline-block;background-color:grey; z-index:500; position: absolute;top:30px; right: 90px; padding:10px;">
+                        <ul style=" list-style-type: none;margin: 0;padding: 0;color:white;">
+                            <li ng-click="userType = ''; ShowFilter =false" style="cursor:pointer;">
+                                Show All
+                            </li>
+                            <li ng-click="userType = 'Employee'; ShowFilter =false" style="cursor:pointer;">
+                                Employee
+                            </li>
+                            <li ng-click="userType = 'Manager';ShowFilter =false" style="cursor:pointer;">
+                                Manager
+                            </li>
+                            <li ng-click="userType = 'Admin'; ShowFilter =false" style="cursor:pointer;">
+                                Admin
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="max-height:{{ScreenHeight}};overflow-x:hidden;overflow-y:scroll;">
+                        <div style="max-height:{{ScreenHeight}}; width:100%;">
+
+                            <div class="row" ng-init="imgsrc = 'UserImage_'+ user.UserId" ng-repeat="org in orgList" ng-class-odd="'bg_lightGrey'">
+
+                                <div class="col-sm-3 col-xs-3" style="padding-top: 10px; padding-left: 22px;">
+                                </div>
+                                <div class="col-sm-3 col-xs-3 padding-10" style="height:50px;">
+                                    {{ org.OrganizationID }}
+                                    <br />{{ org.OrganizationName }}
+                                </div>
+
+
+                                <div class="col-sm-3 col-xs-3 padding-10">{{ org.ContactPerson }} <br /> {{ org.ContactNumber }}</div>
+
+                                <div class="col-sm-3 col-xs-3 padding-10">
+                                    <div class="btn-group" uib-dropdown>
+                                        <button id="split-button" type="button" class="btn btn-primary btn-sm">Action</button>
+                                        <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+
+                                            <li role="menuitem"><a>Detail</a></li>
+                                            <li role="menuitem"><a>Remove User</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+</body>
+</html>

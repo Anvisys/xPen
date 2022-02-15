@@ -55,7 +55,6 @@
                             <th>ExpenseAmount</th>
                             <th>ReceiveAmount</th>
                             <th>Remarks</th>
-                            <th>Status</th>
                             <th>ExpenseDate</th>
                             <th></th>
                         </tr>
@@ -64,8 +63,7 @@
                             <td>{{ item.ItemName}}</td>
                             <td>{{ item.ExpenseAmount | currency : "&#8377" : 2 }}</td>
                             <td>{{ item.ReceiveAmount | currency : "&#8377" : 2 }}</td>
-                              <td>{{item.ExpenseDescription}}</td>
-                            <td>{{item.Status}}</td>
+                             <td>{{item.ExpenseDescription}}</td>
                             <td>{{ item.ExpenseDate| date:"mediumDate" }}</td>
                             <td><span class="fa fa-archive" ng-click="Delete(item)" ng-show="Status== 'Rejected'||Status== 'Added'"></span></td>
                         </tr>
