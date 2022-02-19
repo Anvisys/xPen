@@ -152,13 +152,19 @@
 
         $timeout(function () {
            // $rootScope.myImage = $rootScope.ProfileImage;
-            GetUserData();
+            if ($rootScope.Role == "Admin") {
+                GetUserDataForOrganization();
+            }
+            else if ($rootScope.Role == "SuperAdmin") {
+                GetAllUsers();
+            }
+
            
         }, 10);
 
-        function GetUserData()
+        function GetUserDataForOrganization()
         {
-            userService.GetAll($rootScope.OrgID)
+            userService.GetAllForOrganization($rootScope.OrgID)
                 .then(function (data) {
                     //alert(JSON.stringify(data));
                     $scope.userList = data;
@@ -169,7 +175,19 @@
                     for (i = 0; i < data.length; i++) {
                         GetSetImage(data[i].UserId);
                     }
+                });
+        }
 
+        function GetAllUsers() {
+            userService.GetAll()
+                .then(function (data) {
+
+                    $scope.userList = data;
+                    $scope.selectedUser = data[0].UserName;
+
+                    for (i = 0; i < data.length; i++) {
+                        GetSetImage(data[i].UserId);
+                    }
                 });
         }
 

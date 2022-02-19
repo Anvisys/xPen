@@ -104,9 +104,6 @@
         }
 
 
-
-
-
         $scope.SelectActivity = function ()
         {
             activityService.GetAll("Open")
@@ -166,11 +163,11 @@
                 withdraw = 0;
             }
             var date = new Date();
-            var TranData = {
+            var TranData = [{
                 TransName: $scope.external_name, AccID: $scope.selAcc.AccID, Deposit: deposit, Withdraw: withdraw,
                 TransactionRemarks: $scope.external_Remarks, ProjectID: 0, ActivityID: 0, InvoiceID: 0, ExpenseID: 0, OrgID: $rootScope.OrgID,
                 TransactionDate: date,TransType:'External'
-            };
+            }];
           
            AddTransaction(TranData);
         }
@@ -192,8 +189,6 @@
                 TransactionDate: date,OrgID: $rootScope.OrgID,
                 TransType:"Salary"
             }];
-          console.log(JSON.stringify(TranData));
-
             AddTransaction(TranData);
         }
 
@@ -221,8 +216,6 @@
                 TransactionRemarks: $scope.advance_Remarks, ProjectID: 0, ActivityID: $scope.ActivityID, ExpenseID: 0, OrgID: $rootScope.OrgID,
                 TransType:"Advance"
             };
-
-            console.log(JSON.stringify(advanceItem));
             advanceService.addItem(advanceItem)
             .then(function (resp) {
                 if (resp.data.Response == "OK") {

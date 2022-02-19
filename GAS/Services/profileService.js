@@ -16,8 +16,6 @@
 
 
         function GetImage(id) {
-            console.log("Image URL" + $rootScope.ImageUrl);
-            // alert(id);
             return $http.get($rootScope.ImageUrl + 'api/Image/' + id)
                 .then(returndata, handleError('Error getting all users'));
         }

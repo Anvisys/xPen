@@ -18,13 +18,12 @@
 
         $scope.ShowClose = function () {
             getDataForApproval("Closed");
-          
+            $scope.ShowFilter = false;        
         }
 
         $scope.ShowOpen = function () {
             getDataForApproval("Open");
             $scope.ShowFilter = false;
-
         }
 
         $scope.ShowAll = function () {
@@ -103,8 +102,8 @@
             var date = new Date();
   
             var PaymentData = {
-                ProjectID: $scope.ProjectID, ActivityID: $scope.selActivity.ActivityID, ExpenseID: 0, OrgID: $rootScope.OrgID,
-                ExpenseAmount:  $scope.paid_Amount,AccID:$scope.selAcc.AccID,ItemName: $scope.payment_name,Action:"Paid",
+                ProjectID: $scope.ProjectID, ActivityID: $scope.selActivity.ActivityID, ExpenseID: 0, OrganizationId: $rootScope.OrgID,
+                ReceiveAmount: $scope.paid_Amount, AccountId:$scope.selAcc.AccID,ItemName: $scope.payment_name,Action:"Paid",
                 ExpenseDescription: $scope.paid_Remarks,ExpenseDate: date, 
             };
             //console.log( JSON.stringify(PaymentData));
@@ -300,7 +299,6 @@
                         $scope.reviewList_progress = false;
                          //alert(JSON.stringify(data));
                          $scope.reviewList = data;
-
                          for (i = 0; i < data.length; i++) {
                              GetSetImage(data[i].EmployeeID);
 
@@ -313,9 +311,7 @@
                 activityService.GetAll(status)
                     .then(function (data) {
                         $scope.reviewList_progress = false;
-                         //alert(JSON.stringify(data));
                          $scope.reviewList = data;
-
                          for (i = 0; i < data.length; i++) {
                              GetSetImage(data[i].EmployeeID);
                          }
