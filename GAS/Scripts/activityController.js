@@ -69,8 +69,6 @@
                 ActivityDescription: $scope.activity_remarks, CreationDate: date, ExpenseAmount: 0,
                 ActivityStatus: "Initiated", OrgID: $rootScope.OrgID, ApproverID: $scope.activity_Project.CreatedBy
             };
-           console.log(JSON.stringify(Activity));
-           
             activityService.CreateActivity(Activity)
             .then(function (resp) {
                 $scope.newActivity_progress = false;

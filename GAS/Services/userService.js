@@ -9,6 +9,7 @@
     function userService($http, $rootScope) {
         var service = {};
         service.GetAll = GetAll;
+        service.GetAllForOrganization = GetAllForOrganization;
         service.GetUserByID = GetUserByID;
         service.addUser = addUser;
         service.addExistingUser = addExistingUser;
@@ -22,6 +23,18 @@
         return service;
 
         function GetAll() {
+            // alert(id);
+            return $http.get($rootScope.APIUrl + 'api/User/All')
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+
+        function GetAllForOrganization() {
+            // alert(id);
+            return $http.get($rootScope.APIUrl + 'api/User/Organization/' + $rootScope.OrgID)
+                .then(handleSuccess, handleError('Error getting all users'));
+        }
+
+        function GetAllForOrganization() {
            // alert(id);
             return $http.get($rootScope.APIUrl + 'api/User/Organization/' + $rootScope.OrgID)
                 .then(handleSuccess, handleError('Error getting all users'));

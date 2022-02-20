@@ -282,7 +282,6 @@
             // expenseItemService.getExpenseDataForProject(id)
             dailyExpenseService.getDailyExpenseForProject(id)
             .then(function (data) {
-                console.log(JSON.stringify(data));
                 $scope.expenseList = data;
 
                 for (i = 0; i < data.length; i++) {

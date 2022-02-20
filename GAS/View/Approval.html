@@ -53,7 +53,7 @@
 
                                     <img class="image-profile" ng-src="{{UserImages['UserImage_'+ ip.EmployeeID]}}" ng-m ng-model="UImage" />
                                     <br />
-                                    <label class="inline-heading hidden-xs">Sent By:</label>   {{ ip.Employee}}
+                                    <label class="inline-heading hidden-xs">Activity Owner:</label>   {{ ip.Employee}}
                                 </div>
 
                                 <div class="col-xs-8 col-sm-8 padding-5">
@@ -67,12 +67,17 @@
                                             <b>Expenses:</b><br /> {{ ip.Expenses | currency : "&#8377" : 2}}
                                         </div>
                                         <div class="col-xs-4">
-                                            <b>Paid :</b> <br />  {{ ip.Advance + ip.Settlement | currency : "&#8377" : 2}}<br />
+                                            <b>Received:</b><br /> {{ ip.Received | currency : "&#8377" : 2}}
                                         </div>
                                         <div class="col-xs-4">
-                                            <b>Payable:</b> <br />  {{ip.Expenses- ip.Advance - ip.Settlement | currency : "&#8377" : 2}}
+                                            <b>Advance :</b> <br />  {{ ip.Advance | currency : "&#8377" : 2}}<br />
                                         </div>
-
+                                        <div class="col-xs-4">
+                                            <b>Balance:</b> <br />  {{ip.Expenses- ip.Advance - ip.Received | currency : "&#8377" : 2}}
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <b>Status:</b> <br />  {{ip.ActivityStatus}}
+                                        </div>
 
 
                                     </div>
@@ -91,7 +96,7 @@
 
                                     <img class="image-profile-small" ng-src="{{UserImages['UserImage_'+ ip.Approver]}}" ng-m ng-model="UImage" />
                                     <br />
-                                    <label title="{{ip.ApproverName}}" class="inline-heading  hidden-xs">Owner:{{ ip.ApproverName}}</label>   <br />
+                                    <label title="{{ip.ApproverName}}" class="inline-heading  hidden-xs"><b>Manager:{{ ip.ApproverName}}</b></label>   <br />
                                     <button type="button" class="btn btn-success btn-sm" ng-click="PayForm(ip)" >Pay</button>
 
                                 </div>

@@ -45,9 +45,6 @@
         }
 
         function addPayment(payment) {
-            
-            //var jsonData = angular.toJson(payment);
-
             return $http({
                 url: $rootScope.APIUrl + 'api/ExpenseItem/AddItem',
                 method: "POST",
